@@ -1,0 +1,24 @@
+.cart-table {
+  color: white;
+  background-color: #222831;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.cart-table thead {
+  border-bottom: 1px solid white;
+}
+.cart-table thead tr {
+  text-transform: uppercase;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.cart-table thead th {
+  text-align: center;
+  padding: 1%;
+}
+
+.cart-table thead th:last-child {
+  width: 35px;
+}

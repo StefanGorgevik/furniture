@@ -1,0 +1,5 @@
+export const ADD_TO_CART = "ADD_TO_CART";
+export const GET_CART_DATA = "GET_CART_DATA";
+export const SAVE_CART_DATA = "SAVE_CART_DATA";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const ORDER_SUCCESSFUL = "ORDER_SUCCESSFUL";

@@ -1,0 +1,61 @@
+.notification-modal {
+  border: 1px solid white;
+  min-width: 20%;
+  position: absolute;
+  left: 75%;
+  margin: 0 auto;
+  top: 10%;
+  z-index: 999;
+  background: #222831;
+  border-radius: 10px;
+  padding: 1%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.notification-modal i {
+  font-size: 30px;
+}
+
+.notification-modal-close {
+  text-align: end;
+  cursor: pointer;
+}
+
+.notification-modal p {
+  padding: 5px 20px;
+}
+
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  animation: openModal 0.5s ease-out forwards;
+  transition: opacity 200ms;
+}
+
+@keyframes openModal {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@media (max-width: 564px) {
+  .notification-modal {
+    left: 50%;
+  }
+}

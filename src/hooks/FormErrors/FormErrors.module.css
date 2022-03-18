@@ -1,0 +1,22 @@
+.errors-div {
+  max-width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  color: white;
+  margin: 25px auto;
+  text-align: start;
+  padding: 2%;
+  border-radius: 10px;
+  background-color: rgba(30, 31, 35, 255);
+  height: auto;
+  font-size: 18px;
+}
+
+.errors-div ul {
+  list-style: inside;
+}
+
+.errors-div h4 {
+  padding-bottom: 10px;
+}

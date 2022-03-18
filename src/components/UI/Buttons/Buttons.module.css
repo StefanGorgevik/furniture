@@ -1,0 +1,62 @@
+.btn {
+  height: 35px;
+  width: 150px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 0 auto;
+  width: 50%;
+}
+.submit-btn-inactive,
+.submit-btn {
+  background: rgb(232, 240, 232);
+  min-width: 10%;
+  max-width: 70%;
+}
+
+.cancel-btn {
+  background: rgba(158, 189, 189, 0.76);
+  min-width: 10%;
+  max-width: 70%;
+}
+.submit-btn-active,
+.btn:hover {
+  background-color: rgb(28, 31, 28);
+  color: whitesmoke;
+  transition: 1s;
+  border: 1px solid white;
+  opacity: 1;
+}
+
+.full-button {
+  width: 200px;
+}
+
+.back-button {
+  position: static;
+  margin-top: 5px;
+  top: 50px;
+  left: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 30px;
+  outline: none;
+  border: none;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  box-shadow: 0 0 0 2pt #535559;
+}
+
+.back-button:hover {
+  background-color: #535559;
+  color: white;
+}
+
+.order-btn {
+  margin-top: 20px;
+  margin-right: 0;
+}
