@@ -94,16 +94,16 @@ const Category = ({ itemKey, openFurnitureHandler, allFurniture }) => {
           className={classes.itemsContainer}
           justify="flex-start"
         >
-          {allFurniture[itemKey].slice(slide, slide + 5).map((item, j) => {
+          {allFurniture[itemKey].slice(slide, slide + 5).map((item) => {
             return (
               <FurnitureItem
-                key={j}
+                key={item.id}
                 showIcon={true}
                 price={item.price}
                 isMine={item.createdBy === localStorage.getItem("user_email")}
                 item={item}
                 showTools={false}
-                onClick={() => openFurnitureHandler(Number(item.id))}
+                onClick={() => openFurnitureHandler(item.id)}
                 onDelete={false}
                 onEdit={false}
               />

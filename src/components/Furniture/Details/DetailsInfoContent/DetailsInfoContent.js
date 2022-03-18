@@ -61,8 +61,9 @@ const DetailsInfoContent = ({
           </Typography>
 
           <Typography align="left" variant="subtitle1">
-            {currentFurniture.createdOn.substr(0, 10)} -
-            {currentFurniture.createdOn.substr(11, 5)}
+            {/* {currentFurniture.createdOn.substr(0, 10)} -
+            {currentFurniture.createdOn.substr(11, 5)} */}
+            date
           </Typography>
         </Grid>
         <DetailsButtons
@@ -85,7 +86,7 @@ const DetailsInfoContent = ({
           item
           container
           direction="column"
-          justify="flex-start"
+          justifyContent="flex-start"
           style={{
             width: "50%",
             margin: "0 auto",
@@ -100,7 +101,7 @@ const DetailsInfoContent = ({
                 className={classes.gridItem}
                 key={`${item.label}${i}`}
                 alignItems="flex-start"
-                justify="space-between"
+                justifyContent="space-between"
               >
                 <Grid item>
                   <Typography variant="h6">{item.label}</Typography>
@@ -119,7 +120,7 @@ const DetailsInfoContent = ({
           item
           container
           direction="column"
-          justify="flex-end"
+          justifyContent="flex-end"
           style={{ width: "50%", paddingRight: "1em" }}
         >
           <Grid
@@ -127,7 +128,7 @@ const DetailsInfoContent = ({
             container
             direction="row"
             alignItems="center"
-            justify="flex-end"
+            justifyContent="flex-end"
             onClick={handleLikesOpen}
             style={{
               marginBottom: "1em",
@@ -146,7 +147,7 @@ const DetailsInfoContent = ({
             container
             direction="row"
             alignItems="center"
-            justify="flex-end"
+            justifyContent="flex-end"
             onClick={handleReviewsOpen}
             style={{
               cursor: "pointer",

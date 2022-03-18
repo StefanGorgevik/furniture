@@ -18,16 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Input = ({
-  label,
-  id,
-  error,
-  type,
-  value,
-  onChange,
-  helperText,
-  rows,
-}) => {
+export const Input = ({ label, id, error, type, value, onChange, rows }) => {
   const classes = useStyles();
 
   return (
@@ -36,7 +27,6 @@ export const Input = ({
       label={label}
       id={id}
       error={error}
-      helperText={helperText}
       type={type}
       onChange={onChange}
       value={value}

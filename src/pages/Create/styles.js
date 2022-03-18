@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   create: {
-    padding: "4em",
+    padding: "1em",
     paddingTop: "1em",
     marginTop: "3em",
   },

@@ -57,48 +57,48 @@ const Create = ({
     image: "",
     material: "",
   });
-  useEffect(() => {
-    return () => {
-      editFurnitureAction({
-        furniture: {
-          name: "",
-          category: "",
-          year: "",
-          description: "",
-          price: "",
-          image: "",
-          material: "",
-        },
-        editing: false,
-      });
-    };
-  }, [editFurnitureAction]);
+  // useEffect(() => {
+  //   return () => {
+  //     editFurnitureAction({
+  //       furniture: {
+  //         name: "",
+  //         category: "",
+  //         year: "",
+  //         description: "",
+  //         price: "",
+  //         image: "",
+  //         material: "",
+  //       },
+  //       editing: false,
+  //     });
+  //   };
+  // }, [editFurnitureAction]);
 
-  useEffect(() => {
-    if (editingFurniture && pathname.startsWith("/furniture/edit/")) {
-      setUserInput(furnitureToEdit);
-    }
-    if (!editingFurniture && pathname.startsWith("/furniture/edit/")) {
-      openFurnitureAction({ id: Number(furnitureID), shouldRedirect: false });
-    }
-    if (pathname.startsWith("/furniture/create")) {
-      setUserInput({
-        name: "",
-        category: "",
-        year: "",
-        description: "",
-        price: "",
-        image: "",
-        material: "",
-      });
-    }
-  }, [
-    editingFurniture,
-    furnitureToEdit,
-    pathname,
-    furnitureID,
-    openFurnitureAction,
-  ]);
+  // useEffect(() => {
+  //   if (editingFurniture && pathname.startsWith("/furniture/edit/")) {
+  //     setUserInput(furnitureToEdit);
+  //   }
+  //   if (!editingFurniture && pathname.startsWith("/furniture/edit/")) {
+  //     openFurnitureAction({ id: Number(furnitureID), shouldRedirect: false });
+  //   }
+  //   if (pathname.startsWith("/furniture/create")) {
+  //     setUserInput({
+  //       name: "",
+  //       category: "",
+  //       year: "",
+  //       description: "",
+  //       price: "",
+  //       image: "",
+  //       material: "",
+  //     });
+  //   }
+  // }, [
+  //   editingFurniture,
+  //   furnitureToEdit,
+  //   pathname,
+  //   furnitureID,
+  //   openFurnitureAction,
+  // ]);
 
   const saveValue = (e, id) => {
     setUserInput((prevState) => {
@@ -147,99 +147,89 @@ const Create = ({
           {editingFurniture ? "Edit furniture" : "Add furniture"}
         </Typography>
       </Grid>
-      <Grid item container direction="row" justify="space-around">
-        <Grid item>
-          <Grid item>
-            <Input
-              label="Name"
-              type="text"
-              id="name"
-              value={userInput.name}
-              onChange={(e) => saveValue(e, "name")}
-              error={errors.name.length > 0}
-              helperText={errors.name}
-            />
-          </Grid>
-
-          <Grid item>
-            <Dropdown
-              options={categories}
-              value={userInput.category}
-              handleChange={handleDropdownChangeHandler}
-              error={errors.category.length > 0}
-              helperText={errors.category}
-            />
-          </Grid>
-
-          <Grid item>
-            <Input
-              label="Material"
-              type="text"
-              id="material"
-              value={userInput.material}
-              onChange={(e) => saveValue(e, "material")}
-              error={errors.material.length > 0}
-              helperText={errors.material}
-            />
-          </Grid>
-
-          <Grid item>
-            <Input
-              label="Image URL"
-              type="text"
-              id="image"
-              value={userInput.image}
-              onChange={(e) => saveValue(e, "image")}
-              error={errors.image.length > 0}
-              helperText={errors.image}
-            />
-          </Grid>
+      <Grid
+        item
+        container
+        direction="row"
+        justify="space-around"
+        style={{
+          padding: "1%",
+          margin: "0 auto",
+          marginBottom: "4em",
+          width: "95%",
+        }}
+      >
+        <Grid item container>
+          <Input
+            label="Name"
+            type="text"
+            id="name"
+            value={userInput.name}
+            onChange={(e) => saveValue(e, "name")}
+            error={errors.name.length > 0}
+          />
+          <Dropdown
+            options={categories}
+            value={userInput.category}
+            handleChange={handleDropdownChangeHandler}
+            error={errors.category.length > 0}
+          />
+          <Input
+            label="Material"
+            type="text"
+            id="material"
+            value={userInput.material}
+            onChange={(e) => saveValue(e, "material")}
+            error={errors.material.length > 0}
+          />
+          <Input
+            label="Image URL"
+            type="text"
+            id="image"
+            value={userInput.image}
+            onChange={(e) => saveValue(e, "image")}
+            error={errors.image.length > 0}
+          />
         </Grid>
         <Grid item>
-          <Grid item>
-            <Input
-              label="Year"
-              type="number"
-              id="year"
-              value={userInput.year}
-              onChange={(e) => saveValue(e, "year")}
-              error={errors.year.length > 0}
-              helperText={errors.year}
-            />
-          </Grid>
+          <Input
+            label="Year"
+            type="number"
+            id="year"
+            value={userInput.year}
+            onChange={(e) => saveValue(e, "year")}
+            error={errors.year.length > 0}
+            helperText={errors.year}
+          />
 
-          <Grid item xs>
-            <Input
-              label="Price (€)"
-              type="number"
-              id="price"
-              value={userInput.price}
-              onChange={(e) => saveValue(e, "price")}
-              error={errors.price}
-              helperText={errors.price}
-            />
-          </Grid>
+          <Input
+            label="Price (€)"
+            type="number"
+            id="price"
+            value={userInput.price}
+            onChange={(e) => saveValue(e, "price")}
+            error={errors.price}
+            helperText={errors.price}
+          />
 
-          <Grid item>
-            <Input
-              label="Description"
-              type="text"
-              id="description"
-              value={userInput.description}
-              onChange={(e) => saveValue(e, "description")}
-              error={errors.description.length > 0}
-              helperText={errors.description}
-              rows={8}
-            />
-          </Grid>
-          <Grid item container justify="flex-end">
-            <Button
-              onClick={(e) => submitFurnitureHandler(e, false)}
-              className={classes.createButton}
-            >
-              Save
-            </Button>
-          </Grid>
+          <Input
+            label="Description"
+            type="text"
+            id="description"
+            value={userInput.description}
+            onChange={(e) => saveValue(e, "description")}
+            error={errors.description.length > 0}
+            helperText={errors.description}
+            rows={8}
+          />
+        </Grid>
+        <Grid item container justify="flex-end" style={{ width: "90%" }}>
+          <Button
+            onClick={(e) => submitFurnitureHandler(e, false)}
+            className={classes.createButton}
+          >
+            Save
+          </Button>
         </Grid>
       </Grid>
     </Grid>

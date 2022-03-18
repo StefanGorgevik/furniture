@@ -17,14 +17,29 @@ import { getStatsAction } from "store/stats/statsActions";
 import { fetchRequest } from "utils/fetch";
 import sortByCategory from "utils/sortByCategory";
 
+const transformArray = (array) => {
+  let transformed = [];
+  Object.keys(array).forEach((key) => {
+    transformed.push({ ...array[key], id: key });
+  });
+  return transformed;
+};
 export function* getAllFurniture({ page }) {
   // const path = `furniture/all?page=${page}`;
-  const path = `furniture/allWithoutPaging`;
+  const path = `furniture.json`;
 
   try {
     const res = yield fetchRequest(path, "GET", null);
-    const sorted = sortByCategory(res);
-    yield put(saveAllFurnitureAction(sorted));
+    console.log("RES", res);
+    if (res.error) {
+      return;
+    } else {
+      let array = transformArray(res);
+
+      const sorted = sortByCategory(array);
+      console.log("FINAL", sorted);
+      yield put(saveAllFurnitureAction(sorted));
+    }
   } catch (e) {
     console.log("error", e);
     yield put(setActionStatus("error", "Unexpected error occurred!"));
@@ -32,9 +47,13 @@ export function* getAllFurniture({ page }) {
 }
 
 export function* saveNewFurniture({ data }) {
-  const path = `furniture/create`;
+  const path = `furniture.json`;
+  console.log("data", data);
+  const user = localStorage.getItem("user_email");
   try {
-    const res = yield fetchRequest(path, "POST", data);
+    const res = yield fetchRequest(path, "POST", { ...data, user });
+    console.log("CHK FINAL RESP", res);
+    return;
     let messageType = "success";
     if (res.success) {
       yield put(getStatsAction());
@@ -58,14 +77,17 @@ export function* saveNewFurniture({ data }) {
 
 export function* openFurnitureItem({ data }) {
   const { id, shouldRedirect } = data;
-  const path = `furniture/details/${id}`;
+  const path = `furniture/${id}.json`;
 
   try {
     const res = yield fetchRequest(path, "GET", null);
-    if (res) {
+    if (res.error) {
+      return;
+    } else {
+      console.log("RES FROM DETAILS", res);
       yield put(saveCurrentFurnitureAction(res));
       if (shouldRedirect) {
-        yield put(push(`/furniture/details/${res.id}`));
+        yield put(push(`/furniture/details/${id}`));
       } else {
         const furniture = {
           name: res.name,
@@ -164,13 +186,19 @@ const calculateTotalLikes = (furniture) => {
 };
 
 export function* getMyFurniture() {
-  const path = `furniture/mine`;
+  const path = `furniture.json`;
 
   try {
     const res = yield fetchRequest(path, "GET");
-    const totalLikes = calculateTotalLikes(res);
-    yield put(saveTotalLikes(totalLikes));
-    yield put(saveMyFurnitureAction(res));
+    console.log("res", res);
+    if (res.error) {
+      return;
+    } else {
+      let array = transformArray(res);
+      // const totalLikes = calculateTotalLikes(array);
+      // yield put(saveTotalLikes(totalLikes));
+      yield put(saveMyFurnitureAction(array));
+    }
   } catch (e) {
     yield put(setActionStatus("error", e.message));
   }

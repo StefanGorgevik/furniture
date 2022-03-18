@@ -26,7 +26,7 @@ const All = ({
 
   const openFurnitureHandler = (id) => {
     openFurnitureAction({
-      id: Number(id),
+      id,
       shouldRedirect: true,
     });
   };

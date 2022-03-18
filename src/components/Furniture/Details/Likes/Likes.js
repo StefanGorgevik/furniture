@@ -42,7 +42,7 @@ const Likes = ({ likedBy, handleClose, open }) => {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
+      {/* <DialogContent dividers>
         <Grid
           item
           container
@@ -69,7 +69,7 @@ const Likes = ({ likedBy, handleClose, open }) => {
               </Grid>
             ))}
         </Grid>
-      </DialogContent>
+      </DialogContent> */}
     </Dialog>
   );
 };

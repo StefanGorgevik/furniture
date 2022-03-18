@@ -2,21 +2,9 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   homeContent: {
-    minHeight: "1000px",
-  },
-  "@keyframes background": {
-    "0%": {
-      background: "black",
-      marginBottom: "1000px",
-    },
-    "100%": {
-      marginBottom: 0,
-      height: "auto",
-      background: "#EEEEEE",
-    },
+    minHeight: "100%",
   },
   homeContentItem: {
-    marginBottom: "3em",
     borderRadius: "50%",
   },
   homeButton: {
@@ -33,21 +21,12 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   landingHeader: {
-    marginBottom: "3em",
+    marginBottom: "1em",
   },
   landingItemsWrapper: {
     margin: "1em auto",
     width: "40%",
     borderRadius: "8px",
-  },
-  animationStart: {
-    display: "none",
-  },
-  animationEnter: {
-    display: "none",
-  },
-  animationDone: {
-    display: "block",
   },
   mainTitle: {},
   lampOn: {

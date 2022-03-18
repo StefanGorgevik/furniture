@@ -50,14 +50,14 @@ export const FurnitureItem = ({
           <IconButton className={classes.iconButton}>
             <ThumbUpIcon />
             <Typography style={{ paddingLeft: "5px" }} variant="caption">
-              {item.likes.length}
+              {item.likes ? item.likes.length : 0}
             </Typography>
           </IconButton>
 
           <IconButton className={classes.iconButton}>
             <InsertCommentIcon tooltipTitle="Reviews" />
             <Typography style={{ paddingLeft: "5px" }} variant="caption">
-              {item.reviews.length}
+              {item.reviews ? item.reviews.length : 0}
             </Typography>
           </IconButton>
 

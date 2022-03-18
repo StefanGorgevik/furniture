@@ -65,7 +65,7 @@ const HomeContent = () => {
                 align="center"
                 className={classes.animationContent}
               >
-                Find the best fit of furniture for your home!
+                Find the best furniture for your home!
               </Typography>
             </Grid>
 
@@ -73,7 +73,7 @@ const HomeContent = () => {
               <img
                 alt="furniture logo"
                 src={ChairTable}
-                style={{ alignSelf: "center", marginTop: "1em" }}
+                style={{ alignSelf: "center" }}
                 className={classes.animationContent}
               />
             </Grid>
@@ -87,7 +87,7 @@ const HomeContent = () => {
             justifyContent="space-between"
             md
           >
-            <Grid item style={{ marginTop: !matchesSM ? 100 : undefined }}>
+            <Grid item>
               <Typography
                 variant="h2"
                 align="center"
@@ -105,7 +105,6 @@ const HomeContent = () => {
                   alignSelf: "center",
                   marginTop: matchesSM ? "1em" : undefined,
                   height: "15em",
-                  marginBottom: !matchesSM ? -100 : undefined,
                 }}
                 className={classes.animationContent}
               />
@@ -140,20 +139,16 @@ const HomeContent = () => {
         </Grid>
       </>
       <Grid item container direction="row" justifyContent="center">
-        <Grid item xl style={{ marginTop: "5em" }}>
-          <Typography variant="h4">How do you want to proceed?</Typography>
-        </Grid>
         <Grid
           item
           container
           justifyContent="center"
           spacing={3}
-          style={{ marginBottom: "2em" }}
+          style={{ marginBottom: "2em", marginTop: "1em" }}
         >
           <Grid item>
             <Button
               variant={selectedAuth === "signIn" ? "contained" : "outlined"}
-              lg
               color="primary"
               className={classes.homeButton}
               onClick={() => selectAuthHandler("signIn")}
@@ -164,7 +159,6 @@ const HomeContent = () => {
           <Grid item>
             <Button
               variant={selectedAuth === "signUp" ? "contained" : "outlined"}
-              lg
               color="primary"
               className={classes.homeButton}
               onClick={() => selectAuthHandler("signUp")}

@@ -32,17 +32,17 @@ const Details = ({
 
   useEffect(() => {
     if (furnitureID && !currentFurnitureLoaded) {
-      openFurnitureAction({ id: Number(furnitureID), shouldRedirect: true });
+      openFurnitureAction({ id: furnitureID, shouldRedirect: true });
     }
   }, [furnitureID, openFurnitureAction, currentFurnitureLoaded]);
 
-  useEffect(() => {
-    const userMail = localStorage.getItem("user_email");
-    const liked = likedBy.find((email) => email === userMail);
-    if (liked) {
-      setFurnitureLiked(true);
-    }
-  }, [likedBy]);
+  // useEffect(() => {
+  //   const userMail = localStorage.getItem("user_email");
+  //   const liked = likedBy.find((email) => email === userMail);
+  //   if (liked) {
+  //     setFurnitureLiked(true);
+  //   }
+  // }, [likedBy]);
 
   const editFurnitureHandler = () => {
     const furniture = {
@@ -83,7 +83,8 @@ const Details = ({
             onEdit={editFurnitureHandler}
             onAddToCart={() => addToCartHandler(currentFurniture)}
             reviewsCount={currentFurniture.reviews}
-            likesCount={likedBy.length}
+            // likesCount={likedBy.length}
+            likesCount={0}
             handleReviewsOpen={() => setReviewsOpened(true)}
             handleLikesOpen={() => setLikesOpened(true)}
           />
