@@ -197,7 +197,7 @@ const Header = ({ isLoggedIn, openModal }) => {
                   <MenuItem
                     key={`${option}${i}`}
                     component={Link}
-                    to={option.link}
+                    to={option.link ? option.link : "/"}
                     classes={{ root: classes.menuItem }}
                     onClick={(event) => {
                       option.onClick();

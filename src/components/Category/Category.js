@@ -33,7 +33,12 @@ const Category = ({ itemKey, openFurnitureHandler, allFurniture }) => {
   };
 
   return (
-    <Grid item container justify="flex-start" style={{ marginBottom: "1em" }}>
+    <Grid
+      item
+      container
+      justifyContent="flex-start"
+      style={{ marginBottom: "1em" }}
+    >
       <Grid
         item
         container

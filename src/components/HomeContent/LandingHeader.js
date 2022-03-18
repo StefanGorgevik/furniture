@@ -10,7 +10,7 @@ import lampOn from "assets/images/landingHeader/lampOn.png";
 import sofa from "assets/images/landingHeader/sofa.png";
 import chair from "assets/images/landingHeader/chair.png";
 
-const LandingHeader = ({ isLampOn }) => {
+const LandingHeader = () => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
@@ -21,7 +21,7 @@ const LandingHeader = ({ isLampOn }) => {
       container
       className={classes.landingHeader}
       direction="column"
-      justify="space-between"
+      justifyContent="space-between"
     >
       <Grid item container direction="column" alignItems="center">
         <img
@@ -33,36 +33,26 @@ const LandingHeader = ({ isLampOn }) => {
           }}
         />
         <img src={lampOn} alt="lamp light" className={classes.lampOn} />
-
-        <Grid item>
-          <Transition onOpen={isLampOn} timeout={500}>
-            <Typography className={classes.mainTitle} variant="h1">
-              The place for your furniture!
-            </Typography>
-          </Transition>
-        </Grid>
       </Grid>
-      <Grid
-        item
-        container
-        direction="row"
-        className={classes.landingItemsWrapper}
-        justify="center"
-        alignItems="flex-end"
-        spacing={3}
-      >
-        <Grid item>
-          <Transition onOpen={isLampOn} timeout={500}>
+      <Transition onOpen={true} timeout={50}>
+        <Grid
+          item
+          container
+          direction="row"
+          className={classes.landingItemsWrapper}
+          justifyContent="center"
+          alignItems="flex-end"
+          spacing={3}
+        >
+          <Grid item>
             <img
               src={sofa}
               alt="sofa"
               style={{ width: "5em", height: "5em" }}
               className={classes.animationContent}
             />
-          </Transition>
-        </Grid>
-        <Grid item>
-          <Transition onOpen={isLampOn} timeout={500}>
+          </Grid>
+          <Grid item>
             <img
               src={chair}
               alt="sofa"
@@ -75,19 +65,17 @@ const LandingHeader = ({ isLampOn }) => {
               }}
               className={classes.animationContent}
             />
-          </Transition>
-        </Grid>
-        <Grid item>
-          <Transition onOpen={isLampOn} timeout={500}>
+          </Grid>
+          <Grid item>
             <img
               src={closet}
               alt="nice closet"
               style={{ width: "5em", height: "5em" }}
               className={classes.animationContent}
             />
-          </Transition>
+          </Grid>
         </Grid>
-      </Grid>
+      </Transition>
     </Grid>
   );
 };
