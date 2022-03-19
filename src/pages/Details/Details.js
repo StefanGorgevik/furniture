@@ -25,24 +25,23 @@ const Details = ({
   const [furnitureLiked, setFurnitureLiked] = useState(false);
   const params = useParams();
   let furnitureID = params.id;
-  const { likedBy } = currentFurniture;
-
+  console.log("SUBMIT likes", currentFurniture);
   const [reviewsOpened, setReviewsOpened] = React.useState(false);
   const [likesOpened, setLikesOpened] = React.useState(false);
-
   useEffect(() => {
     if (furnitureID && !currentFurnitureLoaded) {
       openFurnitureAction({ id: furnitureID, shouldRedirect: true });
     }
   }, [furnitureID, openFurnitureAction, currentFurnitureLoaded]);
 
-  // useEffect(() => {
-  //   const userMail = localStorage.getItem("user_email");
-  //   const liked = likedBy.find((email) => email === userMail);
-  //   if (liked) {
-  //     setFurnitureLiked(true);
-  //   }
-  // }, [likedBy]);
+  useEffect(() => {
+    if (!currentFurniture.likes) return;
+    const userMail = localStorage.getItem("user_email");
+    const liked = currentFurniture.likes.find((like) => like.user === userMail);
+    if (liked) {
+      setFurnitureLiked(true);
+    }
+  }, [currentFurniture.likes]);
 
   const editFurnitureHandler = () => {
     const furniture = {
@@ -71,34 +70,47 @@ const Details = ({
           item
           container
           direction="row"
-          justify="space-evenly"
+          justifyContent="space-evenly"
           alignItems="center"
           style={{ marginTop: "2em" }}
         >
-          <DetailsImage likedBy={likedBy} imageURL={currentFurniture.image} />
+          <DetailsImage
+            likes={currentFurniture.likes ? currentFurniture.likes : []}
+            imageURL={currentFurniture.image}
+          />
           <DetailsInfoContent
             currentFurniture={currentFurniture}
             liked={furnitureLiked}
             setLiked={setFurnitureLiked}
             onEdit={editFurnitureHandler}
             onAddToCart={() => addToCartHandler(currentFurniture)}
-            reviewsCount={currentFurniture.reviews}
-            // likesCount={likedBy.length}
-            likesCount={0}
+            reviewsCount={
+              currentFurniture.reviews ? currentFurniture.reviews.length : 0
+            }
+            likes={currentFurniture.likes ? currentFurniture.likes : []}
+            likesCount={
+              currentFurniture.likes ? currentFurniture.likes.length : 0
+            }
             handleReviewsOpen={() => setReviewsOpened(true)}
             handleLikesOpen={() => setLikesOpened(true)}
           />
         </Grid>
 
         <Reviews
-          reviewsCount={currentFurniture.reviews}
+          reviews={currentFurniture.reviews}
+          reviewsCount={
+            currentFurniture.reviews ? currentFurniture.reviews.length : 0
+          }
           id={currentFurniture.id}
           handleClose={() => setReviewsOpened(!reviewsOpened)}
           open={reviewsOpened}
         />
 
         <Likes
-          likedBy={likedBy}
+          likes={currentFurniture.likes ? currentFurniture.likes : []}
+          likesCount={
+            currentFurniture.likes ? currentFurniture.likes.length : 0
+          }
           id={currentFurniture.id}
           handleClose={() => setLikesOpened(!likesOpened)}
           open={likesOpened}

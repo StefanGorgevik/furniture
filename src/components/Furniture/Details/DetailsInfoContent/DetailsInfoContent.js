@@ -39,7 +39,7 @@ const DetailsInfoContent = ({
     { label: "material", text: currentFurniture.material },
     { label: "price", text: `€ ${currentFurniture.price}` },
   ];
-
+  console.log("currentfurniture SUBMIT DETAILS INFO ", reviewsCount);
   return (
     <Grid
       item
@@ -61,9 +61,8 @@ const DetailsInfoContent = ({
           </Typography>
 
           <Typography align="left" variant="subtitle1">
-            {/* {currentFurniture.createdOn.substr(0, 10)} -
-            {currentFurniture.createdOn.substr(11, 5)} */}
-            date
+            {currentFurniture.createdOn.substr(0, 10)} -
+            {currentFurniture.createdOn.substr(11, 5)}
           </Typography>
         </Grid>
         <DetailsButtons

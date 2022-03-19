@@ -38,9 +38,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     width: "90%",
     margin: "0 auto",
-    "&:hover $focusHighlight": {
-      opacity: 0,
-    },
   },
   cardHeader: {
     padding: "5px",

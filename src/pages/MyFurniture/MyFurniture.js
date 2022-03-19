@@ -81,10 +81,16 @@ const MyFurniture = ({
             order={order}
           />
         )}
-        <Grid item container style={{ marginTop: "2.5em" }} justify="center">
+        <Grid
+          item
+          container
+          style={{ marginTop: "2.5em" }}
+          justifyContent="center"
+        >
           {myFurniture.map((furniture) => {
             return (
               <FurnitureItem
+                key={furniture.id}
                 item={furniture}
                 showIcon={false}
                 price={furniture.price}
@@ -94,7 +100,7 @@ const MyFurniture = ({
                 showTools={true}
                 onClick={() =>
                   openFurnitureAction({
-                    id: Number(furniture.id),
+                    id: furniture.id,
                     shouldRedirect: true,
                   })
                 }

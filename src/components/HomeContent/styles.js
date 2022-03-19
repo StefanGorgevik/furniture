@@ -35,6 +35,26 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1em",
     zIndex: 10,
   },
+  // decrease: {
+  //   maxHeight: 0,
+  //   transformOrigin: "top",
+  //   transition: "transform 0.26s ease",
+  //   transform: "scaleY(0)",
+  // },
+  // decreaseActive: {
+  //   maxHeight: "100%",
+  //   transform: "scaleY(1)",
+  // },
+  // topPush: {
+  //   marginTop: 500,
+  //   transform: "scale(0.85)",
+  //   transition: "all 700ms",
+  // },
+  // topNoPush: {
+  //   marginTop: "0",
+  //   opacity: " 1",
+  //   transform: "scale(1)",
+  // },
 }));
 
 export default useStyles;

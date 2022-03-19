@@ -55,7 +55,7 @@ export const FurnitureItem = ({
           </IconButton>
 
           <IconButton className={classes.iconButton}>
-            <InsertCommentIcon tooltipTitle="Reviews" />
+            <InsertCommentIcon title="Reviews" />
             <Typography style={{ paddingLeft: "5px" }} variant="caption">
               {item.reviews ? item.reviews.length : 0}
             </Typography>
@@ -83,7 +83,7 @@ export const FurnitureItem = ({
                 className={classes.actionButton}
                 onClick={onEdit}
                 size="small"
-                variant="standard"
+                variant="contained"
                 color="primary"
               >
                 <EditIcon style={{ marginLeft: "2px", marginBottom: "2px" }} />
@@ -93,7 +93,7 @@ export const FurnitureItem = ({
               <Button
                 className={classes.actionButton}
                 onClick={onDelete}
-                variant="standard"
+                variant="contained"
                 size="small"
                 color="primary"
               >
@@ -111,7 +111,7 @@ export const FurnitureItem = ({
                   paddingLeft: "1em",
                 }}
                 className={classes.actionButton}
-                variant="standard"
+                variant="contained"
               >
                 <ArrowForwardIcon
                   style={{ marginLeft: "2px", marginBottom: "2px" }}

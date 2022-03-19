@@ -90,7 +90,7 @@ const Register = ({ registerUser }) => {
         <Input
           label="Password"
           type="password"
-          id="password"
+          id="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           error={error.password.length > 0}

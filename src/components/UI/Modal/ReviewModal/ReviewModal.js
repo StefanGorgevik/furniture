@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import styles from "./ReviewModal.module.css";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import ModalButtons from "components/UI/Modal/ModalButtons/ModalButtons";
@@ -47,30 +46,49 @@ const ReviewModal = ({
   };
 
   return (
-    <div className={styles["review-modal"]}>
-      <Typography variant="h3" color="primary">
+    <Grid container justifyContent="center">
+      <Typography variant="h3" color="primary" gutterBottom>
         Leave a review
       </Typography>
-      <div className={styles["review-modal-stars"]}>
-        {[0, 1, 2, 3, 4].map((star, i) => {
-          return star >= stars ? (
-            <IconButton key={star} onClick={() => setStarsHandler(star + 1)}>
-              <StarBorderIcon />
-            </IconButton>
-          ) : (
-            <IconButton key={star} onClick={() => setStarsHandler(star + 1)}>
-              <StarIcon />
-            </IconButton>
-          );
-        })}
-      </div>
       <Grid
         item
+        container
+        justifyContent="center"
+        style={{ marginBottom: "30px", marginTop: "20px" }}
+      >
+        {[0, 1, 2, 3, 4].map((star, i) => {
+          return star >= stars ? (
+            <Grid item key={star}>
+              <IconButton onClick={() => setStarsHandler(star + 1)}>
+                <StarBorderIcon
+                  style={{
+                    fontSize: "40px",
+                  }}
+                />
+              </IconButton>
+            </Grid>
+          ) : (
+            <Grid item key={star}>
+              <IconButton onClick={() => setStarsHandler(star + 1)}>
+                <StarIcon
+                  style={{
+                    fontSize: "40px",
+                  }}
+                />
+              </IconButton>
+            </Grid>
+          );
+        })}
+      </Grid>
+      <Grid
+        item
+        container
         style={{
           backgroundColor: theme.palette.common.darkerWhite,
           padding: "0 1em",
           paddingBottom: 0,
           borderRadius: "4px",
+          margin: "0 2em",
           marginTop: "1em",
         }}
       >
@@ -82,7 +100,6 @@ const ReviewModal = ({
           onChange={setReviewHandler}
           rows={5}
           error={error}
-          helperText={error ? "Enter your experience with the product!" : ""}
         />
       </Grid>
       <ModalButtons
@@ -90,7 +107,7 @@ const ReviewModal = ({
         onClose={closeModal}
         submitButtonText="Submit review"
       />
-    </div>
+    </Grid>
   );
 };
 const mapStateToProps = (state) => ({

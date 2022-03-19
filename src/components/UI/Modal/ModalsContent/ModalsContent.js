@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Modal from "@material-ui/core/Modal";
 import NotificationModal from "../NotificationModal/NotificationModal";
-import Modal from "../Modal";
+import ModalItem from "../Modal";
 import ReviewModal from "../ReviewModal/ReviewModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import LogoutModal from "../LogoutModal/LogoutModal";
@@ -15,7 +16,7 @@ import { closeModal } from "store/ui/uiActions";
 const ModalsContent = ({ modals, closeModal }) => {
   const { modalType, modal, loading, showNotification } = modals;
   const [modalContent, setModalContent] = useState(null);
-
+  console.log("loading", loading);
   useEffect(() => {
     switch (modalType) {
       case "review":
@@ -42,12 +43,23 @@ const ModalsContent = ({ modals, closeModal }) => {
     <>
       {modal &&
         ReactDOM.createPortal(
-          <Modal onClose={closeModal}>{modalContent}</Modal>,
+          <ModalItem onClose={closeModal}>{modalContent}</ModalItem>,
           document.getElementById("backdrop-root")
         )}
       {loading &&
         ReactDOM.createPortal(
-          <CircularProgress />,
+          <Modal
+            hideBackdrop
+            open={loading}
+            style={{
+              top: 300,
+              position: "absolute",
+              oveflow: "hidden",
+              backgroundColor: "rgba(0, 0, 0, 0)",
+            }}
+          >
+            <CircularProgress color="primary" />
+          </Modal>,
           document.getElementById("spinner-root")
         )}
       {showNotification &&

@@ -1,11 +1,10 @@
-import { createMuiTheme } from "@material-ui/core";
-
+import { createTheme } from "@material-ui/core/styles";
 const mainGrey = "#535559";
 const darkerWhite = "#EEEEEE";
 const darkerGrey = "#222831";
 const backgroundColor = "rgba(151, 138, 138, 0.287);";
 
-export default createMuiTheme({
+export default createTheme({
   palette: {
     common: {
       grey: mainGrey,
@@ -113,14 +112,6 @@ export default createMuiTheme({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-      },
-      underline: {
-        "&&&:before": {
-          borderBottom: "none",
-        },
-        "&&:after": {
-          borderBottom: "none",
-        },
       },
     },
     MuiCardHeader: {

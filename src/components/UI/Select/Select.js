@@ -8,12 +8,7 @@ import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginBottom: theme.spacing(5),
-
     width: "100%",
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
 }));
 
@@ -39,7 +34,6 @@ const Dropdown = ({ options, value, handleChange, error, helperText }) => {
           );
         })}
       </Select>
-      {error && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };

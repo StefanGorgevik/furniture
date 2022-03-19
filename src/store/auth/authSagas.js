@@ -42,11 +42,9 @@ export function* loginUserSaga({ data }) {
 
   try {
     const res = yield authRequest(data, path);
-    console.log("res LOGIN", res);
     if (res.error) {
       let message = "Something went wrong!";
       const errorId = res.error.message;
-
       if (errorId === "EMAIL_NOT_FOUND") {
         message = "This email could not be found!";
       } else if (errorId === "INVALID_PASSWORD") {
@@ -73,7 +71,6 @@ export function* registerUserSaga({ data }) {
   const path = `signUp`;
   try {
     const res = yield authRequest(data, path);
-    console.log("RES", res);
     const { email, password } = data;
     if (res.error) {
       let message = "Something went wrong!";

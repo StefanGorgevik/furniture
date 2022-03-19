@@ -28,15 +28,15 @@ import CreateIcon from "@material-ui/icons/Create";
 import WebIcon from "@material-ui/icons/Web";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SearchInput from "components/UI/Inputs/SearchInput";
-
+import { useScreenSize } from "hooks/breakpoints";
 const Header = ({ isLoggedIn, openModal }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState();
   const pathname = useLocation().pathname;
-  const [tab, setHeaderTab] = useState(1);
-
+  const [tab, setHeaderTab] = useState(0);
+  const { matchesSM } = useScreenSize();
   useEffect(() => {
     if (pathname === "/furniture/all") {
       setHeaderTab(0);
@@ -107,43 +107,43 @@ const Header = ({ isLoggedIn, openModal }) => {
 
   const menuOptions = useMemo(() => {
     return [
-      {
-        name: "Cart",
-        link: "/cart",
-        activeIndex: 1,
-        selectedIndex: 0,
-        icon: <ShoppingCartIcon />,
-        onClick: () => {},
-      },
-      {
-        name: "Stats",
-        link: "/stats",
-        activeIndex: 1,
-        selectedIndex: 0,
-        icon: <EqualizerIcon />,
-        onClick: () => {},
-      },
-      {
-        name: "Change Username",
-        link: "/change-username",
-        activeIndex: 1,
-        selectedIndex: 0,
-        icon: <EditIcon fontSize="small" />,
-        onClick: () => {},
-      },
-      {
-        name: "Change Password",
-        link: "/change-password",
-        activeIndex: 1,
-        selectedIndex: 0,
-        icon: <EditIcon fontSize="small" />,
-        onClick: () => {},
-      },
+      //   {
+      //     name: "Cart",
+      //     link: "/cart",
+      //     activeIndex: 1,
+      //     selectedIndex: 0,
+      //     icon: <ShoppingCartIcon />,
+      //     onClick: () => {},
+      //   },
+      //   {
+      //     name: "Stats",
+      //     link: "/stats",
+      //     activeIndex: 1,
+      //     selectedIndex: 0,
+      //     icon: <EqualizerIcon />,
+      //     onClick: () => {},
+      //   },
+      //   {
+      //     name: "Change Username",
+      //     link: "/change-username",
+      //     activeIndex: 1,
+      //     selectedIndex: 0,
+      //     icon: <EditIcon fontSize="small" />,
+      //     onClick: () => {},
+      //   },
+      //   {
+      //     name: "Change Password",
+      //     link: "/change-password",
+      //     activeIndex: 1,
+      //     selectedIndex: 0,
+      //     icon: <EditIcon fontSize="small" />,
+      //     onClick: () => {},
+      //   },
       {
         name: "Logout",
         link: undefined,
-        activeIndex: 1,
-        selectedIndex: 2,
+        activeIndex: 0,
+        selectedIndex: 0,
         icon: <ExitToAppIcon fontSize="small" />,
         onClick: () => openModal("logout"),
       },
@@ -155,23 +155,21 @@ const Header = ({ isLoggedIn, openModal }) => {
       <ElevationScroll>
         <AppBar position="fixed">
           <Toolbar disableGutters className={classes.headerWrapper}>
-            <img src={Logo} alt="logo" className={classes.logo} />
+            {matchesSM ? null : (
+              <img src={Logo} alt="logo" className={classes.logo} />
+            )}
+            {/* {pathname !== "/" && (
+              <Grid item style={{ display: "flex", alignItems: "flex-end" }}>
+                <SearchInput />
+              </Grid>
+            )} */}
             <>
               <Tabs
                 value={tab}
                 onChange={handleChange}
-                indicatorColor="primary"
+                indicatorColor="secondary"
                 className={classes.tabs}
               >
-                {pathname !== "/" && (
-                  <Grid
-                    item
-                    style={{ display: "flex", alignItems: "flex-end" }}
-                  >
-                    <SearchInput />
-                  </Grid>
-                )}
-
                 {tabs}
                 {isLoggedIn && (
                   <Tab
@@ -196,8 +194,9 @@ const Header = ({ isLoggedIn, openModal }) => {
                 {menuOptions.map((option, i) => (
                   <MenuItem
                     key={`${option}${i}`}
-                    component={Link}
-                    to={option.link ? option.link : "/"}
+                    //IF YOU ADD OTHER LINKS IN MENU OPTION
+                    // component={Link}
+                    // to={option.link ? option.link : "/"}
                     classes={{ root: classes.menuItem }}
                     onClick={(event) => {
                       option.onClick();

@@ -13,10 +13,11 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     ...theme.typography.tab,
-    fontSize: "1.2rem",
+    fontSize: "1rem",
     letterSpacing: 0,
     fontWeight: 500,
-    textTransform: "capitalize",
+    textAlign: "center",
+    paddingBottom: 0,
     margin: "0 10px",
     "&:hover": {
       color: "white",
@@ -33,12 +34,6 @@ const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "0.2em",
-    // [theme.breakpoints.down("md")]: {
-    //   marginBottom: "1em",
-    // },
-    // [theme.breakpoints.down("xs")]: {
-    //   marginBottom: "0.75em",
-    // },
   },
   searchIcon: {
     color: "white",

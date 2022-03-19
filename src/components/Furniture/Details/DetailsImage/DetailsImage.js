@@ -17,7 +17,7 @@ const DetailsImage = ({ imageURL }) => {
       className={classes.detailsImageContainer}
       direction="column"
       alignItems="flex-end"
-      justify="center"
+      justifyContent="center"
     >
       <img
         src={imageURL}

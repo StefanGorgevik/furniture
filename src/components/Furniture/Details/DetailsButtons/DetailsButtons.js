@@ -51,7 +51,7 @@ const DetailsButtons = ({
   };
 
   const deleteFurnitureHandler = (id) => {
-    openModal("delete", { id: id, shouldRedirect: true });
+    openModal("delete", { id, shouldRedirect: true });
   };
 
   return (
@@ -59,7 +59,7 @@ const DetailsButtons = ({
       item
       container
       direction="row"
-      justify="flex-end"
+      justifyContent="flex-end"
       alignItems="flex-end"
       style={{
         marginBottom: "1em",

@@ -16,7 +16,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Likes = ({ likedBy, handleClose, open }) => {
+const Likes = ({ likes, handleClose, open }) => {
   const classes = useStyles();
 
   return (
@@ -42,17 +42,18 @@ const Likes = ({ likedBy, handleClose, open }) => {
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      {/* <DialogContent dividers>
+      <DialogContent dividers>
         <Grid
           item
           container
           direction="column"
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           style={{ minWidth: "50%" }}
         >
-          {likedBy.length > 0 &&
-            likedBy.map((user, i) => (
+          {likes &&
+            likes.length > 0 &&
+            likes.map((like, i) => (
               <Grid
                 item
                 container
@@ -61,15 +62,16 @@ const Likes = ({ likedBy, handleClose, open }) => {
                 style={{
                   padding: "0.5em 2em",
                 }}
+                key={like.id}
               >
                 <PersonIcon style={{ marginRight: "0.3em" }} />
                 <Typography variant="subtitle2" style={{ minWidth: "200px" }}>
-                  {user}
+                  {like.user}
                 </Typography>
               </Grid>
             ))}
         </Grid>
-      </DialogContent> */}
+      </DialogContent>
     </Dialog>
   );
 };

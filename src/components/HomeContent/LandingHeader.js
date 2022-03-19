@@ -49,7 +49,6 @@ const LandingHeader = () => {
               src={sofa}
               alt="sofa"
               style={{ width: "5em", height: "5em" }}
-              className={classes.animationContent}
             />
           </Grid>
           <Grid item>
@@ -63,7 +62,6 @@ const LandingHeader = () => {
                 top: matchesSM ? 0 : "-2em",
                 margin: "0 2em",
               }}
-              className={classes.animationContent}
             />
           </Grid>
           <Grid item>
@@ -71,7 +69,6 @@ const LandingHeader = () => {
               src={closet}
               alt="nice closet"
               style={{ width: "5em", height: "5em" }}
-              className={classes.animationContent}
             />
           </Grid>
         </Grid>

@@ -41,102 +41,99 @@ const HomeContent = () => {
     >
       <LandingHeader />
       <>
-        <Grid
-          item
-          container
-          direction="row"
-          style={{ width: "95%", margin: "0 auto" }}
-        >
+        {selectedAuth === "" && (
           <Grid
-            className={classes.homeContentItem}
             item
             container
-            direction="column"
-            justifyContent="space-between"
-            md
+            direction="row"
+            style={{ width: "95%", margin: "0 auto" }}
+            //for animated height decrease
+            // className={
+            //   selectedAuth === "" ? classes.decreaseActive : classes.decrease
+            // }
           >
-            <Grid item>
-              <Typography
-                variant="h2"
-                style={{
-                  width: matchesSM ? "12em" : undefined,
-                  margin: "0 auto",
-                }}
-                align="center"
-                className={classes.animationContent}
-              >
-                Find the best furniture for your home!
-              </Typography>
+            <Grid
+              className={classes.homeContentItem}
+              item
+              container
+              direction="column"
+              justifyContent="space-between"
+              md
+            >
+              <Grid item>
+                <Typography
+                  variant="h2"
+                  style={{
+                    width: matchesSM ? "12em" : undefined,
+                    margin: "0 auto",
+                  }}
+                  align="center"
+                >
+                  Find the best furniture for your home!
+                </Typography>
+              </Grid>
+
+              <Grid item>
+                <img
+                  alt="furniture logo"
+                  src={ChairTable}
+                  style={{ alignSelf: "center" }}
+                />
+              </Grid>
             </Grid>
 
-            <Grid item>
-              <img
-                alt="furniture logo"
-                src={ChairTable}
-                style={{ alignSelf: "center" }}
-                className={classes.animationContent}
-              />
+            <Grid
+              item
+              container
+              direction="column"
+              justifyContent="space-between"
+              md
+            >
+              <Grid item>
+                <Typography variant="h2" align="center">
+                  Review and like other furniture!
+                </Typography>
+              </Grid>
+
+              <Grid item>
+                <img
+                  alt="NightStand"
+                  src={NightStand}
+                  style={{
+                    alignSelf: "center",
+                    marginTop: matchesSM ? "1em" : undefined,
+                    height: "15em",
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid
+              className={classes.homeContentItem}
+              item
+              container
+              direction="column"
+              justifyContent="space-between"
+              md
+            >
+              <Grid item>
+                <Typography variant="h2">
+                  Post and sell your furniture!
+                </Typography>
+              </Grid>
+              <Grid item container alignItems="center" direction="column">
+                <img
+                  alt="Wardrobe"
+                  src={Wardrobe}
+                  style={{
+                    marginTop: "1em",
+                    height: "15em",
+                  }}
+                />
+              </Grid>
             </Grid>
           </Grid>
-
-          <Grid
-            className={classes.homeContentItem}
-            item
-            container
-            direction="column"
-            justifyContent="space-between"
-            md
-          >
-            <Grid item>
-              <Typography
-                variant="h2"
-                align="center"
-                className={classes.animationContent}
-              >
-                Review and like other furniture!
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <img
-                alt="NightStand"
-                src={NightStand}
-                style={{
-                  alignSelf: "center",
-                  marginTop: matchesSM ? "1em" : undefined,
-                  height: "15em",
-                }}
-                className={classes.animationContent}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid
-            className={classes.homeContentItem}
-            item
-            container
-            direction="column"
-            justifyContent="space-between"
-            md
-          >
-            <Grid item>
-              <Typography variant="h2" className={classes.animationContent}>
-                Post and sell your furniture!
-              </Typography>
-            </Grid>
-            <Grid item container alignItems="center" direction="column">
-              <img
-                alt="Wardrobe"
-                src={Wardrobe}
-                style={{
-                  marginTop: "1em",
-                  height: "15em",
-                }}
-                className={classes.animationContent}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+        )}
       </>
       <Grid item container direction="row" justifyContent="center">
         <Grid
@@ -145,6 +142,8 @@ const HomeContent = () => {
           justifyContent="center"
           spacing={3}
           style={{ marginBottom: "2em", marginTop: "1em" }}
+          //for animated decrease of marginTop
+          // className={selectedAuth === "" ? classes.topPush : classes.topNoPush}
         >
           <Grid item>
             <Button

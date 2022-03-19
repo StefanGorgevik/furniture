@@ -1,38 +1,41 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { TextFields } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   input: {
     width: "100%",
+    minWidth: "100%",
     marginTop: "1em",
     paddingBottom: "20px",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: "1em",
-      marginRight: "1em",
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: "1em",
-      marginRight: "1em",
-    },
   },
 }));
 
-export const Input = ({ label, id, error, type, value, onChange, rows }) => {
+export const Input = ({
+  label,
+  id,
+  error,
+  type,
+  value,
+  onChange,
+  rows,
+  style,
+}) => {
   const classes = useStyles();
 
   return (
     <TextField
+      style={{ ...style }}
       variant="outlined"
       label={label}
       id={id}
-      error={error}
       type={type}
       onChange={onChange}
       value={value}
       className={classes.input}
       rows={rows ? rows : undefined}
-      multiline={rows ? rows : undefined}
+      multiline={rows ? true : false}
     />
   );
 };

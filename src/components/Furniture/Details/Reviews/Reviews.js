@@ -48,7 +48,7 @@ const Reviews = ({
   const theme = useTheme();
 
   useEffect(() => {
-    if (reviewsCount > 0) {
+    if (reviews > 0) {
       getAllReviewsAction(id);
     }
   }, [reviewsCount, id, getAllReviewsAction]);
@@ -91,16 +91,16 @@ const Reviews = ({
             item
             container
             direction="column"
-            justify="center"
+            justifyContent="center"
             spacing={4}
             className={classes.allReviews}
           >
             {reviewsCount > 0 &&
-              reviews.map((review, i) => {
+              reviews.map((review) => {
                 return (
                   <Card
                     raised
-                    key={i}
+                    key={review.id}
                     style={{
                       margin: "10px 0",
                       paddingBottom: "0.5em",
@@ -111,7 +111,7 @@ const Reviews = ({
                       item
                       container
                       direction="row"
-                      justify="space-between"
+                      justifyContent="space-between"
                       style={{ paddingTop: "1em", paddingBottom: "0.5em" }}
                     >
                       <Grid
@@ -119,7 +119,7 @@ const Reviews = ({
                         lg
                         container
                         direction="row"
-                        justify="center"
+                        justifyContent="center"
                         alignItems="center"
                       >
                         <PersonIcon style={{ marginRight: "0.2em" }} />
@@ -134,11 +134,11 @@ const Reviews = ({
                         container
                         direction="row"
                         alignItems="center"
-                        justify="center"
+                        justifyContent="center"
                       >
                         <QueryBuilderIcon style={{ marginRight: "0.3em" }} />
                         <Typography variant="subtitle2">
-                          {review.createdOn.substr(0, 10)}{" "}
+                          {review.createdOn.substr(0, 10)}
                           {review.createdOn.substr(11, 5)}
                         </Typography>
                       </Grid>
@@ -148,7 +148,7 @@ const Reviews = ({
                         container
                         direction="row"
                         alignItems="center"
-                        justify="center"
+                        justifyContent="center"
                       >
                         {[...Array(review.rating).keys()].map((rat) => {
                           return <StarIcon key={rat} />;

@@ -7,15 +7,15 @@ const All = lazy(() => import("pages/All/All"));
 const Create = lazy(() => import("pages/Create/Create"));
 const Details = lazy(() => import("pages/Details/Details"));
 const MyFurniture = lazy(() => import("pages/MyFurniture/MyFurniture"));
-const ChangeUsername = lazy(() =>
-  import("pages/ChangeUsername/ChangeUsername")
-);
-const Stats = lazy(() => import("pages/Stats/Stats"));
+// const ChangeUsername = lazy(() =>
+//   import("pages/ChangeUsername/ChangeUsername")
+// );
+// const Stats = lazy(() => import("pages/Stats/Stats"));
 
-const ChangePassword = lazy(() =>
-  import("pages/ChangePassword/ChangePassword")
-);
-const Cart = lazy(() => import("pages/Cart/Cart"));
+// const ChangePassword = lazy(() =>
+//   import("pages/ChangePassword/ChangePassword")
+// );
+// const Cart = lazy(() => import("pages/Cart/Cart"));
 const SearchedAll = lazy(() => import("pages/SearchedAll/SearchedAll"));
 
 const Routes = () => {
@@ -36,7 +36,7 @@ const Routes = () => {
         component={MyFurniture}
       />
       <ProtectedRoute exact path="/furniture/details/:id" component={Details} />
-      <ProtectedRoute
+      {/* <ProtectedRoute
         exact
         path="/change-username"
         component={ChangeUsername}
@@ -45,9 +45,9 @@ const Routes = () => {
         exact
         path="/change-password"
         component={ChangePassword}
-      />
-      <ProtectedRoute exact path="/cart" component={Cart} />
-      <ProtectedRoute exact path="/stats" component={Stats} />
+      /> */}
+      {/* <ProtectedRoute exact path="/cart" component={Cart} /> */}
+      {/* <ProtectedRoute exact path="/stats" component={Stats} /> */}
       <Route path="*" component={NotFound} />
     </Switch>
   );

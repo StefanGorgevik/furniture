@@ -17,7 +17,7 @@ export function* fetchRequest(path, requestMethod, postData) {
       body: postData ? JSON.stringify(postData) : null,
     });
     const res = yield response.json();
-    console.log("RES", res);
+    console.log("RES FROM FETCH REQUEST", res);
     yield put(setLoadingStop());
     return res;
   } catch (e) {

@@ -20,9 +20,9 @@ const All = ({
   allFurnitureLoaded,
 }) => {
   useEffect(() => {
-    getStatsAction();
+    // getStatsAction();
     getAllFurnitureAction();
-  }, [getAllFurnitureAction, getStatsAction]);
+  }, [getAllFurnitureAction]);
 
   const openFurnitureHandler = (id) => {
     openFurnitureAction({
@@ -52,13 +52,13 @@ const All = ({
   }
 
   return (
-    <Grid container direction="column" justify="center">
+    <Grid container direction="column" justifyContent="center">
       {empty && !loading && (
         <Grid
           item
           container
           direction="row"
-          justify="center"
+          justifyContent="center"
           style={{
             padding: "1%",
             margin: "0 auto",

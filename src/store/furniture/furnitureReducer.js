@@ -23,7 +23,7 @@ const initState = {
     likes: "",
     reviews: 0,
     image: "",
-    likedBy: [],
+    likes: [],
   },
   currentFurnitureReviews: [],
   allFurnitureLoaded: false,

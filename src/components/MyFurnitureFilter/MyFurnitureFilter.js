@@ -37,7 +37,7 @@ const MyFurnitureFilter = ({ setOrder, setFilter, filter, order }) => {
       item
       container
       alignItems="center"
-      justify="space-evenly"
+      justifyContent="space-evenly"
       spacing={8}
       className={classes.filterContainer}
     >
@@ -52,8 +52,6 @@ const MyFurnitureFilter = ({ setOrder, setFilter, filter, order }) => {
           }}
           onChange={handleChange}
           label="Age"
-          variant="standard"
-          fullWidth
         >
           <MenuItem value="asc">Ascending</MenuItem>
           <MenuItem value="des">Descending</MenuItem>
@@ -69,7 +67,6 @@ const MyFurnitureFilter = ({ setOrder, setFilter, filter, order }) => {
           onChange={handleFilterChange}
           label="Sort"
           style={{ textTransform: "capitalize", paddingLeft: "0.5em" }}
-          variant="standard"
         >
           {filters.map((f, i) => (
             <MenuItem key={i} value={f} style={{ textTransform: "capitalize" }}>

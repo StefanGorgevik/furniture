@@ -27,7 +27,7 @@ const SearchedAll = ({
       item
       container
       direction="row"
-      justify="center"
+      justifyContent="center"
       style={{
         padding: "1%",
         margin: "0 auto",
