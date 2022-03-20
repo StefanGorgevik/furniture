@@ -16,7 +16,7 @@ const Category = ({ itemKey, openFurnitureHandler, allFurniture }) => {
     if (allFurniture[itemKey].length === 0) {
       setOpened(false);
     }
-  }, [allFurniture[itemKey]]);
+  }, [allFurniture, itemKey]);
 
   const setSlideHandler = (type) => {
     if (type === "dec") {

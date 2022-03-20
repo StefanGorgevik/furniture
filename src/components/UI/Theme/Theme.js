@@ -128,5 +128,8 @@ export default createTheme({
     MuiDialogContent: {
       root: { overflowX: "hidden" },
     },
+    MuiChecked: {
+      color: darkerGrey,
+    },
   },
 });

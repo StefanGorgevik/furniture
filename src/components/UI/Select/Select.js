@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dropdown = ({ options, value, handleChange, error }) => {
+const Dropdown = ({ options, value, handleChange, error, setError }) => {
   const classes = useStyles();
 
   return (
@@ -22,7 +21,12 @@ const Dropdown = ({ options, value, handleChange, error }) => {
         labelId="demo-simple-select-outlined-label"
         id="demo-simple-select-outlined"
         value={value}
-        onChange={handleChange}
+        onChange={(e) => {
+          if (error) {
+            setError("");
+          }
+          handleChange(e);
+        }}
         label="Category"
         align="left"
         error={error}

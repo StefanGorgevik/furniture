@@ -159,6 +159,7 @@ const Create = ({
               value={userInput.name}
               onChange={(e) => saveValue(e, "name")}
               error={error.includes("name")}
+              setError={setError}
             />
           </Grid>
           <Grid item>
@@ -169,6 +170,7 @@ const Create = ({
               value={userInput.material}
               onChange={(e) => saveValue(e, "material")}
               error={error.includes("material")}
+              setError={setError}
             />
           </Grid>
           <Grid item>
@@ -179,7 +181,8 @@ const Create = ({
               value={userInput.image}
               onChange={(e) => saveValue(e, "image")}
               style={{ marginBottom: "10px" }}
-              error={error.includes("year")}
+              error={error.includes("image")}
+              setError={setError}
             />
           </Grid>
           <Grid item style={{ marginBottom: matchesMD ? "15px" : "0" }}>
@@ -188,6 +191,7 @@ const Create = ({
               value={userInput.category}
               handleChange={handleDropdownChangeHandler}
               error={error.includes("category")}
+              setError={setError}
             />
           </Grid>
         </Grid>
@@ -210,6 +214,7 @@ const Create = ({
                 value={userInput.year}
                 onChange={(e) => saveValue(e, "year")}
                 error={error.includes("year")}
+                setError={setError}
               />
             </Grid>
             <Grid item md={5} sm={12} style={{ width: "100%" }}>
@@ -220,6 +225,7 @@ const Create = ({
                 value={userInput.price}
                 onChange={(e) => saveValue(e, "price")}
                 error={error.includes("price")}
+                setError={setError}
               />
             </Grid>
           </Grid>
@@ -231,6 +237,7 @@ const Create = ({
             onChange={(e) => saveValue(e, "description")}
             rows={10}
             error={error.includes("description")}
+            setError={setError}
           />
         </Grid>
       </Grid>

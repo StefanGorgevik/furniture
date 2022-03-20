@@ -54,7 +54,7 @@ export function* saveNewFurniture({ data }) {
     if (res) {
       // yield put(getStatsAction());
       yield put(setActionStatus("success", "Furniture saved!"));
-      yield put(push("/furniture/all"));
+      // yield put(push("/furniture/all"));
     }
   } catch (e) {
     console.log("error", e);

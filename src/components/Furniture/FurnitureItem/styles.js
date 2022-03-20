@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "260px",
     margin: "1%",
     paddingBottom: 0,
     paddingTop: 0,
@@ -18,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: "40em",
     maxHeight: "200px",
-    width: "auto",
     width: "90%",
     boxShadow: theme.shadows[6],
     margin: "0 auto",

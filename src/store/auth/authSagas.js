@@ -51,6 +51,8 @@ export function* loginUserSaga({ data }) {
         message = "This password is not valid!";
       } else if (errorId === "INVALID_EMAIL") {
         message = "This email is not valid!";
+      } else if (errorId === "TOO_MANY_ATTEMPTS_TRY_LATER") {
+        message = "Too many login attempts! Try again later!";
       }
       yield put(setActionStatus("error", message));
     } else {

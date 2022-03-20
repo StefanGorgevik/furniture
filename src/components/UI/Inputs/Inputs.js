@@ -1,7 +1,6 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { TextFields } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -21,6 +20,7 @@ export const Input = ({
   onChange,
   rows,
   style,
+  setError,
 }) => {
   const classes = useStyles();
 
@@ -32,7 +32,12 @@ export const Input = ({
       label={label}
       id={id}
       type={type}
-      onChange={onChange}
+      onChange={(e) => {
+        if (setError && error && e.target.value.length > 0) {
+          setError("");
+        }
+        onChange(e);
+      }}
       value={value}
       className={classes.input}
       rows={rows ? rows : undefined}

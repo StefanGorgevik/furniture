@@ -64,6 +64,7 @@ const Register = ({ registerUser }) => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           error={error.includes("username")}
+          setError={setError}
         />
         <Input
           label="Email"
@@ -72,6 +73,7 @@ const Register = ({ registerUser }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           error={error.includes("email")}
+          setError={setError}
         />
         <Input
           label="Password"
@@ -80,6 +82,7 @@ const Register = ({ registerUser }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           error={error.includes("password")}
+          setError={setError}
         />
         <Input
           label="Repeat password"
@@ -88,6 +91,7 @@ const Register = ({ registerUser }) => {
           value={repeatPassword}
           onChange={(e) => setRepeatPassword(e.target.value)}
           error={error.includes("don't match")}
+          setError={setError}
         />
         <Error error={error} />
         <Grid item container direction="column">

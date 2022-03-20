@@ -20,8 +20,14 @@ const ModalButtons = ({ onSubmit, onClose, submitButtonText }) => {
   const classes = useStyles();
 
   return (
-    <Grid item container direction="row" style={{ marginTop: "1em" }}>
-      <Grid item lg>
+    <Grid
+      item
+      container
+      direction="row"
+      justifyContent="space-evenly"
+      style={{ marginTop: "1em", marginBottom: "1em" }}
+    >
+      <Grid item>
         <Button
           onClick={onClose}
           text="Cancel"
@@ -31,7 +37,7 @@ const ModalButtons = ({ onSubmit, onClose, submitButtonText }) => {
           Cancel
         </Button>
       </Grid>
-      <Grid item lg>
+      <Grid item>
         <Button onClick={onSubmit} className={classes.acceptActionButton}>
           {submitButtonText}
         </Button>

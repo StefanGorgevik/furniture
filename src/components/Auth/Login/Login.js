@@ -49,6 +49,7 @@ const Login = ({ loginUser }) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           error={error.includes("email")}
+          setError={setError}
         />
         <Input
           label="Password"
@@ -57,6 +58,7 @@ const Login = ({ loginUser }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           error={error.includes("password")}
+          setError={setError}
         />
         <Error error={error} />
         <Grid item container direction="column">
