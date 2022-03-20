@@ -13,6 +13,8 @@ import {
   Typography,
   Grid,
   IconButton,
+  Box,
+  Tooltip,
 } from "@material-ui/core";
 import { logoutUser } from "store/auth/authActions";
 import { openModal } from "store/ui/uiActions";
@@ -97,7 +99,7 @@ const Header = ({ isLoggedIn, openModal }) => {
         <Tab
           key={`${tab.name}${i}`}
           className={classes.tab}
-          label={tab.name}
+          label={matchesSM ? "" : tab.name}
           component={NavLink}
           to={tab.to}
           icon={tab.icon}
@@ -163,7 +165,15 @@ const Header = ({ isLoggedIn, openModal }) => {
                 <SearchInput />
               </Grid>
             )} */}
-            <>
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                width: "100%",
+              }}
+            >
               <Tabs
                 value={tab}
                 onChange={handleChange}
@@ -171,14 +181,29 @@ const Header = ({ isLoggedIn, openModal }) => {
                 className={classes.tabs}
               >
                 {tabs}
-                {isLoggedIn && (
+                {/* {isLoggedIn && (
                   <Tab
                     icon={<SettingsIcon />}
                     onMouseOver={(event) => handleClick(event)}
                   />
-                )}
+                )} */}
               </Tabs>
-              <Menu
+              {isLoggedIn && (
+                <Tooltip title="Logout">
+                  <IconButton
+                    style={{
+                      width: "60px",
+                      marginRight: "10px",
+                      paddingTop: "20px",
+                    }}
+                    onClick={() => openModal("logout")}
+                  >
+                    <ExitToAppIcon color="secondary" />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {/* POP UP MENU FOR OPTIONS */}
+              {/* <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
                 open={openMenu}
@@ -218,8 +243,8 @@ const Header = ({ isLoggedIn, openModal }) => {
                     <Typography variant="caption">{option.name}</Typography>
                   </MenuItem>
                 ))}
-              </Menu>
-            </>
+              </Menu> */}
+            </Box>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

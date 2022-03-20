@@ -7,6 +7,7 @@ import { registerStarted } from "store/auth/authActions";
 import { validateRegisterForm } from "utils/validators";
 import { Grid, Button } from "@material-ui/core";
 import { useScreenSize } from "hooks/breakpoints";
+import { Error } from "components/UI/formError";
 
 const Register = ({ registerUser }) => {
   const classes = useStyles();
@@ -15,37 +16,24 @@ const Register = ({ registerUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [error, setError] = useState({
-    username: false,
-    email: false,
-    password: false,
-    secondPassword: false,
-    repeatPassword: false,
-  });
+  const [error, setError] = useState("");
 
   const registerHandler = (e, onKey) => {
     if (e.key === "Enter" || !onKey) {
       e.preventDefault();
-      setError({
-        username: false,
-        email: false,
-        password: false,
-        secondPassword: false,
-        repeatPassword: false,
-      });
 
-      const userInput = {
+      const valData = validateRegisterForm({
         username,
         email,
         password,
         repeatPassword,
-      };
+      });
+      setError(valData);
 
-      const valData = validateRegisterForm(userInput);
-      setError(valData.allErrors);
-
-      if (valData.errorCount > 0) return;
-
+      if (valData !== "") return;
+      else {
+        setError("");
+      }
       registerUser({
         email,
         username,
@@ -75,8 +63,7 @@ const Register = ({ registerUser }) => {
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          error={error.username.length > 0}
-          helperText={error.username}
+          error={error.includes("username")}
         />
         <Input
           label="Email"
@@ -84,8 +71,7 @@ const Register = ({ registerUser }) => {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          error={error.email.length > 0}
-          helperText={error.email}
+          error={error.includes("email")}
         />
         <Input
           label="Password"
@@ -93,8 +79,7 @@ const Register = ({ registerUser }) => {
           id="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          error={error.password.length > 0}
-          helperText={error.password}
+          error={error.includes("password")}
         />
         <Input
           label="Repeat password"
@@ -102,9 +87,9 @@ const Register = ({ registerUser }) => {
           id="repeat-password"
           value={repeatPassword}
           onChange={(e) => setRepeatPassword(e.target.value)}
-          error={error.repeatPassword.length > 0 || error.secondPassword}
-          helperText={error.secondPassword}
+          error={error.includes("don't match")}
         />
+        <Error error={error} />
         <Grid item container direction="column">
           <Grid item>
             <Button

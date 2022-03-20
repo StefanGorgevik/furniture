@@ -27,6 +27,7 @@ export const Input = ({
   return (
     <TextField
       style={{ ...style }}
+      error={error}
       variant="outlined"
       label={label}
       id={id}

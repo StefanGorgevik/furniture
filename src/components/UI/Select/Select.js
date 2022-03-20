@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Dropdown = ({ options, value, handleChange, error, helperText }) => {
+const Dropdown = ({ options, value, handleChange, error }) => {
   const classes = useStyles();
 
   return (
@@ -25,6 +25,7 @@ const Dropdown = ({ options, value, handleChange, error, helperText }) => {
         onChange={handleChange}
         label="Category"
         align="left"
+        error={error}
       >
         {options.map((option, i) => {
           return (

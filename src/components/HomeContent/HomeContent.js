@@ -151,6 +151,7 @@ const HomeContent = () => {
               color="primary"
               className={classes.homeButton}
               onClick={() => selectAuthHandler("signIn")}
+              style={{ fontWeight: "bold" }}
             >
               Sign In
             </Button>
@@ -161,6 +162,7 @@ const HomeContent = () => {
               color="primary"
               className={classes.homeButton}
               onClick={() => selectAuthHandler("signUp")}
+              style={{ fontWeight: "bold" }}
             >
               Sign Up
             </Button>

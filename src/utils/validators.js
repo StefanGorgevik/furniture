@@ -9,79 +9,69 @@ const countErrors = (errors) => {
 };
 
 export const validateRegisterForm = (userInput) => {
-  let allErrors = {
-    username: false,
-    email: false,
-    password: false,
-    secondPassword: false,
-    repeatPassword: false,
-  };
-
   const { username, email, password, repeatPassword } = userInput;
 
-  if (username.length === 0 || username === "" || username.length < 4)
-    allErrors.username = "Please enter your username";
-  if (email.length === 0 || email === "" || !email.trim().includes("@"))
-    allErrors.email = "Please enter your email";
-  if (password.length === 0 || password === "" || password.length < 4)
-    allErrors.password = "Please enter a password";
-  if (
+  if (username.length === 0 || username === "" || username.length < 4) {
+    return "Please enter your username";
+  } else if (
+    email.length === 0 ||
+    email === "" ||
+    !email.trim().includes("@")
+  ) {
+    return "Please enter a correct email!";
+  } else if (password.length === 0 || password === "" || password.length < 4) {
+    return "Please enter a password";
+  } else if (password.length < 6) {
+    return "Password should be at least 6 characters!";
+  } else if (
     repeatPassword.length === 0 ||
     repeatPassword === "" ||
     repeatPassword !== password
-  )
-    allErrors.secondPassword = "Passwords don't match";
-
-  const errorCount = countErrors(allErrors);
-  return { allErrors, errorCount };
+  ) {
+    return "Passwords don't match";
+  } else {
+    return "";
+  }
 };
 
 export const validateLoginForm = (userInput) => {
-  let allErrors = {
-    email: false,
-    password: false,
-  };
-
   const { email, password } = userInput;
-  if (email.length === 0 || email === "" || !email.trim().includes("@"))
-    allErrors.email = "Please enter your email!";
-  if (password.length === 0 || password === "" || password.length < 4)
-    allErrors.password = "Please enter your password!";
-
-  const errorCount = countErrors(allErrors);
-
-  return { allErrors, errorCount };
+  if (email.length === 0 || email === "" || !email.trim().includes("@")) {
+    return "Please enter your email!";
+  } else if (password.length === 0 || password === "" || password.length < 4) {
+    return "Please enter your password!";
+  } else if (password.length < 6) {
+    return "Password should be at least 6 characters!";
+  } else {
+    return "";
+  }
 };
 
 export const validateCreateForm = (userInput) => {
   const { name, category, year, description, price, image, material } =
     userInput;
-  let allErrors = {
-    name: false,
-    category: false,
-    material: false,
-    year: false,
-    price: false,
-    description: false,
-    image: false,
-  };
-  if (name === "" || name.length === 0)
-    allErrors.name = "Please enter the name.";
-  if (category === "" || category.length === 0)
-    allErrors.category = "Please enter the category.";
-  if (material === "" || material.length === 0)
-    allErrors.material = "Please enter the material.";
-  if (year === "" || year.length === 0 || year < 1950 || year > 2050)
-    allErrors.year = "Please enter the year.";
-  if (price === "" || price.length === 0 || price <= 0)
-    allErrors.price = "Please enter the price.";
-  if (description === "" || description.length === 0 || description < 10)
-    allErrors.description = "Please enter a description.";
-  if (image === "" || image.length === 0)
-    allErrors.image = "Please enter an image URL.";
 
-  const errorCount = countErrors(allErrors);
-  return { allErrors, errorCount };
+  if (name === "" || name.length === 0) {
+    return "Please enter the name.";
+  } else if (material === "" || material.length === 0) {
+    return "Please enter the material.";
+  } else if (image === "" || image.length === 0) {
+    return "Please enter an image URL.";
+  } else if (category === "" || category.length === 0) {
+    return "Please enter the category.";
+  } else if (year === "" || year.length === 0 || year < 1950 || year > 2050) {
+    return "Please enter the year.";
+  } else if (price === "" || price.length === 0 || price <= 0) {
+    return "Please enter the price.";
+  } else if (
+    description === "" ||
+    description.length === 0 ||
+    description < 10
+  ) {
+    return "Please enter a description.";
+  } else {
+    return "";
+  }
 };
 
 export const validateCheckoutForm = (userInput) => {

@@ -14,6 +14,7 @@ import { validateCreateForm } from "utils/validators";
 import { Grid, Button, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import { useScreenSize } from "hooks/breakpoints";
+import { Error } from "components/UI/formError";
 
 const categories = [
   "Chair",
@@ -40,15 +41,7 @@ const Create = ({
   const { pathname } = location;
   const { matchesMD } = useScreenSize();
   const furnitureID = params?.id;
-  const [errors, setErrors] = useState({
-    name: false,
-    category: false,
-    material: false,
-    year: false,
-    price: false,
-    description: false,
-    image: false,
-  });
+  const [error, setError] = useState("");
 
   const [userInput, setUserInput] = useState({
     name: "",
@@ -117,18 +110,10 @@ const Create = ({
   const submitFurnitureHandler = (e, onKey) => {
     if (e.key === "Enter" || !onKey) {
       e.preventDefault();
-      setErrors({
-        name: false,
-        category: false,
-        material: false,
-        year: false,
-        price: false,
-        description: false,
-        image: false,
-      });
+      setError("");
       const valData = validateCreateForm(userInput);
-      setErrors(valData.allErrors);
-      if (valData.errorCount > 0) return;
+      setError(valData);
+      if (valData !== "") return;
       if (pathname.startsWith("/furniture/edit")) {
         saveEditedFurnitureAction({ data: userInput, id: furnitureID });
       } else {
@@ -173,6 +158,7 @@ const Create = ({
               id="name"
               value={userInput.name}
               onChange={(e) => saveValue(e, "name")}
+              error={error.includes("name")}
             />
           </Grid>
           <Grid item>
@@ -182,6 +168,7 @@ const Create = ({
               id="material"
               value={userInput.material}
               onChange={(e) => saveValue(e, "material")}
+              error={error.includes("material")}
             />
           </Grid>
           <Grid item>
@@ -192,6 +179,7 @@ const Create = ({
               value={userInput.image}
               onChange={(e) => saveValue(e, "image")}
               style={{ marginBottom: "10px" }}
+              error={error.includes("year")}
             />
           </Grid>
           <Grid item style={{ marginBottom: matchesMD ? "15px" : "0" }}>
@@ -199,6 +187,7 @@ const Create = ({
               options={categories}
               value={userInput.category}
               handleChange={handleDropdownChangeHandler}
+              error={error.includes("category")}
             />
           </Grid>
         </Grid>
@@ -220,6 +209,7 @@ const Create = ({
                 id="year"
                 value={userInput.year}
                 onChange={(e) => saveValue(e, "year")}
+                error={error.includes("year")}
               />
             </Grid>
             <Grid item md={5} sm={12} style={{ width: "100%" }}>
@@ -229,6 +219,7 @@ const Create = ({
                 id="price"
                 value={userInput.price}
                 onChange={(e) => saveValue(e, "price")}
+                error={error.includes("price")}
               />
             </Grid>
           </Grid>
@@ -238,13 +229,12 @@ const Create = ({
             id="description"
             value={userInput.description}
             onChange={(e) => saveValue(e, "description")}
-            error={errors.description.length > 0}
-            helperText={errors.description}
             rows={10}
+            error={error.includes("description")}
           />
         </Grid>
       </Grid>
-
+      <Error error={error} />
       <Grid item container justifyContent="center">
         <Button
           onClick={(e) => submitFurnitureHandler(e, false)}
