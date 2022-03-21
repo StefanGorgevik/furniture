@@ -5,7 +5,6 @@ import {
   getAllFurnitureAction,
   openFurnitureAction,
 } from "store/furniture/furnitureActions";
-import { getStatsAction } from "store/stats/statsActions";
 import NoItemsFound from "components/Furniture/NoItemsFound/NoItemsFound";
 import { Grid } from "@material-ui/core";
 import { editFurnitureAction } from "store/furniture/furnitureActions";
@@ -30,14 +29,12 @@ const All = ({
   allFurniture,
   openFurnitureAction,
   loading,
-  getStatsAction,
   allFurnitureLoaded,
 }) => {
   const user_email = localStorage.getItem("user_email");
   const [categories, setCategories] = useState(CATEGORIES);
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [showOwned, setShowOwned] = useState(true);
-  const { matchesSM } = useScreenSize();
   const wrapperRef = useRef(null);
   console.log("allFurniture", allFurniture);
 
@@ -66,7 +63,6 @@ const All = ({
   }, [wrapperRef]);
 
   useEffect(() => {
-    // getStatsAction();
     getAllFurnitureAction();
   }, [getAllFurnitureAction]);
 
@@ -136,7 +132,6 @@ const All = ({
           style={{ width: "100%", paddingTop: "1em" }}
           item
           container
-          // justifyContent={matchesSM && !drawerOpened ? "center" : "flex-start"}
           justifyContent="center"
         >
           {allProducts.map((item) => {
@@ -173,7 +168,6 @@ const All = ({
 const mapStateToProps = (state) => ({
   loading: state.uiReducer.loading,
   allFurniture: state.furnitureReducer.allFurniture,
-  allFurnitureNumber: state.statsReducer.stats.furniture,
   allFurnitureLoaded: state.furnitureReducer.allFurnitureLoaded,
 });
 
@@ -182,7 +176,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getAllFurnitureAction,
       openFurnitureAction,
-      getStatsAction,
       editFurnitureAction,
     },
     dispatch

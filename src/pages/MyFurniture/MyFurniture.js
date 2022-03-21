@@ -81,12 +81,7 @@ const MyFurniture = ({
             order={order}
           />
         )}
-        <Grid
-          item
-          container
-          style={{ marginTop: "2.5em" }}
-          justifyContent="center"
-        >
+        <Grid item container justifyContent="center">
           {myFurniture.map((furniture) => {
             return (
               <FurnitureItem

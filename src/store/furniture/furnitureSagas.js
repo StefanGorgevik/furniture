@@ -13,7 +13,6 @@ import {
   editFurnitureAction,
   saveSearchedFurnitureAction,
 } from "./furnitureActions";
-import { getStatsAction } from "store/stats/statsActions";
 import { fetchRequest } from "utils/fetch";
 import sortByCategory from "utils/sortByCategory";
 
@@ -52,7 +51,6 @@ export function* saveNewFurniture({ data }) {
     });
     console.log("CHK FINAL RESP", res);
     if (res) {
-      // yield put(getStatsAction());
       yield put(setActionStatus("success", "Furniture saved!"));
       // yield put(push("/furniture/all"));
     }
@@ -69,16 +67,13 @@ export function* openFurnitureItem({ data }) {
   try {
     const res = yield fetchRequest(path, "GET", null);
     if (res) {
-      console.log("RES FROM DETAILS", res);
       let likedBy = [];
       if (res.likes) {
         res.likes = Object.keys(res.likes).map((r) => ({
           id: r,
           user: res.likes[r],
         }));
-        console.log("RES FROM DETAILS", res.likes);
       }
-      console.log("RES FROM DETAILS FINAL", res);
       yield put(saveCurrentFurnitureAction({ ...res, id }));
       if (shouldRedirect) {
         yield put(push(`/furniture/details/${id}`));
@@ -110,7 +105,6 @@ export function* searchFurniture({ search }) {
     const res = yield fetchRequest(path, "GET");
     if (res) {
       yield put(push(`/furniture/search`));
-      console.log("search", res);
       let array = [];
       if (res) {
         array = transformArray(res);

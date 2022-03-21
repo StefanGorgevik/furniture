@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontFamily: "Heebo",
     width: "33.3%",
-    border: `0.5px double ${theme.palette.common.darkerWhite}`,
   },
 }));
 

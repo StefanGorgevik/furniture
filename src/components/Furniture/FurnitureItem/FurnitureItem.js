@@ -14,7 +14,7 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import useStyles from "./styles";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -71,6 +71,13 @@ export const FurnitureItem = ({
     >
       <CardContent className={classes.cardContent}>
         <CardHeader
+          subheader={
+            showTools ? (
+              <Typography variant="body1" style={{ marginRight: "40px" }}>
+                {item.createdOn.substr(0, 10)}
+              </Typography>
+            ) : null
+          }
           titleTypographyProps={{
             style: {
               textAlign: "center",
@@ -81,9 +88,10 @@ export const FurnitureItem = ({
             <Tooltip title={item.category}>
               <img
                 style={{
-                  width: "30px",
-                  height: "30px",
+                  width: "25px",
+                  height: "25px",
                   marginLeft: "10px",
+                  marginBottom: "13px",
                 }}
                 src={require(`assets/images/categoriesIcons/${itemCategory}.png`)}
                 alt="category"
@@ -91,7 +99,11 @@ export const FurnitureItem = ({
             </Tooltip>
           }
           action={isMine && showIcon && <UserCheckedIcon />}
-          title={item.name}
+          title={
+            <Typography variant="caption" style={{ marginRight: "40px" }}>
+              {item.name}
+            </Typography>
+          }
           className={classes.cardHeader}
         />
         <img className={classes.media} src={item.image} alt={item.name} />
@@ -162,7 +174,7 @@ export const FurnitureItem = ({
                 className={classes.actionButton}
                 variant="contained"
               >
-                <ArrowForwardIcon
+                <RemoveRedEyeIcon
                   style={{ marginLeft: "2px", marginBottom: "2px" }}
                 />
               </Button>
