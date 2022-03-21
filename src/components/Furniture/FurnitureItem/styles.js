@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0,
     paddingTop: 0,
     borderRadius: "5px",
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
   },
   cardContent: {
     padding: 0,

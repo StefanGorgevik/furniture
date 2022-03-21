@@ -14,14 +14,15 @@ import { FurnitureItem } from "components/Furniture/FurnitureItem/FurnitureItem"
 import { useScreenSize } from "hooks/breakpoints";
 
 export const CATEGORIES = [
-  { id: 0, category: "Chairs", value: false },
-  { id: 1, category: "Tables", value: false },
-  { id: 2, category: "Desks", value: false },
-  { id: 3, category: "Dressers", value: false },
-  { id: 4, category: "Cupboards", value: false },
-  { id: 5, category: "Beds", value: false },
-  { id: 6, category: "Couches", value: false },
-  { id: 7, category: "Uncategorized", value: false },
+  { id: 0, category: "All", value: true },
+  { id: 1, category: "Chairs", value: false },
+  { id: 2, category: "Tables", value: false },
+  { id: 3, category: "Desks", value: false },
+  { id: 4, category: "Dressers", value: false },
+  { id: 5, category: "Cupboards", value: false },
+  { id: 6, category: "Beds", value: false },
+  { id: 7, category: "Couches", value: false },
+  { id: 8, category: "Uncategorized", value: false },
 ];
 
 const All = ({
@@ -95,10 +96,20 @@ const All = ({
     let array = [];
     if (Object.keys(allFurniture).length === 0) return array;
     categories.forEach((cat) => {
+      if (cat.category === "All" && cat.value) {
+      }
       if (cat.value) {
-        allFurniture[cat.category.toLowerCase()].forEach((item) =>
-          array.push(item)
-        );
+        if (cat.category === "All") {
+          Object.keys(allFurniture).forEach((key) => {
+            allFurniture[key].forEach((furniture) => {
+              array.push(furniture);
+            });
+          });
+        } else {
+          allFurniture[cat.category.toLowerCase()].forEach((item) =>
+            array.push(item)
+          );
+        }
       }
     });
     if (!showOwned) {

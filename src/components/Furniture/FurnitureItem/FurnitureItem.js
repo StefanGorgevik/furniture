@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
 import UserCheckedIcon from "components/UI/icons/UserCheckedIcon";
@@ -28,8 +28,38 @@ export const FurnitureItem = ({
   price,
   showTools,
 }) => {
+  const { category } = item;
   const classes = useStyles();
-
+  const itemCategory = useMemo(() => {
+    let cat = "Uncategorized";
+    switch (category) {
+      case "Bed":
+        cat = "Beds";
+        break;
+      case "Chair":
+        cat = "Chairs";
+        break;
+      case "Table":
+        cat = "Tables";
+        break;
+      case "Desk":
+        cat = "Desks";
+        break;
+      case "Dresser":
+        cat = "Dressers";
+        break;
+      case "Cupboard":
+        cat = "Cupboards";
+        break;
+      case "Couch":
+        cat = "Couches";
+        break;
+      default:
+        cat = "Uncategorized";
+        break;
+    }
+    return cat;
+  }, [category]);
   return (
     <Card
       className={classes.root}
@@ -41,6 +71,25 @@ export const FurnitureItem = ({
     >
       <CardContent className={classes.cardContent}>
         <CardHeader
+          titleTypographyProps={{
+            style: {
+              textAlign: "center",
+              marginRight: "50px",
+            },
+          }}
+          avatar={
+            <Tooltip title={item.category}>
+              <img
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginLeft: "10px",
+                }}
+                src={require(`assets/images/categoriesIcons/${itemCategory}.png`)}
+                alt="category"
+              />
+            </Tooltip>
+          }
           action={isMine && showIcon && <UserCheckedIcon />}
           title={item.name}
           className={classes.cardHeader}
