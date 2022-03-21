@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   headerWrapper: {
+    minHeight: "60px",
+    justifyContent: "space-between",
     background: `linear-gradient(to right, ${theme.palette.common.grey} 10%, ${theme.palette.common.darkerGrey} 90%)`,
   },
   logo: {

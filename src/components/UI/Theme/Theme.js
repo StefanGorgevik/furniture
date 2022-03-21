@@ -98,6 +98,7 @@ export default createTheme({
       },
     },
     MuiInput: {
+      color: "black",
       underline: {
         "&:before": {
           borderBottom: `2px solid ${darkerWhite}`,
@@ -110,7 +111,7 @@ export default createTheme({
     MuiTab: {
       wrapper: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
       },
     },

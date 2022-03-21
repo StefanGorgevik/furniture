@@ -103,15 +103,23 @@ export function* openFurnitureItem({ data }) {
 }
 
 export function* searchFurniture({ search }) {
-  const path = `furniture/all?search=${search}`;
+  const path = `furniture.json?orderBy="name"&equalTo=${JSON.stringify(
+    search
+  )}`;
   try {
     const res = yield fetchRequest(path, "GET");
-    if (res && res.length > 0) {
-      yield put(push(`/furniture/allSearched`));
-      console.log("allSearched", res);
-      yield put(saveSearchedFurnitureAction(res));
-    } else {
-      yield put(searchNotFoundAction());
+    if (res) {
+      yield put(push(`/furniture/search`));
+      console.log("search", res);
+      let array = [];
+      if (res) {
+        array = transformArray(res);
+      }
+      if (array.length === 0) {
+        yield put(searchNotFoundAction());
+      } else {
+        yield put(saveSearchedFurnitureAction(array));
+      }
     }
   } catch (error) {
     console.log(error);

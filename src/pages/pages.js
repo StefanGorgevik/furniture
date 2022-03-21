@@ -23,11 +23,7 @@ const Routes = () => {
     <Switch>
       <Route exact path="/" component={HomePage} />
       <ProtectedRoute exact path="/furniture/all" component={All} />
-      <ProtectedRoute
-        exact
-        path="/furniture/allSearched"
-        component={SearchedAll}
-      />
+      <ProtectedRoute exact path="/furniture/search" component={SearchedAll} />
       <ProtectedRoute exact path="/furniture/create" component={Create} />
       <ProtectedRoute exact path="/furniture/edit/:id" component={Create} />
       <ProtectedRoute

@@ -31,12 +31,11 @@ export function SelectCategories({
       item
       style={{
         flexDirection: "row",
-        height: opened ? "auto" : matchesSM ? "55px" : "80px",
+        height: opened ? "auto" : matchesSM ? "45px" : "60px",
         width: !opened && matchesSM ? "55px" : opened ? "200px" : "80px",
         paddingBottom: "1em",
-        borderBottomLeftRadius: 5,
-        paddingLeft: !opened && matchesSM ? 0 : "1em",
-        paddingTop: !opened && matchesSM ? 0 : "1em",
+        borderBottomLeftRadius: 15,
+
         position: matchesSM ? "fixed" : "absolute",
         zIndex: matchesMD ? 500 : 5,
         right: 0,
@@ -52,30 +51,44 @@ export function SelectCategories({
         item
         container
         style={{
-          marginBottom: "2em",
+          borderBottomLeftRadius: !opened ? 5 : 0,
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          minWidth: "150px",
+          background: `linear-gradient(to right, ${theme.palette.common.grey} 10%, ${theme.palette.common.darkerGrey} 90%)`,
+          minWidth: "170px",
         }}
       >
         {opened && (
-          <Grid item style={{ paddingRight: "10px" }}>
-            <Typography variant="h6" gutterBottom>
+          <Grid
+            item
+            style={{
+              padding: "10px",
+            }}
+          >
+            <Typography variant="h6" color="secondary">
               Filters
             </Typography>
           </Grid>
         )}
         <Grid item>
           <IconButton onClick={() => setOpened(!opened)}>
-            <SortOutlinedIcon fontSize="large" />
+            <SortOutlinedIcon fontSize="large" color="secondary" />
           </IconButton>
         </Grid>
       </Grid>
       {opened && (
         <>
-          <Grid item container style={{ marginBottom: "1em" }}>
+          <Grid
+            item
+            container
+            style={{
+              marginBottom: "1em",
+              paddingLeft: !opened && matchesSM ? 0 : "1em",
+              paddingTop: !opened && matchesSM ? 0 : "1em",
+            }}
+          >
             <Grid item>
               <Typography variant="caption">Categories</Typography>
             </Grid>
@@ -97,6 +110,8 @@ export function SelectCategories({
                     alignItems: "center",
                     width: "90%",
                     padding: "2px 0",
+                    transition: "1s",
+                    minWidth: "170px",
                   }}
                 >
                   <FormControlLabel
@@ -107,7 +122,6 @@ export function SelectCategories({
                         onChange={(e) => {
                           if (cat.category === "All") {
                             if (e.target.checked) {
-                              console.log("CHK ENTERED");
                               setShowOwned(true);
                               setCategories((prevCategories) => {
                                 localStorage.setItem(
@@ -164,7 +178,16 @@ export function SelectCategories({
               ))}
             </Grid>
           </Grid>
-          <Grid item container flexDirection="column">
+          <Grid
+            item
+            container
+            flexDirection="column"
+            style={{
+              paddingLeft: !opened && matchesSM ? 0 : "1em",
+              paddingTop: !opened && matchesSM ? 0 : "1em",
+              marginBottom: "1em",
+            }}
+          >
             <Grid item>
               <Typography variant="caption">Settings</Typography>
             </Grid>
@@ -183,6 +206,7 @@ export function SelectCategories({
                   justifyContent: "space-between",
                   alignItems: "center",
                   padding: "2px 0",
+                  minWidth: "170px",
                 }}
               >
                 <Box>

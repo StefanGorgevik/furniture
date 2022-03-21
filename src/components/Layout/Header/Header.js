@@ -28,24 +28,26 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import CreateIcon from "@material-ui/icons/Create";
 import WebIcon from "@material-ui/icons/Web";
+import SearchIcon from "@material-ui/icons/Search";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import SearchInput from "components/UI/Inputs/SearchInput";
 import { useScreenSize } from "hooks/breakpoints";
 const Header = ({ isLoggedIn, openModal }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState();
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const [openMenu, setOpenMenu] = useState(false);
+  // const [selectedIndex, setSelectedIndex] = useState();
   const pathname = useLocation().pathname;
   const [tab, setHeaderTab] = useState(0);
   const { matchesSM } = useScreenSize();
   useEffect(() => {
     if (pathname === "/furniture/all") {
       setHeaderTab(0);
-    } else if (pathname === "/furniture/create") {
+    } else if (pathname === "/furniture/search") {
       setHeaderTab(1);
-    } else if (pathname === "/furniture/my-furniture") {
+    } else if (pathname === "/furniture/create") {
       setHeaderTab(2);
+    } else if (pathname === "/furniture/my-furniture") {
+      setHeaderTab(3);
     }
   }, [pathname]);
 
@@ -53,21 +55,21 @@ const Header = ({ isLoggedIn, openModal }) => {
     setHeaderTab(newValue);
   };
 
-  const handleClose = (e) => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-  };
+  // const handleClose = (e) => {
+  //   setAnchorEl(null);
+  //   setOpenMenu(false);
+  // };
 
-  const handleMenuItemClick = (e, i) => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-    setSelectedIndex(i);
-  };
+  // const handleMenuItemClick = (e, i) => {
+  //   setAnchorEl(null);
+  //   setOpenMenu(false);
+  //   setSelectedIndex(i);
+  // };
 
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget);
-    setOpenMenu(true);
-  };
+  // const handleClick = (e) => {
+  //   setAnchorEl(e.currentTarget);
+  //   setOpenMenu(true);
+  // };
 
   const loggedInTabs = useMemo(
     () => [
@@ -75,6 +77,13 @@ const Header = ({ isLoggedIn, openModal }) => {
         name: "Browse",
         to: "/furniture/all",
         icon: <WebIcon style={{ marginRight: "0.2em", marginTop: "0.2em" }} />,
+      },
+      {
+        name: "Search",
+        to: "/furniture/search",
+        icon: (
+          <SearchIcon style={{ marginRight: "0.2em", marginTop: "0.2em" }} />
+        ),
       },
       {
         name: "Create",
@@ -103,54 +112,55 @@ const Header = ({ isLoggedIn, openModal }) => {
           component={NavLink}
           to={tab.to}
           icon={tab.icon}
+          iconPosition="top"
         />
       ))
     : null;
 
-  const menuOptions = useMemo(() => {
-    return [
-      //   {
-      //     name: "Cart",
-      //     link: "/cart",
-      //     activeIndex: 1,
-      //     selectedIndex: 0,
-      //     icon: <ShoppingCartIcon />,
-      //     onClick: () => {},
-      //   },
-      //   {
-      //     name: "Stats",
-      //     link: "/stats",
-      //     activeIndex: 1,
-      //     selectedIndex: 0,
-      //     icon: <EqualizerIcon />,
-      //     onClick: () => {},
-      //   },
-      //   {
-      //     name: "Change Username",
-      //     link: "/change-username",
-      //     activeIndex: 1,
-      //     selectedIndex: 0,
-      //     icon: <EditIcon fontSize="small" />,
-      //     onClick: () => {},
-      //   },
-      //   {
-      //     name: "Change Password",
-      //     link: "/change-password",
-      //     activeIndex: 1,
-      //     selectedIndex: 0,
-      //     icon: <EditIcon fontSize="small" />,
-      //     onClick: () => {},
-      //   },
-      {
-        name: "Logout",
-        link: undefined,
-        activeIndex: 0,
-        selectedIndex: 0,
-        icon: <ExitToAppIcon fontSize="small" />,
-        onClick: () => openModal("logout"),
-      },
-    ];
-  }, [openModal]);
+  // const menuOptions = useMemo(() => {
+  // return [
+  //   {
+  //     name: "Cart",
+  //     link: "/cart",
+  //     activeIndex: 1,
+  //     selectedIndex: 0,
+  //     icon: <ShoppingCartIcon />,
+  //     onClick: () => {},
+  //   },
+  //   {
+  //     name: "Stats",
+  //     link: "/stats",
+  //     activeIndex: 1,
+  //     selectedIndex: 0,
+  //     icon: <EqualizerIcon />,
+  //     onClick: () => {},
+  //   },
+  //   {
+  //     name: "Change Username",
+  //     link: "/change-username",
+  //     activeIndex: 1,
+  //     selectedIndex: 0,
+  //     icon: <EditIcon fontSize="small" />,
+  //     onClick: () => {},
+  //   },
+  //   {
+  //     name: "Change Password",
+  //     link: "/change-password",
+  //     activeIndex: 1,
+  //     selectedIndex: 0,
+  //     icon: <EditIcon fontSize="small" />,
+  //     onClick: () => {},
+  //   },
+  //     {
+  //       name: "Logout",
+  //       link: undefined,
+  //       activeIndex: 0,
+  //       selectedIndex: 0,
+  //       icon: <ExitToAppIcon fontSize="small" />,
+  //       onClick: () => openModal("logout"),
+  //     },
+  //   ];
+  // }, [openModal]);
 
   return (
     <React.Fragment>
@@ -160,18 +170,14 @@ const Header = ({ isLoggedIn, openModal }) => {
             {matchesSM ? null : (
               <img src={Logo} alt="logo" className={classes.logo} />
             )}
-            {/* {pathname !== "/" && (
-              <Grid item style={{ display: "flex", alignItems: "flex-end" }}>
-                <SearchInput />
-              </Grid>
-            )} */}
+
             <Box
               style={{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "flex-end",
-                width: "100%",
+                justifyContent: "center",
+                width: matchesSM ? "100%" : "70%",
               }}
             >
               <Tabs

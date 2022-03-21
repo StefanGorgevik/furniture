@@ -20,7 +20,6 @@ const initState = {
     year: 0,
     price: 0,
     createdOn: "",
-    likes: "",
     reviews: 0,
     image: "",
     likes: [],
@@ -71,7 +70,12 @@ const statsReducer = (state = initState, { type, data }) => {
       };
     }
     case FURNITURE_NOT_FOUND: {
-      return { ...state, allFurniture: [], searchFurnitureNotFound: true };
+      return {
+        ...state,
+        allFurniture: [],
+        searchFurnitureNotFound: true,
+        searchedFurnitureLoaded: true,
+      };
     }
     case SAVE_TOTAL_LIKES: {
       return { ...state, totalLikes: data };
@@ -94,6 +98,7 @@ const statsReducer = (state = initState, { type, data }) => {
         ...state,
         searchedFurniture: data,
         searchedFurnitureLoaded: true,
+        searchFurnitureNotFound: false,
       };
     }
     default:
