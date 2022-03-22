@@ -70,7 +70,7 @@ const Details = ({
           item
           container
           direction="row"
-          justifyContent="space-evenly"
+          justify="space-evenly"
           alignItems="center"
           style={{
             marginTop: "2em",

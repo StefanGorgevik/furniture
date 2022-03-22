@@ -21,7 +21,7 @@ const LandingHeader = () => {
       container
       className={classes.landingHeader}
       direction="column"
-      justifyContent="space-between"
+      justify="space-between"
     >
       <Grid item container direction="column" alignItems="center">
         <img
@@ -40,7 +40,7 @@ const LandingHeader = () => {
           container
           direction="row"
           className={classes.landingItemsWrapper}
-          justifyContent="center"
+          justify="center"
           alignItems="flex-end"
           spacing={3}
         >

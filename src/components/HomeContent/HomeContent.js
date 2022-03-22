@@ -57,7 +57,7 @@ const HomeContent = () => {
               item
               container
               direction="column"
-              justifyContent="space-between"
+              justify="space-between"
               md
             >
               <Grid item>
@@ -82,13 +82,7 @@ const HomeContent = () => {
               </Grid>
             </Grid>
 
-            <Grid
-              item
-              container
-              direction="column"
-              justifyContent="space-between"
-              md
-            >
+            <Grid item container direction="column" justify="space-between" md>
               <Grid item>
                 <Typography variant="h2" align="center">
                   Review and like other furniture!
@@ -113,7 +107,7 @@ const HomeContent = () => {
               item
               container
               direction="column"
-              justifyContent="space-between"
+              justify="space-between"
               md
             >
               <Grid item>
@@ -133,11 +127,11 @@ const HomeContent = () => {
           </Grid>
         )}
       </>
-      <Grid item container direction="row" justifyContent="center">
+      <Grid item container direction="row" justify="center">
         <Grid
           item
           container
-          justifyContent="center"
+          justify="center"
           spacing={3}
           style={{ marginBottom: "2em", marginTop: "1em" }}
           //for animated decrease of marginTop

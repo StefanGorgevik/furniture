@@ -7,7 +7,7 @@ const WarningModalsContent = ({ text }) => {
       item
       container
       direction="column"
-      justifyContent="center"
+      justify="center"
       alignItems="center"
     >
       <Grid item>

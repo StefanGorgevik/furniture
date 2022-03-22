@@ -24,7 +24,7 @@ const ModalButtons = ({ onSubmit, onClose, submitButtonText, cancelText }) => {
       item
       container
       direction="row"
-      justifyContent="space-evenly"
+      justify="space-evenly"
       style={{ marginTop: "1em", marginBottom: "1em" }}
     >
       <Grid item>

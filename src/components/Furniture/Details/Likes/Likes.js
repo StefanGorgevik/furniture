@@ -48,7 +48,7 @@ const Likes = ({ likes, handleClose, open }) => {
           container
           direction="column"
           alignItems="center"
-          justifyContent="center"
+          justify="center"
           style={{ minWidth: "50%" }}
         >
           {likes &&

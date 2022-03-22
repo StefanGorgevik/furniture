@@ -37,7 +37,7 @@ const MyFurnitureFilter = ({ setOrder, setFilter, filter, order }) => {
       item
       container
       alignItems="center"
-      justifyContent="space-evenly"
+      justify="space-evenly"
       spacing={8}
       className={classes.filterContainer}
     >

@@ -87,7 +87,7 @@ const DetailsInfoContent = ({
         container
         direction="column"
         alignItems="center"
-        justifyContent="center"
+        justify="center"
         style={{
           width: matchesSM ? "90%" : "100%",
           marginTop: "1em",
@@ -103,7 +103,7 @@ const DetailsInfoContent = ({
               className={classes.gridItem}
               key={`${item.label}${i}`}
               alignItems="flex-start"
-              justifyContent="space-between"
+              justify="space-between"
             >
               <Grid item>
                 <Typography variant="h6">{item.label}</Typography>

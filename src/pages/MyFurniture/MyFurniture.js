@@ -81,7 +81,7 @@ const MyFurniture = ({
             order={order}
           />
         )}
-        <Grid item container justifyContent="center">
+        <Grid item container justify="center">
           {myFurniture.map((furniture) => {
             return (
               <FurnitureItem

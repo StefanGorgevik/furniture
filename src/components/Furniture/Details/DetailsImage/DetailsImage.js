@@ -40,7 +40,7 @@ const DetailsImage = ({ imageURL, likesCount, handleLikesOpen }) => {
       container
       className={classes.detailsImageContainer}
       alignItems="center"
-      justifyContent="center"
+      justify="center"
     >
       <Grid item>
         <img src={imageURL} alt="furniture" className={classes.image} />

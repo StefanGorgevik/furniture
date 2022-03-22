@@ -161,7 +161,7 @@ const All = ({
     <Grid
       container
       direction="row"
-      justifyContent="center"
+      justify="center"
       style={{ marginBottom: matchesSM ? "2em" : 0 }}
     >
       {allProducts.length === 0 && !loading && allFurnitureLoaded ? (
@@ -176,7 +176,7 @@ const All = ({
           style={{ width: "100%", paddingTop: "1em" }}
           item
           container
-          justifyContent="center"
+          justify="center"
         >
           {allProducts.map((item) => {
             return (

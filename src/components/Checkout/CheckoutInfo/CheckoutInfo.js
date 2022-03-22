@@ -10,9 +10,9 @@ const CheckoutInfo = ({ totalPrice, cartItemsInfo }) => {
       item
       container
       className={classes.checkoutInfo}
-      justifyContent="space-between"
+      justify="space-between"
     >
-      <Grid item container alignItems="flex-start" justifyContent="flex-end">
+      <Grid item container alignItems="flex-start" justify="flex-end">
         <ul className={classes.list}>
           {cartItemsInfo.map((item, i) => (
             <li className={classes.listItem} key={i}>
@@ -33,7 +33,7 @@ const CheckoutInfo = ({ totalPrice, cartItemsInfo }) => {
           ))}
         </ul>
       </Grid>
-      <Grid item container justifyContent="flex-end" alignItems="flex-end">
+      <Grid item container justify="flex-end" alignItems="flex-end">
         <Grid item>
           <Typography
             variant="caption"

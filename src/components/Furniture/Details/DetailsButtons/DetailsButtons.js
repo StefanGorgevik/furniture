@@ -60,7 +60,7 @@ const DetailsButtons = ({
       item
       container
       direction="row"
-      justifyContent="flex-end"
+      justify="flex-end"
       alignItems="flex-end"
       style={{
         marginBottom: "1em",

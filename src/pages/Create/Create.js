@@ -128,7 +128,7 @@ const Create = ({
       className={classes.create}
       direction="column"
       alignItems="center"
-      justifyContent="center"
+      justify="center"
     >
       <Grid item>
         <Typography variant="h3" style={{ textTransform: "uppercase" }}>
@@ -139,7 +139,7 @@ const Create = ({
         item
         container
         direction="row"
-        justifyContent="space-evenly"
+        justify="space-evenly"
         style={{
           padding: "1%",
           margin: "0 auto",
@@ -244,7 +244,7 @@ const Create = ({
         </Grid>
       </Grid>
       <Error error={error} />
-      <Grid item container justifyContent="center">
+      <Grid item container justify="center">
         <Button
           onClick={(e) => submitFurnitureHandler(e, false)}
           className={classes.createButton}

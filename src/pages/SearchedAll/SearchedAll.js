@@ -25,11 +25,11 @@ const SearchedAll = ({
   };
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justify="center">
       <Grid
         item
         container
-        justifyContent="center"
+        justify="center"
         style={{ marginTop: "1em", marginBottom: matchesSM ? "1em" : 0 }}
       >
         <SearchInput />
@@ -38,7 +38,7 @@ const SearchedAll = ({
         <Grid
           item
           container
-          justifyContent="center"
+          justify="center"
           alignItems="center"
           style={{
             display: "flex",
@@ -61,7 +61,7 @@ const SearchedAll = ({
           item
           container
           direction="row"
-          justifyContent="center"
+          justify="center"
           style={{
             padding: "1%",
             margin: "0 auto",

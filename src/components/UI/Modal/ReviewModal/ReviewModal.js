@@ -46,14 +46,14 @@ const ReviewModal = ({
   };
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justify="center">
       <Typography variant="h3" color="primary" gutterBottom>
         Leave a review
       </Typography>
       <Grid
         item
         container
-        justifyContent="center"
+        justify="center"
         style={{ marginBottom: "30px", marginTop: "20px" }}
       >
         {[0, 1, 2, 3, 4].map((star, i) => {
