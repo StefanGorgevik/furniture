@@ -22,7 +22,7 @@ const NoItemsFound = ({ text, subText, buttonText, location }) => {
     <Grid
       container
       direction="column"
-      justify="center"
+      justifyContent="center"
       style={{ paddingTop: "5em" }}
     >
       <Grid item>

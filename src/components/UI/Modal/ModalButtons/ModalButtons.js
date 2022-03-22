@@ -16,22 +16,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModalButtons = ({ onSubmit, onClose, submitButtonText }) => {
+const ModalButtons = ({ onSubmit, onClose, submitButtonText, cancelText }) => {
   const classes = useStyles();
 
   return (
-    <Grid item container direction="row" style={{ marginTop: "1em" }}>
-      <Grid item lg>
+    <Grid
+      item
+      container
+      direction="row"
+      justifyContent="space-evenly"
+      style={{ marginTop: "1em", marginBottom: "1em" }}
+    >
+      <Grid item>
         <Button
           onClick={onClose}
-          text="Cancel"
           className={classes.cancelButton}
           color="secondary"
         >
-          Cancel
+          {cancelText ? cancelText : "Cancel"}
         </Button>
       </Grid>
-      <Grid item lg>
+      <Grid item>
         <Button onClick={onSubmit} className={classes.acceptActionButton}>
           {submitButtonText}
         </Button>

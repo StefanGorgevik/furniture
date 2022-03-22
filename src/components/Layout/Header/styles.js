@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   headerWrapper: {
+    minHeight: "60px",
+    justifyContent: "space-between",
     background: `linear-gradient(to right, ${theme.palette.common.grey} 10%, ${theme.palette.common.darkerGrey} 90%)`,
   },
   logo: {
@@ -13,10 +15,26 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     ...theme.typography.tab,
-    fontSize: "1.2rem",
+    "& .MuiTab-wrapper": {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      justifyContent: "center",
+      [theme.breakpoints.down("lg")]: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        minWidth: "150px",
+        width: "170px",
+      },
+      // [theme.breakpoints.up("md")]: {
+
+      // },
+    },
+    fontSize: "1rem",
     letterSpacing: 0,
     fontWeight: 500,
-    textTransform: "capitalize",
+    textAlign: "center",
+    paddingBottom: 0,
     margin: "0 10px",
     "&:hover": {
       color: "white",
@@ -26,19 +44,14 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     backgroundColor: theme.palette.common.darkerGrey,
     color: "white",
-    borderRadius: "0px",
-    width: "17.5em",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    width: "13em",
     marginTop: "3.1em",
   },
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "0.2em",
-    // [theme.breakpoints.down("md")]: {
-    //   marginBottom: "1em",
-    // },
-    // [theme.breakpoints.down("xs")]: {
-    //   marginBottom: "0.75em",
-    // },
   },
   searchIcon: {
     color: "white",

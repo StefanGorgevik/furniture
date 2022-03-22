@@ -1,11 +1,9 @@
-import { createMuiTheme } from "@material-ui/core";
-
+import { createTheme } from "@material-ui/core/styles";
 const mainGrey = "#535559";
 const darkerWhite = "#EEEEEE";
 const darkerGrey = "#222831";
-const backgroundColor = "rgba(151, 138, 138, 0.287);";
-
-export default createMuiTheme({
+const backgroundColor = "rgba(151, 138, 138, 0.287)";
+export default createTheme({
   palette: {
     common: {
       grey: mainGrey,
@@ -71,13 +69,16 @@ export default createMuiTheme({
     subtitle1: {
       fontFamily: "Heebo",
       color: "black",
-      fontSize: "0.8rem",
+      fontSize: "1.2rem",
       fontWeight: 300,
       opacity: 0.8,
     },
     subtitle2: {
       fontFamily: "Heebo",
       fontSize: "1rem",
+    },
+    overline: {
+      fontSize: "1.2rem",
     },
     acceptButton: {
       height: "3em",
@@ -99,27 +100,10 @@ export default createMuiTheme({
       },
     },
     MuiInput: {
+      color: "black",
       underline: {
         "&:before": {
           borderBottom: `2px solid ${darkerWhite}`,
-        },
-        // "&:hover:not($disabled):not($focused):not($error):before": {
-        //   borderBottom: `2px solid ${darkerGrey}`,
-        // },
-      },
-    },
-    MuiTab: {
-      wrapper: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-      },
-      underline: {
-        "&&&:before": {
-          borderBottom: "none",
-        },
-        "&&:after": {
-          borderBottom: "none",
         },
       },
     },
@@ -136,6 +120,15 @@ export default createMuiTheme({
     },
     MuiDialogContent: {
       root: { overflowX: "hidden" },
+    },
+    MuiChecked: {
+      color: darkerGrey,
+    },
+    MuiTooltip: {
+      tooltip: {
+        fontSize: "1em",
+        fontFamily: "Heebo",
+      },
     },
   },
 });

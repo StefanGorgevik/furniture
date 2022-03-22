@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.acceptButton,
     width: "20em",
     margin: "0 10px",
+    marginBottom: "1em",
   },
 }));
 

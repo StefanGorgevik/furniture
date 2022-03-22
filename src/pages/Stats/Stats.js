@@ -36,7 +36,7 @@ const Stats = ({
   totalLikes,
 }) => {
   useEffect(() => {
-    getStatsAction();
+    // getStatsAction();
     getMyFurnitureAction();
   }, [getStatsAction, getMyFurnitureAction]);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -13,25 +13,29 @@ import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   searchIcon: {
-    color: "white",
+    color: "black",
     "&:hover": {
       background: "transparent",
     },
   },
   searchInput: {
     color: "black",
-    marginBottom: "17px",
-    marginLeft: "17px",
+    backgroundColor: "whitesmoke",
+    borderColor: "white",
     label: {
       background: "whitesmoke",
     },
+    "&.Mui-input": {
+      color: "black",
+    },
   },
   inputLabel: {
-    color: "#fff",
+    color: "black",
     opacity: "0.9",
     letterSpacing: "2px",
     "&.Mui-focused": {
-      color: "orange",
+      color: "black",
+      background: "transparent",
     },
   },
 }));
@@ -39,7 +43,6 @@ const SearchInput = ({ searchForFurnitureAction, getAllFurnitureAction }) => {
   const classes = useStyles();
   const [searched, setSearched] = useState(false);
   const [search, setSearch] = useState("");
-  const [expended, setExpended] = useState(false);
 
   const submitSearch = () => {
     if (search.trim() !== "") {
@@ -52,20 +55,13 @@ const SearchInput = ({ searchForFurnitureAction, getAllFurnitureAction }) => {
     }
   };
 
-  const denySearchHandler = () => {
+  const denySearchHandler = useCallback(() => {
     setSearched(false);
     getAllFurnitureAction();
-  };
-
+  }, [setSearched, getAllFurnitureAction]);
   const saveSearchHandler = (e) => {
     setSearched(true);
     setSearch(e.target.value);
-  };
-
-  const onBlurHandler = () => {
-    setExpended(false);
-    setSearch("");
-    setSearched(false);
   };
 
   useEffect(() => {
@@ -76,17 +72,15 @@ const SearchInput = ({ searchForFurnitureAction, getAllFurnitureAction }) => {
 
   return (
     <TextField
-      onBlur={onBlurHandler}
-      onClick={() => setExpended(true)}
       style={{
-        width: expended ? "27em" : "3em",
-        marginLeft: "1em",
         transition: "1s",
       }}
       className={classes.searchInput}
+      variant="outlined"
       type="text"
+      autoFocus={true}
       onChange={saveSearchHandler}
-      label={expended ? "Search" : ""}
+      label="Search "
       id="search-input"
       value={search}
       onKeyPress={handleKeyPress}
@@ -95,14 +89,14 @@ const SearchInput = ({ searchForFurnitureAction, getAllFurnitureAction }) => {
       }}
       InputProps={{
         endAdornment: (
-          <InputAdornment>
+          <InputAdornment position="end">
             <IconButton onClick={submitSearch} className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon fontSize="large" />
             </IconButton>
           </InputAdornment>
         ),
         style: {
-          color: "white",
+          color: "black",
         },
       }}
     />

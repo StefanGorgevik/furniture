@@ -2,12 +2,20 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "260px",
     margin: "1%",
     paddingBottom: 0,
     paddingTop: 0,
     borderRadius: "5px",
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
+    width: "350px",
+    boxShadow: "50px",
+    "&:hover": {
+      backgroundColor: "#faf5f5",
+      boxShadow: "150px", // theme.shadows[20]
+    },
   },
   cardContent: {
     padding: 0,
@@ -16,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    height: "40em",
+    height: "200px",
     maxHeight: "200px",
-    width: "auto",
-    width: "90%",
+    width: "100%",
     boxShadow: theme.shadows[6],
     margin: "0 auto",
     marginBottom: "-0.3em",
@@ -27,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     display: "flex",
-    cursor: "default",
+    alignItems: "center",
+    justifyContent: "center",
     "&:hover": {
       backgroundColor: "transparent",
     },
@@ -38,9 +46,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     width: "90%",
     margin: "0 auto",
-    "&:hover $focusHighlight": {
-      opacity: 0,
-    },
   },
   cardHeader: {
     padding: "5px",
@@ -49,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontFamily: "Heebo",
     width: "33.3%",
-    border: `0.5px double ${theme.palette.common.darkerWhite}`,
   },
 }));
 

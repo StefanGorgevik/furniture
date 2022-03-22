@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import statsReducer from "./stats/statsReducer";
 import furnitureReducer from "./furniture/furnitureReducer";
 import authReducer from "store/auth/authReducer";
 import uiReducer from "./ui/uiReducer";
@@ -12,7 +11,6 @@ export const history = createBrowserHistory();
 export default combineReducers({
   router: connectRouter(history),
   uiReducer,
-  statsReducer,
   furnitureReducer,
   authReducer,
   cartReducer,

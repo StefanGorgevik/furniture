@@ -13,6 +13,7 @@ import DetailsInfoContent from "components/Furniture/Details/DetailsInfoContent/
 import DetailsImage from "components/Furniture/Details/DetailsImage/DetailsImage";
 import { Grid } from "@material-ui/core";
 import Likes from "components/Furniture/Details/Likes/Likes";
+import { useScreenSize } from "hooks/breakpoints";
 
 const Details = ({
   currentFurniture,
@@ -24,25 +25,23 @@ const Details = ({
   const history = useHistory();
   const [furnitureLiked, setFurnitureLiked] = useState(false);
   const params = useParams();
-  let furnitureID = params.id;
-  const { likedBy } = currentFurniture;
-
-  const [reviewsOpened, setReviewsOpened] = React.useState(false);
+  const furnitureID = params.id;
+  const { matchesSM } = useScreenSize();
   const [likesOpened, setLikesOpened] = React.useState(false);
-
   useEffect(() => {
     if (furnitureID && !currentFurnitureLoaded) {
-      openFurnitureAction({ id: Number(furnitureID), shouldRedirect: true });
+      openFurnitureAction({ id: furnitureID, shouldRedirect: true });
     }
   }, [furnitureID, openFurnitureAction, currentFurnitureLoaded]);
 
   useEffect(() => {
-    const userMail = localStorage.getItem("user_email");
-    const liked = likedBy.find((email) => email === userMail);
+    if (!currentFurniture.likes) return;
+    const username = localStorage.getItem("username");
+    const liked = currentFurniture.likes.find((like) => like.user === username);
     if (liked) {
       setFurnitureLiked(true);
     }
-  }, [likedBy]);
+  }, [currentFurniture.likes]);
 
   const editFurnitureHandler = () => {
     const furniture = {
@@ -71,33 +70,38 @@ const Details = ({
           item
           container
           direction="row"
-          justify="space-evenly"
+          justifyContent="space-evenly"
           alignItems="center"
-          style={{ marginTop: "2em" }}
+          style={{
+            marginTop: "2em",
+            minHeight: "100%",
+            marginBottom: matchesSM ? "2em" : 0,
+          }}
         >
-          <DetailsImage likedBy={likedBy} imageURL={currentFurniture.image} />
+          <DetailsImage
+            imageURL={currentFurniture.image}
+            likes={currentFurniture.likes ? currentFurniture.likes : []}
+            likesCount={
+              currentFurniture.likes ? currentFurniture.likes.length : 0
+            }
+            handleLikesOpen={() => setLikesOpened(true)}
+          />
           <DetailsInfoContent
             currentFurniture={currentFurniture}
             liked={furnitureLiked}
             setLiked={setFurnitureLiked}
             onEdit={editFurnitureHandler}
             onAddToCart={() => addToCartHandler(currentFurniture)}
-            reviewsCount={currentFurniture.reviews}
-            likesCount={likedBy.length}
-            handleReviewsOpen={() => setReviewsOpened(true)}
-            handleLikesOpen={() => setLikesOpened(true)}
           />
         </Grid>
 
-        <Reviews
-          reviewsCount={currentFurniture.reviews}
-          id={currentFurniture.id}
-          handleClose={() => setReviewsOpened(!reviewsOpened)}
-          open={reviewsOpened}
-        />
+        <Reviews id={currentFurniture.id} />
 
         <Likes
-          likedBy={likedBy}
+          likes={currentFurniture.likes ? currentFurniture.likes : []}
+          likesCount={
+            currentFurniture.likes ? currentFurniture.likes.length : 0
+          }
           id={currentFurniture.id}
           handleClose={() => setLikesOpened(!likesOpened)}
           open={likesOpened}
@@ -109,7 +113,6 @@ const Details = ({
 
 const mapStateToProps = (state) => ({
   currentFurniture: state.furnitureReducer.currentFurniture,
-  reviews: state.furnitureReducer.currentFurnitureReviews,
   currentFurnitureLoaded: state.furnitureReducer.currentFurnitureLoaded,
 });
 

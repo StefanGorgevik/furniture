@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   arrowsContainer: {
     flexDirection: "row",
     display: "flex",
+    alignItems: "center",
     borderRadius: "5px",
     borderRight: `1px solid ${theme.palette.common.darkerGrey}`,
     borderLeft: `1px solid ${theme.palette.common.darkerGrey}`,

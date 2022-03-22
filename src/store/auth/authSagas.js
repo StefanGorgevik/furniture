@@ -13,6 +13,7 @@ import {
 } from "./authActions";
 import { saveUserData, logoutUser } from "utils/localStorage";
 import { fetchRequest } from "utils/fetch";
+import { authRequest } from "utils/fetch";
 
 export function* isLoggedInSaga() {
   try {
@@ -37,18 +38,29 @@ export function* logoutUserSaga() {
 }
 
 export function* loginUserSaga({ data }) {
-  const path = `auth/login`;
+  const path = "signInWithPassword";
 
   try {
-    const res = yield fetchRequest(path, "POST", data);
-    if (res.success) {
-      saveUserData(res.token, data.email, res.user.username);
+    const res = yield authRequest(data, path);
+    if (res.error) {
+      let message = "Something went wrong!";
+      const errorId = res.error.message;
+      if (errorId === "EMAIL_NOT_FOUND") {
+        message = "This email could not be found!";
+      } else if (errorId === "INVALID_PASSWORD") {
+        message = "This password is not valid!";
+      } else if (errorId === "INVALID_EMAIL") {
+        message = "This email is not valid!";
+      } else if (errorId === "TOO_MANY_ATTEMPTS_TRY_LATER") {
+        message = "Too many login attempts! Try again later!";
+      }
+      yield put(setActionStatus("error", message));
+    } else {
+      saveUserData(res.idToken, res.email, res.displayName);
       yield put(closeModal());
       yield put(setIsUserLoggedInAction(true));
       yield put(push("/furniture/all"));
       yield put(setActionStatus("success", "You have successfully logged in!"));
-    } else {
-      yield put(setActionStatus("error", res.message));
     }
   } catch (e) {
     console.log(e);
@@ -57,23 +69,58 @@ export function* loginUserSaga({ data }) {
 }
 
 export function* registerUserSaga({ data }) {
-  const path = `auth/signup`;
+  console.log("FROM SAGA", data);
+  const path = `signUp`;
   try {
-    const res = yield fetchRequest(path, "POST", {
-      username: data.username,
-      email: data.email,
-      password: data.password,
-    });
+    const res = yield authRequest(data, path);
     const { email, password } = data;
-    if (res.errors?.email) {
-      yield put(setActionStatus("error", res.errors.email));
+    if (res.error) {
+      let message = "Something went wrong!";
+      const errorId = res.error.message;
+      if (errorId === "EMAIL_EXISTS") {
+        message = "This email exists already!";
+      } else if (errorId === "INVALID_EMAIL") {
+        message = "This email is not valid!";
+      } else if (errorId.includes("WEAK_PASSWORD")) {
+        message = "Password should be at least 6 characters!";
+      }
+      yield put(setActionStatus("error", message));
       return;
-    }
-    if (res.success) {
+    } else {
       yield put(closeModal());
       yield put(loginStarted({ email, password }));
+    }
+  } catch (e) {
+    console.log(e);
+    yield put(setActionStatus("error", e.message));
+  }
+}
+
+export function* changePasswordSaga({ data }) {
+  const path = "update";
+
+  try {
+    const res = yield authRequest(data, path);
+    if (res.error) {
+      let message = "Something went wrong!";
+      const errorId = res.error.message;
+      console.log("CHANGE CHK ERROR", message, errorId);
+      // if (errorId === "EMAIL_NOT_FOUND") {
+      //   message = "This email could not be found!";
+      // } else if (errorId === "INVALID_PASSWORD") {
+      //   message = "This password is not valid!";
+      // } else if (errorId === "INVALID_EMAIL") {
+      //   message = "This email is not valid!";
+      // } else if (errorId === "TOO_MANY_ATTEMPTS_TRY_LATER") {
+      //   message = "Too many login attempts! Try again later!";
+      // }
+      // yield put(setActionStatus("error", message));
     } else {
-      yield put(setActionStatus("error", res.message));
+      saveUserData(res.idToken, res.email, res.displayName);
+      yield put(closeModal());
+      yield put(setIsUserLoggedInAction(true));
+      yield put(push("/furniture/all"));
+      yield put(setActionStatus("success", "You have successfully logged in!"));
     }
   } catch (e) {
     console.log(e);

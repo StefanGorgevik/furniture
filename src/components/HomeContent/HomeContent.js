@@ -6,35 +6,19 @@ import LandingHeader from "./LandingHeader";
 import ChairTable from "assets/images/chairTable.png";
 import NightStand from "assets/images/nightStand.png";
 import Wardrobe from "assets/images/wardrobe.png";
-import Transition from "hooks/Transition";
 import { connect } from "react-redux";
 import Login from "components/Auth/Login/Login";
 import Register from "components/Auth/Register/Register";
-import Footer from "components/Footer/Footer";
 
 const HomeContent = () => {
   const classes = useStyles();
-  const [isTextOn, setIsTextOn] = useState(false);
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const [selectedAuth, setSelectedAuth] = useState("");
-  const [isLampOn, setIsLampOn] = useState(false);
   const ref = useRef();
 
-  function enable() {}
-
-  function disable() {}
-
   useEffect(() => {
-    enable();
-    setTimeout(() => {
-      setIsLampOn(true);
-    }, 800);
-
-    setTimeout(() => {
-      setIsTextOn(true);
-      // enable();
-    }, 1500);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const selectAuthHandler = (type) => {
@@ -45,7 +29,7 @@ const HomeContent = () => {
         block: "center",
         inline: "end",
       });
-    }, 200);
+    }, 50);
   };
 
   return (
@@ -55,22 +39,25 @@ const HomeContent = () => {
       className={classes.homeContent}
       id="scrollingContainer"
     >
-      <LandingHeader isLampOn={isLampOn} />
-
-      <Transition onOpen={isLampOn} timeout={1100}>
-        <>
+      <LandingHeader />
+      <>
+        {selectedAuth === "" && (
           <Grid
             item
             container
             direction="row"
             style={{ width: "95%", margin: "0 auto" }}
+            //for animated height decrease
+            // className={
+            //   selectedAuth === "" ? classes.decreaseActive : classes.decrease
+            // }
           >
             <Grid
               className={classes.homeContentItem}
               item
               container
               direction="column"
-              justify="space-between"
+              justifyContent="space-between"
               md
             >
               <Grid item>
@@ -81,9 +68,8 @@ const HomeContent = () => {
                     margin: "0 auto",
                   }}
                   align="center"
-                  className={classes.animationContent}
                 >
-                  Find the best fit of furniture for your home!
+                  Find the best furniture for your home!
                 </Typography>
               </Grid>
 
@@ -91,26 +77,20 @@ const HomeContent = () => {
                 <img
                   alt="furniture logo"
                   src={ChairTable}
-                  style={{ alignSelf: "center", marginTop: "1em" }}
-                  className={classes.animationContent}
+                  style={{ alignSelf: "center" }}
                 />
               </Grid>
             </Grid>
 
             <Grid
-              className={classes.homeContentItem}
               item
               container
               direction="column"
-              justify="space-between"
+              justifyContent="space-between"
               md
             >
-              <Grid item style={{ marginTop: !matchesSM ? 100 : undefined }}>
-                <Typography
-                  variant="h2"
-                  align="center"
-                  className={classes.animationContent}
-                >
+              <Grid item>
+                <Typography variant="h2" align="center">
                   Review and like other furniture!
                 </Typography>
               </Grid>
@@ -123,9 +103,7 @@ const HomeContent = () => {
                     alignSelf: "center",
                     marginTop: matchesSM ? "1em" : undefined,
                     height: "15em",
-                    marginBottom: !matchesSM ? -100 : undefined,
                   }}
-                  className={classes.animationContent}
                 />
               </Grid>
             </Grid>
@@ -135,13 +113,11 @@ const HomeContent = () => {
               item
               container
               direction="column"
-              justify="space-between"
+              justifyContent="space-between"
               md
             >
               <Grid item>
-                <Typography variant="h2" className={classes.animationContent}>
-                  Post and sell your furniture!
-                </Typography>
+                <Typography variant="h2">Showcase your furniture!</Typography>
               </Grid>
               <Grid item container alignItems="center" direction="column">
                 <img
@@ -151,52 +127,48 @@ const HomeContent = () => {
                     marginTop: "1em",
                     height: "15em",
                   }}
-                  className={classes.animationContent}
                 />
               </Grid>
             </Grid>
           </Grid>
-        </>
-      </Transition>
-      <Transition onOpen={isTextOn} timeout={1100}>
-        <Grid item container direction="row" justify="center">
-          <Grid item xl style={{ marginTop: "10em" }}>
-            <Typography variant="h4">How do you want to proceed?</Typography>
+        )}
+      </>
+      <Grid item container direction="row" justifyContent="center">
+        <Grid
+          item
+          container
+          justifyContent="center"
+          spacing={3}
+          style={{ marginBottom: "2em", marginTop: "1em" }}
+          //for animated decrease of marginTop
+          // className={selectedAuth === "" ? classes.topPush : classes.topNoPush}
+        >
+          <Grid item>
+            <Button
+              variant={selectedAuth === "signIn" ? "contained" : "outlined"}
+              color="primary"
+              className={classes.homeButton}
+              onClick={() => selectAuthHandler("signIn")}
+              style={{ fontWeight: "bold" }}
+            >
+              Sign In
+            </Button>
           </Grid>
-          <Grid
-            item
-            container
-            justify="center"
-            spacing={3}
-            style={{ marginBottom: "5em" }}
-          >
-            <Grid item>
-              <Button
-                variant={selectedAuth === "signIn" ? "contained" : "outlined"}
-                lg
-                color="primary"
-                className={classes.homeButton}
-                onClick={() => selectAuthHandler("signIn")}
-              >
-                Sign In
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant={selectedAuth === "signUp" ? "contained" : "outlined"}
-                lg
-                color="primary"
-                className={classes.homeButton}
-                onClick={() => selectAuthHandler("signUp")}
-              >
-                Sign Up
-              </Button>
-            </Grid>
+          <Grid item>
+            <Button
+              variant={selectedAuth === "signUp" ? "contained" : "outlined"}
+              color="primary"
+              className={classes.homeButton}
+              onClick={() => selectAuthHandler("signUp")}
+              style={{ fontWeight: "bold" }}
+            >
+              Sign Up
+            </Button>
           </Grid>
         </Grid>
-      </Transition>
+      </Grid>
 
-      {selectedAuth === "signIn" && isTextOn && (
+      {selectedAuth === "signIn" && (
         <div ref={ref}>
           <Login />
         </div>
@@ -206,9 +178,6 @@ const HomeContent = () => {
           <Register />
         </div>
       )}
-      <Transition onOpen={isTextOn} timeout={1100}>
-        <Footer position="relative" />
-      </Transition>
     </Grid>
   );
 };

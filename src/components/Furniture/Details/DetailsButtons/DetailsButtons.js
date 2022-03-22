@@ -4,27 +4,28 @@ import useStyles from "./styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Tooltip } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
-const ButtonContainer = ({ children, onClick }) => {
+const ButtonContainer = ({ children, onClick, tooltip }) => {
   const classes = useStyles();
 
   return (
-    <Grid item>
-      <Button
-        className={classes.actionButton}
-        onClick={onClick}
-        size="small"
-        color="primary"
-      >
-        {children}
-      </Button>
-    </Grid>
+    <Tooltip title={tooltip}>
+      <Grid item>
+        <Button
+          className={classes.actionButton}
+          onClick={onClick}
+          size="small"
+          color="primary"
+        >
+          {children}
+        </Button>
+      </Grid>
+    </Tooltip>
   );
 };
 
@@ -51,7 +52,7 @@ const DetailsButtons = ({
   };
 
   const deleteFurnitureHandler = (id) => {
-    openModal("delete", { id: id, shouldRedirect: true });
+    openModal("delete", { id, shouldRedirect: true });
   };
 
   return (
@@ -59,7 +60,7 @@ const DetailsButtons = ({
       item
       container
       direction="row"
-      justify="flex-end"
+      justifyContent="flex-end"
       alignItems="flex-end"
       style={{
         marginBottom: "1em",
@@ -69,31 +70,37 @@ const DetailsButtons = ({
     >
       {!isMyFurniture &&
         (liked ? (
-          <ButtonContainer onClick={() => likeHandler("remove-like")}>
+          <ButtonContainer
+            tooltip="Dislike"
+            onClick={() => likeHandler("remove-like")}
+          >
             <FavoriteIcon />
           </ButtonContainer>
         ) : (
-          <ButtonContainer onClick={() => likeHandler("like")}>
-            <FavoriteBorderIcon />{" "}
+          <ButtonContainer tooltip="Like" onClick={() => likeHandler("like")}>
+            <FavoriteBorderIcon />
           </ButtonContainer>
         ))}
       {!isMyFurniture && (
-        <ButtonContainer onClick={leaveReviewHandler}>
+        <ButtonContainer tooltip="Add a review" onClick={leaveReviewHandler}>
           <InsertCommentIcon />
         </ButtonContainer>
       )}
-      {!isMyFurniture && (
+      {/* {!isMyFurniture && (
         <ButtonContainer onClick={onAddToCart}>
           <AddShoppingCartIcon />
         </ButtonContainer>
-      )}
+      )} */}
       {isMyFurniture && (
         <>
-          <ButtonContainer onClick={onEdit}>
+          <ButtonContainer tooltip="Edit furniture" onClick={onEdit}>
             <EditIcon />
           </ButtonContainer>
 
-          <ButtonContainer onClick={() => deleteFurnitureHandler(id)}>
+          <ButtonContainer
+            tooltip="Delete furniture"
+            onClick={() => deleteFurnitureHandler(id)}
+          >
             <DeleteIcon />
           </ButtonContainer>
         </>
