@@ -1,7 +1,7 @@
 {
   "name": "furniture",
   "version": "0.1.0",
-  "homepage": "http://StefanGorgevik.github.io/furniture",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
