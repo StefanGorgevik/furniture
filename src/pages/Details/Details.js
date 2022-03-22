@@ -13,6 +13,7 @@ import DetailsInfoContent from "components/Furniture/Details/DetailsInfoContent/
 import DetailsImage from "components/Furniture/Details/DetailsImage/DetailsImage";
 import { Grid } from "@material-ui/core";
 import Likes from "components/Furniture/Details/Likes/Likes";
+import { useScreenSize } from "hooks/breakpoints";
 
 const Details = ({
   currentFurniture,
@@ -24,7 +25,8 @@ const Details = ({
   const history = useHistory();
   const [furnitureLiked, setFurnitureLiked] = useState(false);
   const params = useParams();
-  let furnitureID = params.id;
+  const furnitureID = params.id;
+  const { matchesSM } = useScreenSize();
   const [likesOpened, setLikesOpened] = React.useState(false);
   useEffect(() => {
     if (furnitureID && !currentFurnitureLoaded) {
@@ -70,7 +72,11 @@ const Details = ({
           direction="row"
           justifyContent="space-evenly"
           alignItems="center"
-          style={{ marginTop: "2em", minHeight: "100%" }}
+          style={{
+            marginTop: "2em",
+            minHeight: "100%",
+            marginBottom: matchesSM ? "2em" : 0,
+          }}
         >
           <DetailsImage
             imageURL={currentFurniture.image}

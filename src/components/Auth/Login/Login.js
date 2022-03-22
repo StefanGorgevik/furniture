@@ -15,7 +15,7 @@ const Login = ({ loginUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { matchesMD, matchesSM } = useScreenSize();
+  const { matchesSM } = useScreenSize();
 
   const loginHandler = (e, onKey) => {
     if (e.key === "Enter" || !onKey) {

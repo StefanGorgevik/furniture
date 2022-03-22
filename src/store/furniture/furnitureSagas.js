@@ -27,7 +27,7 @@ export function* getAllFurniture({ page }) {
   try {
     const res = yield fetchRequest("furniture.json", "GET", null);
     console.log("RES", res);
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -55,7 +55,7 @@ export function* saveNewFurniture({ data }) {
       likes: [],
       reviews: [],
     });
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -76,7 +76,7 @@ export function* openFurnitureItem({ data }) {
 
   try {
     const res = yield fetchRequest(path, "GET", null);
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -115,7 +115,7 @@ export function* searchFurniture({ search }) {
   try {
     const res = yield fetchRequest(path, "GET", null, true);
     console.log("response from SEARCH", res);
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -165,7 +165,7 @@ export function* submitReview({ data, id }) {
       ...furniture,
       reviews: allReviews,
     });
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -215,7 +215,7 @@ export function* likeFurniture({ data }) {
   console.log("likeFurniture", data, type, user);
   try {
     const res = yield fetchRequest(path, "GET");
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -260,7 +260,7 @@ export function* getMyFurniture() {
   const user = localStorage.getItem("user_email");
   try {
     const res = yield fetchRequest(path, "GET");
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -281,7 +281,7 @@ export function* deleteFurniture({ data }) {
   console.log(data);
   try {
     const res = yield fetchRequest(path, "DELETE");
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
@@ -300,7 +300,7 @@ export function* editFurniture({ data }) {
   const path = `furniture/${data.id}.json`;
   try {
     const res = yield fetchRequest(path, "PATCH", data.data);
-    if (res.error) {
+    if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
