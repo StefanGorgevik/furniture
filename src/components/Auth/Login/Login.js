@@ -38,8 +38,8 @@ const Login = ({ loginUser }) => {
         className={classes.formWrapper}
         onKeyPress={(e) => loginHandler(e, true)}
         style={{
-          width: matchesMD ? "90%" : "30%",
-          maxWidth: matchesMD ? "90%" : "30%",
+          width: matchesSM ? "80%" : "30%",
+          maxWidth: matchesSM ? "80%" : "30%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

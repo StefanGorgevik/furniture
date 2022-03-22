@@ -105,17 +105,6 @@ export default createTheme({
         "&:before": {
           borderBottom: `2px solid ${darkerWhite}`,
         },
-        // "&:hover:not($disabled):not($focused):not($error):before": {
-        //   borderBottom: `2px solid ${darkerGrey}`,
-        // },
-      },
-    },
-    MuiTab: {
-      wrapper: {
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "flex-start",
       },
     },
     MuiCardHeader: {

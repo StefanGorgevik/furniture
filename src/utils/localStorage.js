@@ -11,6 +11,8 @@ export const saveUserData = (token, email, username) => {
   localStorage.setItem("categories_copy", JSON.stringify(CATEGORIES));
   localStorage.setItem("sort_by_likes", false);
   localStorage.setItem("sort_by_reviews", false);
+  localStorage.setItem("sort_by_price", false);
+  localStorage.setItem("order", "desc");
 };
 
 export const logoutUser = () => {
@@ -24,5 +26,6 @@ export const logoutUser = () => {
   localStorage.removeItem("drawer_opened");
   localStorage.removeItem("sort_by_likes");
   localStorage.removeItem("sort_by_reviews");
-  localStorage.removeItem("expiresDate");
+  localStorage.removeItem("sort_by_price");
+  localStorage.removeItem("order");
 };

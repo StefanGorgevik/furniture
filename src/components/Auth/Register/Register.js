@@ -11,7 +11,7 @@ import { Error } from "components/UI/formError";
 
 const Register = ({ registerUser }) => {
   const classes = useStyles();
-  const { matchesMD, matchesSM } = useScreenSize();
+  const { matchesSM } = useScreenSize();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -53,8 +53,8 @@ const Register = ({ registerUser }) => {
         className={classes.formWrapper}
         onKeyPress={(e) => registerHandler(e, true)}
         style={{
-          width: matchesMD ? "90%" : "30%",
-          maxWidth: matchesMD ? "90%" : "30%",
+          width: matchesSM ? "90%" : "30%",
+          maxWidth: matchesSM ? "90%" : "30%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

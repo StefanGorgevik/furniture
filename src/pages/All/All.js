@@ -10,7 +10,12 @@ import { Grid } from "@material-ui/core";
 import { editFurnitureAction } from "store/furniture/furnitureActions";
 import { SelectCategories } from "components/Category/SelectCategories";
 import { FurnitureItem } from "components/Furniture/FurnitureItem/FurnitureItem";
-import { sortByLikesHandler, sortByReviewsHandler } from "utils/sort";
+import {
+  sortByLikesHandler,
+  sortByReviewsHandler,
+  sortByPriceHandler,
+} from "utils/sort";
+import { useScreenSize } from "hooks/breakpoints";
 export const CATEGORIES = [
   { id: 0, category: "All", value: true },
   { id: 1, category: "Chairs", value: false },
@@ -36,9 +41,10 @@ const All = ({
   const [showOwned, setShowOwned] = useState(true);
   const [sortByLikes, setSortByLikes] = useState(false);
   const [sortByReviews, setSortByReviews] = useState(false);
+  const [sortByPrice, setSortByPrice] = useState(false);
+  const [order, setOrder] = useState("desc");
   const wrapperRef = useRef(null);
-  console.log("allFurniture", allFurniture);
-
+  const { matchesSM } = useScreenSize();
   const changeDrawerOptions = (drawerOpened) => {
     setDrawerOpened(drawerOpened);
     localStorage.setItem("drawer_opened", drawerOpened);
@@ -79,6 +85,8 @@ const All = ({
     const show_owned = localStorage.getItem("show_owned");
     const sortByLikes = localStorage.getItem("sort_by_likes");
     const sortByReviews = localStorage.getItem("sort_by_reviews");
+    const sortByPrice = localStorage.getItem("sort_by_price");
+    const orderType = localStorage.getItem("order");
     if (categories) {
       setCategories(JSON.parse(categories));
     }
@@ -90,6 +98,12 @@ const All = ({
     }
     if (sortByReviews) {
       setSortByReviews(JSON.parse(sortByReviews));
+    }
+    if (sortByPrice) {
+      setSortByPrice(JSON.parse(sortByPrice));
+    }
+    if (orderType) {
+      setOrder(orderType);
     }
   }, []);
 
@@ -115,15 +129,17 @@ const All = ({
     });
     console.log("before arraych", array, showOwned);
 
-    if (!showOwned) {
-      console.log("entered arraych", array);
-      array = array.filter((item) => item.createdBy !== user_email);
-    }
     if (sortByLikes) {
-      array = sortByLikesHandler(array, "desc");
+      array = sortByLikesHandler(array, order);
     }
     if (sortByReviews) {
-      array = sortByReviewsHandler(array, "desc");
+      array = sortByReviewsHandler(array, order);
+    }
+    if (sortByPrice) {
+      array = sortByPriceHandler(array, order);
+    }
+    if (!showOwned) {
+      array = array.filter((item) => item.createdBy !== user_email);
     }
     console.log("arraych", array, showOwned);
     if (array.length === 0) {
@@ -137,10 +153,17 @@ const All = ({
     user_email,
     sortByLikes,
     sortByReviews,
+    sortByPrice,
+    order,
   ]);
 
   return (
-    <Grid container direction="row" justifyContent="center">
+    <Grid
+      container
+      direction="row"
+      justifyContent="center"
+      style={{ marginBottom: matchesSM ? "2em" : 0 }}
+    >
       {allProducts.length === 0 && !loading && allFurnitureLoaded ? (
         <NoItemsFound
           location="/furniture/create"
@@ -184,6 +207,10 @@ const All = ({
           setSortByLikes={setSortByLikes}
           sortByReviews={sortByReviews}
           setSortByReviews={setSortByReviews}
+          sortByPrice={sortByPrice}
+          setSortByPrice={setSortByPrice}
+          order={order}
+          setOrder={setOrder}
         />
       </Grid>
     </Grid>

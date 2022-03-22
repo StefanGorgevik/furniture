@@ -15,6 +15,21 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     ...theme.typography.tab,
+    "& .MuiTab-wrapper": {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      justifyContent: "center",
+      [theme.breakpoints.down("lg")]: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        minWidth: "150px",
+        width: "170px",
+      },
+      // [theme.breakpoints.up("md")]: {
+
+      // },
+    },
     fontSize: "1rem",
     letterSpacing: 0,
     fontWeight: 500,

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllReviewsAction } from "store/furniture/furnitureActions";
 import StarIcon from "@material-ui/icons/Star";
-import { Grid, Typography, Card, useTheme, Button } from "@material-ui/core";
+import { Grid, Typography, Card, Button } from "@material-ui/core";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PersonIcon from "@material-ui/icons/Person";
 import { makeStyles } from "@material-ui/styles";
@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
   const classes = useStyles();
-  const { matchesSM } = useScreenSize();
   const reviewsCount = reviews.length;
   useEffect(() => {
     getAllReviewsAction(id);
@@ -60,7 +59,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
           width: "100%",
         }}
       >
-        <Typography variant="h4" align={matchesSM ? "center" : "left"}>
+        <Typography variant="h4" align="center">
           Reviews
         </Typography>
       </Grid>

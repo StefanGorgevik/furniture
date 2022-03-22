@@ -11,7 +11,6 @@ import {
   Button,
   Tooltip,
   Box,
-  IconButton,
   Icon,
 } from "@material-ui/core";
 import useStyles from "./styles";
@@ -90,7 +89,7 @@ export const FurnitureItem = ({
             />
           </Icon>
         </Tooltip>
-        <Tooltip title={item.name.length < 20 ? "" : item.name}>
+        <Tooltip title={item && item.name.length < 20 ? "" : item.name}>
           <Typography variant="caption">
             {item.name.substr(0, 20)} {item.name.length > 20 && "..."}
           </Typography>
@@ -98,7 +97,7 @@ export const FurnitureItem = ({
 
         <Tooltip title="Owned">
           <Icon variant="outlined" color="primary">
-            <VerifiedUserIcon />
+            {isMine && <VerifiedUserIcon />}
           </Icon>
         </Tooltip>
       </CardContent>

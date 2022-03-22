@@ -14,7 +14,8 @@ import { useScreenSize } from "hooks/breakpoints";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
-
+import AscendingImage from "assets/images/asc.png";
+import DescendingImage from "assets/images/desc.png";
 export function SelectCategories({
   categories,
   setCategories,
@@ -26,6 +27,10 @@ export function SelectCategories({
   setSortByLikes,
   sortByReviews,
   setSortByReviews,
+  sortByPrice,
+  setSortByPrice,
+  order,
+  setOrder,
 }) {
   console.log(categories);
   const theme = useTheme();
@@ -88,9 +93,7 @@ export function SelectCategories({
             item
             container
             style={{
-              marginBottom: "1em",
               paddingLeft: !opened && matchesSM ? 0 : "1em",
-              paddingTop: !opened && matchesSM ? 0 : "1em",
             }}
           >
             <Grid item>
@@ -188,12 +191,37 @@ export function SelectCategories({
             direction="column"
             style={{
               paddingLeft: !opened && matchesSM ? 0 : "1em",
-              paddingTop: !opened && matchesSM ? 0 : "1em",
-              marginBottom: "1em",
             }}
           >
-            <Grid item>
-              <Typography variant="caption">Sort by most</Typography>
+            <Grid
+              item
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="caption" align="left">
+                Sort
+              </Typography>
+              <IconButton
+                onClick={() =>
+                  setOrder((prevOrder) => {
+                    let order = "asc";
+                    if (prevOrder === "asc") {
+                      order = "desc";
+                    }
+                    localStorage.setItem("order", order);
+                    return order;
+                  })
+                }
+              >
+                {order === "asc" ? (
+                  <img src={AscendingImage} alt="ascending" />
+                ) : (
+                  <img src={DescendingImage} alt="descending" />
+                )}
+              </IconButton>
             </Grid>
             <Grid
               item
@@ -222,7 +250,9 @@ export function SelectCategories({
                           const checked = e.target.checked;
                           if (checked) {
                             setSortByReviews(false);
+                            setSortByPrice(false);
                             localStorage.setItem("sort_by_reviews", false);
+                            localStorage.setItem("sort_by_price", false);
                           }
                           setSortByLikes(checked);
                           localStorage.setItem("sort_by_likes", checked);
@@ -254,17 +284,56 @@ export function SelectCategories({
                         color="primary"
                         onChange={(e) => {
                           const checked = e.target.checked;
-                          setSortByReviews(checked);
                           if (checked) {
                             setSortByLikes(false);
+                            setSortByPrice(false);
                             localStorage.setItem("sort_by_likes", false);
+                            localStorage.setItem("sort_by_price", false);
                           }
+                          setSortByReviews(checked);
+
                           localStorage.setItem("sort_by_reviews", checked);
                         }}
                         checked={sortByReviews}
                       />
                     }
                     label="Reviews"
+                  />
+                </Box>
+                <Box style={{ paddingRight: "15px" }}>
+                  <InsertCommentIcon />
+                </Box>
+              </FormGroup>
+              <FormGroup
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "2px 0",
+                  minWidth: "170px",
+                }}
+              >
+                <Box>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          setSortByPrice(checked);
+                          if (checked) {
+                            setSortByLikes(false);
+                            setSortByReviews(false);
+                            localStorage.setItem("sort_by_likes", false);
+                            localStorage.setItem("sort_by_reviews", false);
+                          }
+                          localStorage.setItem("sort_by_price", checked);
+                        }}
+                        checked={sortByPrice}
+                      />
+                    }
+                    label="Price"
                   />
                 </Box>
                 <Box style={{ paddingRight: "15px" }}>
@@ -280,11 +349,9 @@ export function SelectCategories({
             direction="column"
             style={{
               paddingLeft: !opened && matchesSM ? 0 : "1em",
-              paddingTop: !opened && matchesSM ? 0 : "1em",
-              marginBottom: "1em",
             }}
           >
-            <Grid item>
+            <Grid item style={{ display: "flex" }}>
               <Typography variant="caption">Settings</Typography>
             </Grid>
             <Grid

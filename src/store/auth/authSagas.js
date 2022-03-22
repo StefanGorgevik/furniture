@@ -96,6 +96,38 @@ export function* registerUserSaga({ data }) {
   }
 }
 
+export function* changePasswordSaga({ data }) {
+  const path = "update";
+
+  try {
+    const res = yield authRequest(data, path);
+    if (res.error) {
+      let message = "Something went wrong!";
+      const errorId = res.error.message;
+      console.log("CHANGE CHK ERROR", message, errorId);
+      // if (errorId === "EMAIL_NOT_FOUND") {
+      //   message = "This email could not be found!";
+      // } else if (errorId === "INVALID_PASSWORD") {
+      //   message = "This password is not valid!";
+      // } else if (errorId === "INVALID_EMAIL") {
+      //   message = "This email is not valid!";
+      // } else if (errorId === "TOO_MANY_ATTEMPTS_TRY_LATER") {
+      //   message = "Too many login attempts! Try again later!";
+      // }
+      // yield put(setActionStatus("error", message));
+    } else {
+      saveUserData(res.idToken, res.email, res.displayName);
+      yield put(closeModal());
+      yield put(setIsUserLoggedInAction(true));
+      yield put(push("/furniture/all"));
+      yield put(setActionStatus("success", "You have successfully logged in!"));
+    }
+  } catch (e) {
+    console.log(e);
+    yield put(setActionStatus("error", e.message));
+  }
+}
+
 export function* getUserInfo({ email }) {
   const path = `profile-info/${email}`;
 

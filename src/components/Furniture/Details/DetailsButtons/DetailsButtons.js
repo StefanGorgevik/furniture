@@ -4,7 +4,6 @@ import useStyles from "./styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Button, Grid, Tooltip } from "@material-ui/core";

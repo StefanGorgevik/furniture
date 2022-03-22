@@ -1,9 +1,11 @@
 import { setLoadingStart, setLoadingStop } from "store/ui/uiActions";
 import { put } from "@redux-saga/core/effects";
 
-export function* fetchRequest(path, requestMethod, postData) {
+export function* fetchRequest(path, requestMethod, postData, isSearch) {
   const token = localStorage.getItem("user_token");
-  const url = `https://furniture-e4787-default-rtdb.europe-west1.firebasedatabase.app/${path}?auth=${token}`;
+  const url = `https://furniture-e4787-default-rtdb.europe-west1.firebasedatabase.app/${path}${
+    isSearch ? "&" : "?"
+  }auth=${token}`;
   console.log("CHK POST DATA", path, requestMethod, postData);
   try {
     yield put(setLoadingStart());

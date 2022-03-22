@@ -2,16 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  AppBar,
-  Toolbar,
-  Tabs,
-  Tab,
-  Menu,
-  IconButton,
-  Box,
-  Tooltip,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Tabs, Tab, Menu, Box } from "@material-ui/core";
 import { logoutUser } from "store/auth/authActions";
 import { openModal } from "store/ui/uiActions";
 import Logo from "assets/images/Logo.png";
@@ -33,7 +24,7 @@ const Header = ({ isLoggedIn, openModal }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const pathname = useLocation().pathname;
   const [tab, setHeaderTab] = useState(0);
-  const { matchesSM } = useScreenSize();
+  const { matchesMD } = useScreenSize();
   useEffect(() => {
     if (pathname === "/furniture/all") {
       setHeaderTab(0);
@@ -92,15 +83,11 @@ const Header = ({ isLoggedIn, openModal }) => {
         name: "Logout",
         to: pathname,
         icon: (
-          <Tooltip title="Logout">
-            <IconButton style={{}}>
-              <ExitToAppIcon color="secondary" />
-            </IconButton>
-          </Tooltip>
+          <ExitToAppIcon style={{ marginRight: "0.2em", marginTop: "0.2em" }} />
         ),
       },
     ],
-    [openModal, pathname]
+    [pathname]
   );
 
   const tabs = isLoggedIn
@@ -145,14 +132,14 @@ const Header = ({ isLoggedIn, openModal }) => {
               <img src={Logo} alt="logo" className={classes.logo} />
             )}
 
-            {!matchesSM ? (
+            {!matchesMD ? (
               <Box
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
-                  width: matchesSM ? "100%" : "90%",
+                  width: matchesMD ? "100%" : "90%",
                 }}
               >
                 <Tabs

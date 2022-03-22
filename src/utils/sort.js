@@ -22,7 +22,8 @@ const sortByLetter = (array, order) => {
   }
 };
 
-const sortByPrice = (array, order) => {
+export const sortByPriceHandler = (array, order) => {
+  console.log("ORDER", array, order);
   if (order === "asc") {
     return array.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
   } else {
@@ -80,7 +81,7 @@ const sort = (array, sortOptions) => {
   if (filter === "name") {
     sorted = sortByLetter(array, order);
   } else if (filter === "price") {
-    sorted = sortByPrice(array, order);
+    sorted = sortByPriceHandler(array, order);
   } else if (filter === "likes") {
     sorted = sortByLikesHandler(array, order);
   } else if (filter === "reviews") {
