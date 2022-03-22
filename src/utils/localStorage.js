@@ -24,4 +24,5 @@ export const logoutUser = () => {
   localStorage.removeItem("drawer_opened");
   localStorage.removeItem("sort_by_likes");
   localStorage.removeItem("sort_by_reviews");
+  localStorage.removeItem("expiresDate");
 };

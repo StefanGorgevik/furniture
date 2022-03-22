@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModalButtons = ({ onSubmit, onClose, submitButtonText }) => {
+const ModalButtons = ({ onSubmit, onClose, submitButtonText, cancelText }) => {
   const classes = useStyles();
 
   return (
@@ -30,11 +30,10 @@ const ModalButtons = ({ onSubmit, onClose, submitButtonText }) => {
       <Grid item>
         <Button
           onClick={onClose}
-          text="Cancel"
           className={classes.cancelButton}
           color="secondary"
         >
-          Cancel
+          {cancelText ? cancelText : "Cancel"}
         </Button>
       </Grid>
       <Grid item>

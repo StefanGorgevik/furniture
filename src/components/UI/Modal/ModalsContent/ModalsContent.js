@@ -12,6 +12,7 @@ import RemoveFromCartModal from "../RemoveFromCartModal/RemoveFromCartModal";
 import CheckoutModal from "../CheckoutModal/CheckoutModal";
 import { bindActionCreators } from "redux";
 import { closeModal } from "store/ui/uiActions";
+import ReloginModal from "../ReloginModal/ReloginModal";
 
 const ModalsContent = ({ modals, closeModal }) => {
   const { modalType, modal, loading, showNotification } = modals;
@@ -33,6 +34,9 @@ const ModalsContent = ({ modals, closeModal }) => {
         break;
       case "checkout":
         setModalContent(<CheckoutModal />);
+        break;
+      case "relogin":
+        setModalContent(<ReloginModal />);
         break;
       default:
         break;

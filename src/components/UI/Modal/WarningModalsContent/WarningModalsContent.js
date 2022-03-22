@@ -19,7 +19,7 @@ const WarningModalsContent = ({ text }) => {
           color="primary"
           style={{ fontSize: "1.75rem" }}
         >
-          {text}
+          {text.charAt(0).toUpperCase() + text.slice(1)}
         </Typography>
       </Grid>
     </Grid>
