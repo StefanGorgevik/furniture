@@ -30,26 +30,35 @@ const sortByPrice = (array, order) => {
   }
 };
 
-const sortByLikes = (array, order) => {
+export const sortByLikesHandler = (array, order) => {
+  console.log("SORT", array);
   if (order === "asc") {
     return array.sort(
-      (a, b) => parseFloat(a.likes.length) - parseFloat(b.likes.length)
+      (a, b) =>
+        parseFloat(a.likes ? a.likes.length : 0) -
+        parseFloat(b.likes ? b.likes.length : 0)
     );
   } else {
     return array.sort(
-      (a, b) => parseFloat(b.likes.length) - parseFloat(a.likes.length)
+      (a, b) =>
+        parseFloat(b.likes ? b.likes.length : 0) -
+        parseFloat(a.likes ? a.likes.length : 0)
     );
   }
 };
 
-const sortByReviews = (array, order) => {
+export const sortByReviewsHandler = (array, order) => {
   if (order === "asc") {
     return array.sort(
-      (a, b) => parseFloat(a.reviews.length) - parseFloat(b.reviews.length)
+      (a, b) =>
+        parseFloat(a.reviews ? a.reviews.length : 0) -
+        parseFloat(b.reviews ? b.reviews.length : 0)
     );
   } else {
     return array.sort(
-      (a, b) => parseFloat(b.reviews.length) - parseFloat(a.reviews.length)
+      (a, b) =>
+        parseFloat(b.reviews ? b.reviews.length : 0) -
+        parseFloat(a.reviews ? a.reviews.length : 0)
     );
   }
 };
@@ -73,9 +82,9 @@ const sort = (array, sortOptions) => {
   } else if (filter === "price") {
     sorted = sortByPrice(array, order);
   } else if (filter === "likes") {
-    sorted = sortByLikes(array, order);
+    sorted = sortByLikesHandler(array, order);
   } else if (filter === "reviews") {
-    sorted = sortByReviews(array, order);
+    sorted = sortByReviewsHandler(array, order);
   } else if (filter === "date") {
     sorted = sortByDate(array, order);
   }

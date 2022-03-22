@@ -21,11 +21,13 @@ export const Input = ({
   rows,
   style,
   setError,
+  inputProps,
 }) => {
   const classes = useStyles();
 
   return (
     <TextField
+      inputProps={inputProps ? inputProps : {}}
       style={{ ...style }}
       error={error}
       variant="outlined"

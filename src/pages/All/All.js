@@ -10,8 +10,7 @@ import { Grid } from "@material-ui/core";
 import { editFurnitureAction } from "store/furniture/furnitureActions";
 import { SelectCategories } from "components/Category/SelectCategories";
 import { FurnitureItem } from "components/Furniture/FurnitureItem/FurnitureItem";
-import { useScreenSize } from "hooks/breakpoints";
-
+import { sortByLikesHandler, sortByReviewsHandler } from "utils/sort";
 export const CATEGORIES = [
   { id: 0, category: "All", value: true },
   { id: 1, category: "Chairs", value: false },
@@ -35,6 +34,8 @@ const All = ({
   const [categories, setCategories] = useState(CATEGORIES);
   const [drawerOpened, setDrawerOpened] = useState(false);
   const [showOwned, setShowOwned] = useState(true);
+  const [sortByLikes, setSortByLikes] = useState(false);
+  const [sortByReviews, setSortByReviews] = useState(false);
   const wrapperRef = useRef(null);
   console.log("allFurniture", allFurniture);
 
@@ -75,16 +76,20 @@ const All = ({
 
   useEffect(() => {
     const categories = localStorage.getItem("categories");
+    const show_owned = localStorage.getItem("show_owned");
+    const sortByLikes = localStorage.getItem("sort_by_likes");
+    const sortByReviews = localStorage.getItem("sort_by_reviews");
     if (categories) {
       setCategories(JSON.parse(categories));
     }
-  }, []);
-
-  useEffect(() => {
-    const show_owned = localStorage.getItem("show_owned");
-    console.log("USE EFFECT", JSON.parse(show_owned));
     if (show_owned) {
       setShowOwned(JSON.parse(show_owned));
+    }
+    if (sortByLikes) {
+      setSortByLikes(JSON.parse(sortByLikes));
+    }
+    if (sortByReviews) {
+      setSortByReviews(JSON.parse(sortByReviews));
     }
   }, []);
 
@@ -108,14 +113,31 @@ const All = ({
         }
       }
     });
+    console.log("before arraych", array, showOwned);
+
     if (!showOwned) {
-      array = array.filter((item) => item.user === user_email);
+      console.log("entered arraych", array);
+      array = array.filter((item) => item.createdBy !== user_email);
     }
+    if (sortByLikes) {
+      array = sortByLikesHandler(array, "desc");
+    }
+    if (sortByReviews) {
+      array = sortByReviewsHandler(array, "desc");
+    }
+    console.log("arraych", array, showOwned);
     if (array.length === 0) {
       changeDrawerOptions(true);
     }
     return array ? array : [];
-  }, [categories, allFurniture, showOwned, user_email]);
+  }, [
+    categories,
+    allFurniture,
+    showOwned,
+    user_email,
+    sortByLikes,
+    sortByReviews,
+  ]);
 
   return (
     <Grid container direction="row" justifyContent="center">
@@ -128,7 +150,6 @@ const All = ({
         />
       ) : (
         <Grid
-          md={12}
           style={{ width: "100%", paddingTop: "1em" }}
           item
           container
@@ -159,6 +180,10 @@ const All = ({
           setOpened={changeDrawerOptions}
           showOwned={showOwned}
           setShowOwned={setShowOwned}
+          sortByLikes={sortByLikes}
+          setSortByLikes={setSortByLikes}
+          sortByReviews={sortByReviews}
+          setSortByReviews={setSortByReviews}
         />
       </Grid>
     </Grid>

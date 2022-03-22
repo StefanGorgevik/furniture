@@ -117,9 +117,7 @@ const HomeContent = () => {
               md
             >
               <Grid item>
-                <Typography variant="h2">
-                  Post and sell your furniture!
-                </Typography>
+                <Typography variant="h2">Showcase your furniture!</Typography>
               </Grid>
               <Grid item container alignItems="center" direction="column">
                 <img

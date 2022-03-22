@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Grid, Typography } from "@material-ui/core";
@@ -78,7 +78,7 @@ const SearchedAll = ({
                 isMine={item.createdBy === localStorage.getItem("user_email")}
                 item={item}
                 showTools={false}
-                onClick={() => openFurnitureHandler(Number(item.id))}
+                onClick={() => openFurnitureHandler(item.id)}
                 onDelete={false}
                 onEdit={false}
               />

@@ -89,7 +89,7 @@ const SearchInput = ({ searchForFurnitureAction, getAllFurnitureAction }) => {
       }}
       InputProps={{
         endAdornment: (
-          <InputAdornment>
+          <InputAdornment position="end">
             <IconButton onClick={submitSearch} className={classes.searchIcon}>
               <SearchIcon fontSize="large" />
             </IconButton>

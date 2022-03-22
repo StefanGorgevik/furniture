@@ -62,7 +62,7 @@ const Likes = ({ likes, handleClose, open }) => {
                 style={{
                   padding: "0.5em 2em",
                 }}
-                key={like.id}
+                key={i}
               >
                 <PersonIcon style={{ marginRight: "0.3em" }} />
                 <Typography variant="subtitle2" style={{ minWidth: "200px" }}>

@@ -2,8 +2,7 @@ import { createTheme } from "@material-ui/core/styles";
 const mainGrey = "#535559";
 const darkerWhite = "#EEEEEE";
 const darkerGrey = "#222831";
-const backgroundColor = "rgba(151, 138, 138, 0.287);";
-
+const backgroundColor = "rgba(151, 138, 138, 0.287)";
 export default createTheme({
   palette: {
     common: {
@@ -70,13 +69,16 @@ export default createTheme({
     subtitle1: {
       fontFamily: "Heebo",
       color: "black",
-      fontSize: "0.8rem",
+      fontSize: "1.2rem",
       fontWeight: 300,
       opacity: 0.8,
     },
     subtitle2: {
       fontFamily: "Heebo",
       fontSize: "1rem",
+    },
+    overline: {
+      fontSize: "1.2rem",
     },
     acceptButton: {
       height: "3em",
@@ -111,8 +113,9 @@ export default createTheme({
     MuiTab: {
       wrapper: {
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "flex-start",
       },
     },
     MuiCardHeader: {
@@ -131,6 +134,12 @@ export default createTheme({
     },
     MuiChecked: {
       color: darkerGrey,
+    },
+    MuiTooltip: {
+      tooltip: {
+        fontSize: "1em",
+        fontFamily: "Heebo",
+      },
     },
   },
 });

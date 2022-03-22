@@ -128,6 +128,7 @@ const Create = ({
       className={classes.create}
       direction="column"
       alignItems="center"
+      justifyContent="center"
     >
       <Grid item>
         <Typography variant="h3" style={{ textTransform: "uppercase" }}>
@@ -160,6 +161,7 @@ const Create = ({
               onChange={(e) => saveValue(e, "name")}
               error={error.includes("name")}
               setError={setError}
+              inputProps={{ maxLength: 30 }}
             />
           </Grid>
           <Grid item>

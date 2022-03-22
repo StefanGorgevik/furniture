@@ -9,6 +9,8 @@ export const saveUserData = (token, email, username) => {
   localStorage.setItem("drawer_opened", true);
   localStorage.setItem("categories", JSON.stringify(CATEGORIES));
   localStorage.setItem("categories_copy", JSON.stringify(CATEGORIES));
+  localStorage.setItem("sort_by_likes", false);
+  localStorage.setItem("sort_by_reviews", false);
 };
 
 export const logoutUser = () => {
@@ -20,4 +22,6 @@ export const logoutUser = () => {
   localStorage.removeItem("categories_copy");
   localStorage.removeItem("show_owned");
   localStorage.removeItem("drawer_opened");
+  localStorage.removeItem("sort_by_likes");
+  localStorage.removeItem("sort_by_reviews");
 };

@@ -10,6 +10,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    width: "350px",
+    boxShadow: "50px",
+    "&:hover": {
+      backgroundColor: "#faf5f5",
+      boxShadow: "150px", // theme.shadows[20]
+    },
   },
   cardContent: {
     padding: 0,
@@ -18,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   media: {
-    height: "40em",
+    height: "200px",
     maxHeight: "200px",
-    width: "90%",
+    width: "100%",
     boxShadow: theme.shadows[6],
     margin: "0 auto",
     marginBottom: "-0.3em",
@@ -28,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     display: "flex",
-    cursor: "default",
+    alignItems: "center",
+    justifyContent: "center",
     "&:hover": {
       backgroundColor: "transparent",
     },

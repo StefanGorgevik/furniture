@@ -39,15 +39,19 @@
 }
 
 .back-btn-div {
-  width: 5%;
+  width: 100%;
   background-color: inherit;
-  padding-top: 15px;
+  padding-bottom: 10px;
   padding-left: 20px;
-  position: fixed;
+  position: "absolute";
 }
 
 @media (max-width: 764px) {
   .layout-children::-webkit-scrollbar {
     display: none;
+  }
+  .back-btn-div {
+    position: "absolute";
+    height: "50px";
   }
 }

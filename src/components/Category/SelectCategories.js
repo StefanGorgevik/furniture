@@ -11,8 +11,9 @@ import {
 } from "@material-ui/core";
 import SortOutlinedIcon from "@material-ui/icons/SortOutlined";
 import { useScreenSize } from "hooks/breakpoints";
-import UserCheckedIcon from "components/UI/icons/UserCheckedIcon";
-import { CATEGORIES } from "pages/All/All";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import InsertCommentIcon from "@material-ui/icons/InsertComment";
 
 export function SelectCategories({
   categories,
@@ -21,6 +22,10 @@ export function SelectCategories({
   setOpened,
   showOwned,
   setShowOwned,
+  sortByLikes,
+  setSortByLikes,
+  sortByReviews,
+  setSortByReviews,
 }) {
   console.log(categories);
   const theme = useTheme();
@@ -35,8 +40,7 @@ export function SelectCategories({
         width: !opened && matchesSM ? "55px" : opened ? "200px" : "80px",
         paddingBottom: "1em",
         borderBottomLeftRadius: 15,
-
-        position: matchesSM ? "fixed" : "absolute",
+        position: "fixed",
         zIndex: matchesMD ? 500 : 5,
         right: 0,
         borderRight: `2px double ${theme.palette.common.darkerWhite}`,
@@ -56,7 +60,7 @@ export function SelectCategories({
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          background: `linear-gradient(to right, ${theme.palette.common.grey} 10%, ${theme.palette.common.darkerGrey} 90%)`,
+          background: theme.palette.common.darkerGrey,
           minWidth: "170px",
         }}
       >
@@ -122,7 +126,6 @@ export function SelectCategories({
                         onChange={(e) => {
                           if (cat.category === "All") {
                             if (e.target.checked) {
-                              setShowOwned(true);
                               setCategories((prevCategories) => {
                                 localStorage.setItem(
                                   "categories_copy",
@@ -178,10 +181,11 @@ export function SelectCategories({
               ))}
             </Grid>
           </Grid>
+
           <Grid
             item
             container
-            flexDirection="column"
+            direction="column"
             style={{
               paddingLeft: !opened && matchesSM ? 0 : "1em",
               paddingTop: !opened && matchesSM ? 0 : "1em",
@@ -189,7 +193,7 @@ export function SelectCategories({
             }}
           >
             <Grid item>
-              <Typography variant="caption">Settings</Typography>
+              <Typography variant="caption">Sort by most</Typography>
             </Grid>
             <Grid
               item
@@ -213,7 +217,98 @@ export function SelectCategories({
                   <FormControlLabel
                     control={
                       <Checkbox
-                        disabled={categories[0].value}
+                        color="primary"
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          if (checked) {
+                            setSortByReviews(false);
+                            localStorage.setItem("sort_by_reviews", false);
+                          }
+                          setSortByLikes(checked);
+                          localStorage.setItem("sort_by_likes", checked);
+                        }}
+                        checked={sortByLikes}
+                      />
+                    }
+                    label="Likes"
+                  />
+                </Box>
+                <Box style={{ paddingRight: "15px" }}>
+                  <ThumbUpIcon />
+                </Box>
+              </FormGroup>
+              <FormGroup
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "2px 0",
+                  minWidth: "170px",
+                }}
+              >
+                <Box>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        color="primary"
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          setSortByReviews(checked);
+                          if (checked) {
+                            setSortByLikes(false);
+                            localStorage.setItem("sort_by_likes", false);
+                          }
+                          localStorage.setItem("sort_by_reviews", checked);
+                        }}
+                        checked={sortByReviews}
+                      />
+                    }
+                    label="Reviews"
+                  />
+                </Box>
+                <Box style={{ paddingRight: "15px" }}>
+                  <InsertCommentIcon />
+                </Box>
+              </FormGroup>
+            </Grid>
+          </Grid>
+
+          <Grid
+            item
+            container
+            direction="column"
+            style={{
+              paddingLeft: !opened && matchesSM ? 0 : "1em",
+              paddingTop: !opened && matchesSM ? 0 : "1em",
+              marginBottom: "1em",
+            }}
+          >
+            <Grid item>
+              <Typography variant="caption">Settings</Typography>
+            </Grid>
+            <Grid
+              item
+              container
+              direction="column"
+              style={{
+                height: "100%",
+              }}
+            >
+              <FormGroup
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "2px 0",
+                  minWidth: "170px",
+                }}
+              >
+                <Box>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
                         color="primary"
                         onChange={(e) => {
                           localStorage.setItem("show_owned", e.target.checked);
@@ -225,8 +320,8 @@ export function SelectCategories({
                     label="Show owned"
                   />
                 </Box>
-                <Box style={{ paddingBottom: "15px" }}>
-                  <UserCheckedIcon />
+                <Box style={{ paddingRight: "15px" }}>
+                  <VerifiedUserIcon />
                 </Box>
               </FormGroup>
             </Grid>

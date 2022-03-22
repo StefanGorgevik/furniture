@@ -15,7 +15,7 @@ const Login = ({ loginUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { matchesMD } = useScreenSize();
+  const { matchesMD, matchesSM } = useScreenSize();
 
   const loginHandler = (e, onKey) => {
     if (e.key === "Enter" || !onKey) {
@@ -28,7 +28,12 @@ const Login = ({ loginUser }) => {
     }
   };
   return (
-    <Grid item container direction="column">
+    <Grid
+      item
+      container
+      direction="column"
+      style={{ marginBottom: matchesSM ? "2em" : 0 }}
+    >
       <form
         className={classes.formWrapper}
         onKeyPress={(e) => loginHandler(e, true)}

@@ -9,7 +9,7 @@ import {
   getMyFurnitureAction,
   openFurnitureAction,
   searchNotFoundAction,
-  saveTotalLikes,
+  getAllReviewsAction,
   editFurnitureAction,
   saveSearchedFurnitureAction,
 } from "./furnitureActions";
@@ -48,6 +48,8 @@ export function* saveNewFurniture({ data }) {
       ...data,
       createdBy: user,
       createdOn: new Date(),
+      likes: [],
+      reviews: [],
     });
     console.log("CHK FINAL RESP", res);
     if (res) {
@@ -67,12 +69,8 @@ export function* openFurnitureItem({ data }) {
   try {
     const res = yield fetchRequest(path, "GET", null);
     if (res) {
-      let likedBy = [];
       if (res.likes) {
-        res.likes = Object.keys(res.likes).map((r) => ({
-          id: r,
-          user: res.likes[r],
-        }));
+        res.likes = Object.keys(res.likes).map((r) => res.likes[r]);
       }
       yield put(saveCurrentFurnitureAction({ ...res, id }));
       if (shouldRedirect) {
@@ -150,6 +148,8 @@ export function* submitReview({ data, id }) {
     });
     let messageType = "success";
     if (res) {
+      yield put(getAllReviewsAction(id));
+
       yield put(openFurnitureAction({ id, shouldRedirect: false }));
     } else {
       messageType = "error";
@@ -184,30 +184,31 @@ export function* getAllReviews({ id }) {
 export function* likeFurniture({ data }) {
   const { id, type } = data;
   const path = `furniture/${id}.json`;
-  const user = localStorage.getItem("user_email");
-  console.log("LIKE", data, type, user);
+  const user = localStorage.getItem("username");
+  console.log("likeFurniture", data, type, user);
   try {
     const res = yield fetchRequest(path, "GET");
-    console.log("LIKE FURNITURE res 1", res);
+    console.log("likeFurniture res 1", res);
     let message = "";
     if (res) {
       let likes = [];
       if (res.likes) {
-        likes = Object.keys(res.likes).map((r) => ({
-          id: r,
-          user: res.likes[r],
+        likes = Object.keys(res.likes).map((key) => ({
+          id: key,
+          user: res.likes[key].user,
         }));
-        console.log("RES FROM DETAILS", res.likes);
       }
+      console.log("likeFurniture likes", likes);
 
       if (type === "like") {
         message = "Furniture liked!";
-        likes.push(user);
+        likes.push({ id: Math.random(), user });
       } else {
         message = "Furniture unliked!";
 
         likes = likes.filter((l) => l.user !== user);
       }
+      console.log("likeFurniturelikes after", likes);
       const likeResponse = yield fetchRequest(path, "PATCH", { ...res, likes });
 
       if (likeResponse) {

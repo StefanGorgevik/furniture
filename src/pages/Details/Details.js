@@ -25,8 +25,6 @@ const Details = ({
   const [furnitureLiked, setFurnitureLiked] = useState(false);
   const params = useParams();
   let furnitureID = params.id;
-  console.log("SUBMIT likes", currentFurniture);
-  const [reviewsOpened, setReviewsOpened] = React.useState(false);
   const [likesOpened, setLikesOpened] = React.useState(false);
   useEffect(() => {
     if (furnitureID && !currentFurnitureLoaded) {
@@ -36,8 +34,8 @@ const Details = ({
 
   useEffect(() => {
     if (!currentFurniture.likes) return;
-    const userMail = localStorage.getItem("user_email");
-    const liked = currentFurniture.likes.find((like) => like.user === userMail);
+    const username = localStorage.getItem("username");
+    const liked = currentFurniture.likes.find((like) => like.user === username);
     if (liked) {
       setFurnitureLiked(true);
     }
@@ -72,11 +70,15 @@ const Details = ({
           direction="row"
           justifyContent="space-evenly"
           alignItems="center"
-          style={{ marginTop: "2em" }}
+          style={{ marginTop: "2em", minHeight: "100%" }}
         >
           <DetailsImage
-            likes={currentFurniture.likes ? currentFurniture.likes : []}
             imageURL={currentFurniture.image}
+            likes={currentFurniture.likes ? currentFurniture.likes : []}
+            likesCount={
+              currentFurniture.likes ? currentFurniture.likes.length : 0
+            }
+            handleLikesOpen={() => setLikesOpened(true)}
           />
           <DetailsInfoContent
             currentFurniture={currentFurniture}
@@ -84,27 +86,10 @@ const Details = ({
             setLiked={setFurnitureLiked}
             onEdit={editFurnitureHandler}
             onAddToCart={() => addToCartHandler(currentFurniture)}
-            reviewsCount={
-              currentFurniture.reviews ? currentFurniture.reviews.length : 0
-            }
-            likes={currentFurniture.likes ? currentFurniture.likes : []}
-            likesCount={
-              currentFurniture.likes ? currentFurniture.likes.length : 0
-            }
-            handleReviewsOpen={() => setReviewsOpened(true)}
-            handleLikesOpen={() => setLikesOpened(true)}
           />
         </Grid>
 
-        <Reviews
-          reviews={currentFurniture.reviews}
-          reviewsCount={
-            currentFurniture.reviews ? currentFurniture.reviews.length : 0
-          }
-          id={currentFurniture.id}
-          handleClose={() => setReviewsOpened(!reviewsOpened)}
-          open={reviewsOpened}
-        />
+        <Reviews id={currentFurniture.id} />
 
         <Likes
           likes={currentFurniture.likes ? currentFurniture.likes : []}
@@ -122,7 +107,6 @@ const Details = ({
 
 const mapStateToProps = (state) => ({
   currentFurniture: state.furnitureReducer.currentFurniture,
-  reviews: state.furnitureReducer.currentFurnitureReviews,
   currentFurnitureLoaded: state.furnitureReducer.currentFurnitureLoaded,
 });
 

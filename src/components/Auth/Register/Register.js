@@ -11,7 +11,7 @@ import { Error } from "components/UI/formError";
 
 const Register = ({ registerUser }) => {
   const classes = useStyles();
-  const { matchesMD } = useScreenSize();
+  const { matchesMD, matchesSM } = useScreenSize();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +43,12 @@ const Register = ({ registerUser }) => {
   };
 
   return (
-    <Grid item container direction="column">
+    <Grid
+      item
+      container
+      direction="column"
+      style={{ marginBottom: matchesSM ? "2em" : 0 }}
+    >
       <form
         className={classes.formWrapper}
         onKeyPress={(e) => registerHandler(e, true)}

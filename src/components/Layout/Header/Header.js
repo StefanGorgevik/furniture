@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useLocation, NavLink, Link } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
@@ -8,10 +8,6 @@ import {
   Tabs,
   Tab,
   Menu,
-  MenuItem,
-  ListItemIcon,
-  Typography,
-  Grid,
   IconButton,
   Box,
   Tooltip,
@@ -20,22 +16,21 @@ import { logoutUser } from "store/auth/authActions";
 import { openModal } from "store/ui/uiActions";
 import Logo from "assets/images/Logo.png";
 import useStyles from "./styles.js";
-import SettingsIcon from "@material-ui/icons/Settings";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { ElevationScroll } from "./ElevationScroll";
-import EditIcon from "@material-ui/icons/Edit";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import EqualizerIcon from "@material-ui/icons/Equalizer";
 import CreateIcon from "@material-ui/icons/Create";
 import WebIcon from "@material-ui/icons/Web";
 import SearchIcon from "@material-ui/icons/Search";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import { useScreenSize } from "hooks/breakpoints";
+import { BackButton } from "components/UI/Buttons/Buttons";
+import styles from "../Layout.module.css";
+
 const Header = ({ isLoggedIn, openModal }) => {
   const classes = useStyles();
-  // const [anchorEl, setAnchorEl] = useState(null);
-  // const [openMenu, setOpenMenu] = useState(false);
-  // const [selectedIndex, setSelectedIndex] = useState();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openMenu, setOpenMenu] = useState(false);
   const pathname = useLocation().pathname;
   const [tab, setHeaderTab] = useState(0);
   const { matchesSM } = useScreenSize();
@@ -55,21 +50,15 @@ const Header = ({ isLoggedIn, openModal }) => {
     setHeaderTab(newValue);
   };
 
-  // const handleClose = (e) => {
-  //   setAnchorEl(null);
-  //   setOpenMenu(false);
-  // };
+  const handleClose = (e) => {
+    setAnchorEl(null);
+    setOpenMenu(false);
+  };
 
-  // const handleMenuItemClick = (e, i) => {
-  //   setAnchorEl(null);
-  //   setOpenMenu(false);
-  //   setSelectedIndex(i);
-  // };
-
-  // const handleClick = (e) => {
-  //   setAnchorEl(e.currentTarget);
-  //   setOpenMenu(true);
-  // };
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+    setOpenMenu(true);
+  };
 
   const loggedInTabs = useMemo(
     () => [
@@ -99,158 +88,108 @@ const Header = ({ isLoggedIn, openModal }) => {
           <ListAltIcon style={{ marginRight: "0.2em", marginTop: "0.2em" }} />
         ),
       },
+      {
+        name: "Logout",
+        to: pathname,
+        icon: (
+          <Tooltip title="Logout">
+            <IconButton style={{}}>
+              <ExitToAppIcon color="secondary" />
+            </IconButton>
+          </Tooltip>
+        ),
+      },
     ],
-    []
+    [openModal, pathname]
   );
 
   const tabs = isLoggedIn
     ? loggedInTabs.map((tab, i) => (
         <Tab
+          onClick={() => {
+            if (tab.name === "Logout") {
+              openModal("logout");
+            }
+            handleClose();
+          }}
           key={`${tab.name}${i}`}
           className={classes.tab}
-          label={matchesSM ? "" : tab.name}
+          label={tab.name}
           component={NavLink}
           to={tab.to}
           icon={tab.icon}
-          iconPosition="top"
         />
       ))
     : null;
 
-  // const menuOptions = useMemo(() => {
-  // return [
-  //   {
-  //     name: "Cart",
-  //     link: "/cart",
-  //     activeIndex: 1,
-  //     selectedIndex: 0,
-  //     icon: <ShoppingCartIcon />,
-  //     onClick: () => {},
-  //   },
-  //   {
-  //     name: "Stats",
-  //     link: "/stats",
-  //     activeIndex: 1,
-  //     selectedIndex: 0,
-  //     icon: <EqualizerIcon />,
-  //     onClick: () => {},
-  //   },
-  //   {
-  //     name: "Change Username",
-  //     link: "/change-username",
-  //     activeIndex: 1,
-  //     selectedIndex: 0,
-  //     icon: <EditIcon fontSize="small" />,
-  //     onClick: () => {},
-  //   },
-  //   {
-  //     name: "Change Password",
-  //     link: "/change-password",
-  //     activeIndex: 1,
-  //     selectedIndex: 0,
-  //     icon: <EditIcon fontSize="small" />,
-  //     onClick: () => {},
-  //   },
-  //     {
-  //       name: "Logout",
-  //       link: undefined,
-  //       activeIndex: 0,
-  //       selectedIndex: 0,
-  //       icon: <ExitToAppIcon fontSize="small" />,
-  //       onClick: () => openModal("logout"),
-  //     },
-  //   ];
-  // }, [openModal]);
+  const showBackButton =
+    pathname === "/furniture/create" ||
+    pathname.startsWith("/furniture/details/") ||
+    pathname === "/profile" ||
+    pathname === "/furniture/create" ||
+    pathname.startsWith("/furniture/edit/") ||
+    pathname === "/profile/change-password" ||
+    pathname === "/cart" ||
+    pathname === "/stats";
 
   return (
     <React.Fragment>
       <ElevationScroll>
         <AppBar position="fixed">
           <Toolbar disableGutters className={classes.headerWrapper}>
-            {matchesSM ? null : (
+            {showBackButton ? (
+              <div className={styles["back-btn-div"]}>
+                <BackButton />
+              </div>
+            ) : (
               <img src={Logo} alt="logo" className={classes.logo} />
             )}
 
-            <Box
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                width: matchesSM ? "100%" : "70%",
-              }}
-            >
-              <Tabs
-                value={tab}
-                onChange={handleChange}
-                indicatorColor="secondary"
-                className={classes.tabs}
-              >
-                {tabs}
-                {/* {isLoggedIn && (
-                  <Tab
-                    icon={<SettingsIcon />}
-                    onMouseOver={(event) => handleClick(event)}
-                  />
-                )} */}
-              </Tabs>
-              {isLoggedIn && (
-                <Tooltip title="Logout">
-                  <IconButton
-                    style={{
-                      width: "60px",
-                      marginRight: "10px",
-                      paddingTop: "20px",
-                    }}
-                    onClick={() => openModal("logout")}
-                  >
-                    <ExitToAppIcon color="secondary" />
-                  </IconButton>
-                </Tooltip>
-              )}
-              {/* POP UP MENU FOR OPTIONS */}
-              {/* <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                open={openMenu}
-                onClose={handleClose}
-                classes={{ paper: classes.menu }}
-                MenuListProps={{
-                  onMouseLeave: handleClose,
+            {!matchesSM ? (
+              <Box
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: matchesSM ? "100%" : "90%",
                 }}
-                elevation={0}
-                style={{ zIndex: 1302 }}
-                keepMounted
               >
-                {menuOptions.map((option, i) => (
-                  <MenuItem
-                    key={`${option}${i}`}
-                    //IF YOU ADD OTHER LINKS IN MENU OPTION
-                    // component={Link}
-                    // to={option.link ? option.link : "/"}
-                    classes={{ root: classes.menuItem }}
-                    onClick={(event) => {
-                      option.onClick();
-                      handleMenuItemClick(event, i);
-                    }}
-                    selected={i === selectedIndex && tab === 1}
-                    style={{
-                      borderBottom: i === 1 ? "1px solid white" : "",
-                    }}
-                  >
-                    <ListItemIcon
-                      style={{
-                        color: "white",
-                        marginRight: "auto",
-                      }}
-                    >
-                      {option.icon}
-                    </ListItemIcon>
-                    <Typography variant="caption">{option.name}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu> */}
-            </Box>
+                <Tabs
+                  value={tab}
+                  onChange={handleChange}
+                  indicatorColor="secondary"
+                  className={classes.tabs}
+                >
+                  {tabs}
+                </Tabs>
+              </Box>
+            ) : (
+              <Box>
+                {isLoggedIn && (
+                  <Tab
+                    disableRipple
+                    icon={<MoreVertIcon />}
+                    onClick={(event) => handleClick(event)}
+                  />
+                )}
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  open={openMenu}
+                  onClose={handleClose}
+                  classes={{ paper: classes.menu }}
+                  MenuListProps={{
+                    onMouseLeave: handleClose,
+                  }}
+                  elevation={0}
+                  style={{ zIndex: 1302 }}
+                  keepMounted
+                >
+                  {tabs}
+                </Menu>
+              </Box>
+            )}
           </Toolbar>
         </AppBar>
       </ElevationScroll>

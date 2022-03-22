@@ -29,8 +29,9 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     backgroundColor: theme.palette.common.darkerGrey,
     color: "white",
-    borderRadius: "0px",
-    width: "17.5em",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    width: "13em",
     marginTop: "3.1em",
   },
   toolbarMargin: {
