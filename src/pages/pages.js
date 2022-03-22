@@ -22,7 +22,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/furniture/" component={HomePage} />
         <ProtectedRoute exact path="/furniture/all" component={All} />
         <ProtectedRoute
           exact
