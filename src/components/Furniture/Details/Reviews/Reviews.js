@@ -7,7 +7,6 @@ import { Grid, Typography, Card, Button } from "@material-ui/core";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PersonIcon from "@material-ui/icons/Person";
 import { makeStyles } from "@material-ui/styles";
-import { useScreenSize } from "hooks/breakpoints";
 import { openModal } from "store/ui/uiActions";
 
 const useStyles = makeStyles((theme) => ({

@@ -1,6 +1,6 @@
 import React from "react";
 import useStyles from "./styles";
-import { Grid, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import { Grid, useMediaQuery, useTheme } from "@material-ui/core";
 
 import Transition from "hooks/Transition";
 
