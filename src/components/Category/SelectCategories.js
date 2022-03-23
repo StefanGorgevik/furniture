@@ -84,8 +84,9 @@ export function SelectCategories({
           background: theme.palette.common.darkerGrey,
           minWidth: "170px",
         }}
+        onClick={() => setOpened(!opened)}
       >
-        <IconButton onClick={() => setOpened(!opened)} focusRipple>
+        <IconButton focusRipple>
           <SortOutlinedIcon fontSize="large" color="secondary" />
         </IconButton>
       </Grid>
