@@ -2,7 +2,15 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { AppBar, Toolbar, Tabs, Tab, Menu, Box } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Tabs,
+  Tab,
+  Menu,
+  Box,
+  Typography,
+} from "@material-ui/core";
 import { logoutUser } from "store/auth/authActions";
 import { openModal } from "store/ui/uiActions";
 import Logo from "assets/images/Logo.png";
@@ -38,6 +46,7 @@ const Header = ({ isLoggedIn, openModal }) => {
   }, [pathname]);
 
   const handleChange = (e, newValue) => {
+    if (newValue === 4) return;
     setHeaderTab(newValue);
   };
 
@@ -129,7 +138,9 @@ const Header = ({ isLoggedIn, openModal }) => {
                 <BackButton />
               </div>
             ) : (
-              <img src={Logo} alt="logo" className={classes.logo} />
+              <Typography style={{ paddingLeft: "10px" }} variant="h1">
+                Furnlab
+              </Typography>
             )}
 
             {!matchesMD ? (

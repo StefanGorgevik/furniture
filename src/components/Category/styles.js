@@ -24,6 +24,23 @@ const useStyles = makeStyles((theme) => ({
     borderRight: `1px solid ${theme.palette.common.darkerGrey}`,
     borderLeft: `1px solid ${theme.palette.common.darkerGrey}`,
   },
+  closeButton: {
+    ...theme.typography.acceptButton,
+    width: "20em",
+    margin: "0 auto",
+    marginBottom: "1em",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "1em",
+    },
+  },
+  formGroup: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "2px 0",
+    minWidth: "170px",
+  },
 }));
 
 export default useStyles;

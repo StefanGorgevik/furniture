@@ -11,7 +11,7 @@ import {
 } from "store/furniture/furnitureActions";
 import { closeModal } from "store/ui/uiActions";
 import { Grid, useTheme, Typography, IconButton } from "@material-ui/core";
-
+import { useScreenSize } from "hooks/breakpoints";
 const ReviewModal = ({
   closeModal,
   furnitureID,
@@ -22,7 +22,7 @@ const ReviewModal = ({
   const [stars, setStars] = useState(null);
   const [review, setReview] = useState("");
   const [error, setError] = useState(false);
-
+  const { matchesSM } = useScreenSize();
   const setStarsHandler = (star) => {
     if (star === 1 && stars === 1) return setStars(null);
     setStars(star);
@@ -54,7 +54,7 @@ const ReviewModal = ({
         item
         container
         justify="center"
-        style={{ marginBottom: "30px", marginTop: "20px" }}
+        style={{ marginBottom: matchesSM ? "10px" : "30px", marginTop: "20px" }}
       >
         {[0, 1, 2, 3, 4].map((star, i) => {
           return star >= stars ? (
@@ -62,7 +62,7 @@ const ReviewModal = ({
               <IconButton onClick={() => setStarsHandler(star + 1)}>
                 <StarBorderIcon
                   style={{
-                    fontSize: "40px",
+                    fontSize: matchesSM ? "30px" : "40px",
                   }}
                 />
               </IconButton>
@@ -72,7 +72,7 @@ const ReviewModal = ({
               <IconButton onClick={() => setStarsHandler(star + 1)}>
                 <StarIcon
                   style={{
-                    fontSize: "40px",
+                    fontSize: matchesSM ? "30px" : "40px",
                   }}
                 />
               </IconButton>
@@ -88,7 +88,7 @@ const ReviewModal = ({
           padding: "0 1em",
           paddingBottom: 0,
           borderRadius: "4px",
-          margin: "0 2em",
+          margin: matchesSM ? "0 5px" : "0 2em",
           marginTop: "1em",
         }}
       >

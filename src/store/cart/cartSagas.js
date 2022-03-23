@@ -53,7 +53,6 @@ export function* removeFromCart({ id }) {
 
   try {
     const res = yield fetchRequest(path, "POST", null);
-    console.log(res);
     if (res.success) {
       yield put(setActionStatus("success", res.message));
       yield put(getCartDataAction());

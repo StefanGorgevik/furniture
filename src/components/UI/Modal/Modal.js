@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { makeStyles, Dialog } from "@material-ui/core";
+import { useScreenSize } from "hooks/breakpoints";
 
 const useStyles = makeStyles({
   closeWrapper: {
@@ -26,7 +27,7 @@ const CloseModal = ({ onClose }) => {
 
 const Modal = ({ children, onClose, modalType }) => {
   const [show, setShow] = useState(false);
-
+  const { matchesSM } = useScreenSize();
   useEffect(() => {
     setShow(true);
   }, []);
@@ -37,7 +38,7 @@ const Modal = ({ children, onClose, modalType }) => {
   }, []);
 
   return (
-    <Dialog open={show} onClose={onClose}>
+    <Dialog open={show} onClose={onClose} fullWidth={matchesSM} maxWidth="md">
       {modalType !== "relogin" && <CloseModal onClose={onClose} />}
       {children}
     </Dialog>

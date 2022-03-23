@@ -82,7 +82,14 @@ const HomeContent = () => {
               </Grid>
             </Grid>
 
-            <Grid item container direction="column" justify="space-between" md>
+            <Grid
+              item
+              container
+              direction="column"
+              justify="space-between"
+              className={classes.homeContentItem}
+              md
+            >
               <Grid item>
                 <Typography variant="h2" align="center">
                   Review and like other furniture!

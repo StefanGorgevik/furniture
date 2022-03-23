@@ -23,7 +23,6 @@ const sortByLetter = (array, order) => {
 };
 
 export const sortByPriceHandler = (array, order) => {
-  console.log("ORDER", array, order);
   if (order === "asc") {
     return array.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
   } else {
@@ -32,7 +31,6 @@ export const sortByPriceHandler = (array, order) => {
 };
 
 export const sortByLikesHandler = (array, order) => {
-  console.log("SORT", array);
   if (order === "asc") {
     return array.sort(
       (a, b) =>

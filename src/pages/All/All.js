@@ -127,7 +127,6 @@ const All = ({
         }
       }
     });
-    console.log("before arraych", array, showOwned);
 
     if (sortByLikes) {
       array = sortByLikesHandler(array, order);
@@ -141,7 +140,6 @@ const All = ({
     if (!showOwned) {
       array = array.filter((item) => item.createdBy !== user_email);
     }
-    console.log("arraych", array, showOwned);
     if (array.length === 0) {
       changeDrawerOptions(true);
     }
@@ -162,8 +160,28 @@ const All = ({
       container
       direction="row"
       justify="center"
-      style={{ marginBottom: matchesSM ? "2em" : 0 }}
+      style={{
+        marginBottom: matchesSM ? "2em" : 0,
+      }}
     >
+      <Grid item container ref={wrapperRef} alignItems="center">
+        <SelectCategories
+          categories={categories}
+          setCategories={setCategories}
+          opened={drawerOpened}
+          setOpened={changeDrawerOptions}
+          showOwned={showOwned}
+          setShowOwned={setShowOwned}
+          sortByLikes={sortByLikes}
+          setSortByLikes={setSortByLikes}
+          sortByReviews={sortByReviews}
+          setSortByReviews={setSortByReviews}
+          sortByPrice={sortByPrice}
+          setSortByPrice={setSortByPrice}
+          order={order}
+          setOrder={setOrder}
+        />
+      </Grid>
       {allProducts.length === 0 && !loading && allFurnitureLoaded ? (
         <NoItemsFound
           location="/furniture/create"
@@ -173,7 +191,7 @@ const All = ({
         />
       ) : (
         <Grid
-          style={{ width: "100%", paddingTop: "1em" }}
+          style={{ width: "100%", paddingTop: matchesSM ? "5em" : 0 }}
           item
           container
           justify="center"
@@ -195,24 +213,6 @@ const All = ({
           })}
         </Grid>
       )}
-      <Grid item ref={wrapperRef}>
-        <SelectCategories
-          categories={categories}
-          setCategories={setCategories}
-          opened={drawerOpened}
-          setOpened={changeDrawerOptions}
-          showOwned={showOwned}
-          setShowOwned={setShowOwned}
-          sortByLikes={sortByLikes}
-          setSortByLikes={setSortByLikes}
-          sortByReviews={sortByReviews}
-          setSortByReviews={setSortByReviews}
-          sortByPrice={sortByPrice}
-          setSortByPrice={setSortByPrice}
-          order={order}
-          setOrder={setOrder}
-        />
-      </Grid>
     </Grid>
   );
 };

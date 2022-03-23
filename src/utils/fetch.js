@@ -6,7 +6,6 @@ export function* fetchRequest(path, requestMethod, postData, isSearch) {
   const url = `https://furniture-e4787-default-rtdb.europe-west1.firebasedatabase.app/${path}${
     isSearch ? "&" : "?"
   }auth=${token}`;
-  console.log("CHK POST DATA", path, requestMethod, postData);
   try {
     yield put(setLoadingStart());
     const response = yield fetch(url, {
@@ -14,7 +13,6 @@ export function* fetchRequest(path, requestMethod, postData, isSearch) {
       body: postData ? JSON.stringify(postData) : null,
     });
     const res = yield response.json();
-    console.log("RES FROM FETCH REQUEST", res);
     yield put(setLoadingStop());
     return res;
   } catch (e) {
@@ -49,7 +47,7 @@ export function* authRequest(data, path) {
 
     yield put(setLoadingStop());
 
-    const expiryTime = 10 * 1000;
+    const expiryTime = parseInt(res.expiresIn) * 1000;
     const expirationDate = new Date().getTime() + expiryTime;
     localStorage.setItem("expiresDate", JSON.stringify(expirationDate));
 

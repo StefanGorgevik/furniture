@@ -17,6 +17,7 @@ import useStyles from "./styles";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useScreenSize } from "hooks/breakpoints";
 
 export const FurnitureItem = ({
   item,
@@ -29,6 +30,7 @@ export const FurnitureItem = ({
   showTools,
 }) => {
   const { category } = item;
+  const { matchesSM } = useScreenSize();
   const classes = useStyles();
   const itemCategory = useMemo(() => {
     let cat = "Uncategorized";
@@ -72,7 +74,7 @@ export const FurnitureItem = ({
       <CardContent
         style={{
           display: "flex",
-          width: "350px",
+          width: matchesSM ? "325px" : "350px",
           alignItems: "center",
           justifyContent: "space-between",
         }}

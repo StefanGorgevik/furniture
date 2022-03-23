@@ -40,8 +40,25 @@ const DetailsInfoContent = ({
       className={classes.detailsContainer}
       direction="column"
     >
-      <Grid item container style={{ padding: "0.5em" }}>
-        <Grid item style={{ padding: "0.5em", width: "50%" }}>
+      <Grid
+        item
+        container
+        style={{
+          padding: "0.5em",
+          flexDirection: matchesSM ? "column" : "row",
+        }}
+      >
+        <Grid
+          item
+          style={{
+            padding: "0.5em",
+            width: matchesSM ? "100%" : "50%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: matchesSM ? "center" : "flex-start",
+            alignItems: matchesSM ? "center" : "flex-start",
+          }}
+        >
           <Typography
             align="left"
             variant="h2"

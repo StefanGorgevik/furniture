@@ -9,10 +9,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Button, Grid, Tooltip } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { useScreenSize } from "hooks/breakpoints";
 
 const ButtonContainer = ({ children, onClick, tooltip }) => {
   const classes = useStyles();
-
   return (
     <Tooltip title={tooltip}>
       <Grid item>
@@ -40,7 +40,7 @@ const DetailsButtons = ({
   onAddToCart,
 }) => {
   const isMyFurniture = createdBy === localStorage.getItem("user_email");
-
+  const { matchesSM } = useScreenSize();
   const leaveReviewHandler = () => {
     openModal("review");
   };
@@ -60,12 +60,13 @@ const DetailsButtons = ({
       item
       container
       direction="row"
-      justify="flex-end"
+      justify={matchesSM ? "center" : "flex-end"}
       alignItems="flex-end"
       style={{
+        marginTop: matchesSM ? "1em" : 0,
         marginBottom: "1em",
         position: "relative",
-        width: "50%",
+        width: matchesSM ? "100%" : "50%",
       }}
     >
       {!isMyFurniture &&

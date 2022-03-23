@@ -25,7 +25,6 @@ const ChangeUsername = ({
       getUserInfoAction(userEmail);
     }
 
-    console.log(userInfo);
     if (isUserInfoLoaded) {
       setUserName(userInfo.username);
     }

@@ -69,7 +69,6 @@ export function* loginUserSaga({ data }) {
 }
 
 export function* registerUserSaga({ data }) {
-  console.log("FROM SAGA", data);
   const path = `signUp`;
   try {
     const res = yield authRequest(data, path);
@@ -104,7 +103,6 @@ export function* changePasswordSaga({ data }) {
     if (res.error) {
       let message = "Something went wrong!";
       const errorId = res.error.message;
-      console.log("CHANGE CHK ERROR", message, errorId);
       // if (errorId === "EMAIL_NOT_FOUND") {
       //   message = "This email could not be found!";
       // } else if (errorId === "INVALID_PASSWORD") {

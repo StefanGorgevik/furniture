@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#faf5f5",
       boxShadow: "150px", // theme.shadows[20]
     },
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "2em",
+      width: "90%",
+    },
   },
   cardContent: {
     padding: 0,

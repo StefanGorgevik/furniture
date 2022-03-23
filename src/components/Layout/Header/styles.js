@@ -2,14 +2,11 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   headerWrapper: {
-    minHeight: "60px",
-    justifyContent: "space-between",
+    minHeight: "70px",
     background: `linear-gradient(to right, ${theme.palette.common.grey} 10%, ${theme.palette.common.darkerGrey} 90%)`,
+    justifyContent: "space-between",
   },
-  logo: {
-    marginLeft: "3em",
-    marginTop: "0.3em",
-  },
+
   tabs: {
     marginLeft: "auto",
   },
@@ -26,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
         minWidth: "150px",
         width: "170px",
       },
-      // [theme.breakpoints.up("md")]: {
-
-      // },
+      [theme.breakpoints.up("lg")]: {
+        justifyContent: "center",
+      },
     },
     fontSize: "1rem",
     letterSpacing: 0,
@@ -52,12 +49,8 @@ const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "0.2em",
-  },
-  searchIcon: {
-    color: "white",
-    marginLeft: "400px",
-    "&:hover": {
-      background: "transparent",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: 0,
     },
   },
 }));

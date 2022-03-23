@@ -41,7 +41,6 @@ const sortByCategory = (items) => {
     }
   }
 
-  console.log("allCate", allCategories);
   return allCategories;
 };
 

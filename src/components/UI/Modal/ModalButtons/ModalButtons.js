@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ModalButtons = ({ onSubmit, onClose, submitButtonText, cancelText }) => {
   const classes = useStyles();
-
   return (
     <Grid
       item

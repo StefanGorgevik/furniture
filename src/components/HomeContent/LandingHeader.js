@@ -59,7 +59,7 @@ const LandingHeader = () => {
                 width: "5em",
                 height: "5em",
                 position: "relative",
-                top: matchesSM ? 0 : "-2em",
+                top: matchesSM ? 0 : "2em",
                 margin: "0 2em",
               }}
             />

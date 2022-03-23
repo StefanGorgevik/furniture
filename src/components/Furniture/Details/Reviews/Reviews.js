@@ -140,6 +140,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
                     className={classes.comment}
                     direction="row"
                     alignItems="center"
+                    justify="center"
                   >
                     <Typography variant="subtitle2" align="center">
                       {review.comment}

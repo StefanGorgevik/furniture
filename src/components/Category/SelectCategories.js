@@ -8,6 +8,8 @@ import {
   IconButton,
   useTheme,
   Box,
+  Button,
+  Tooltip,
 } from "@material-ui/core";
 import SortOutlinedIcon from "@material-ui/icons/SortOutlined";
 import { useScreenSize } from "hooks/breakpoints";
@@ -16,6 +18,8 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import InsertCommentIcon from "@material-ui/icons/InsertComment";
 import AscendingImage from "assets/images/asc.png";
 import DescendingImage from "assets/images/desc.png";
+import useStyles from "./styles";
+
 export function SelectCategories({
   categories,
   setCategories,
@@ -32,60 +36,58 @@ export function SelectCategories({
   order,
   setOrder,
 }) {
-  console.log(categories);
   const theme = useTheme();
   const { matchesMD, matchesSM } = useScreenSize();
-
+  const classes = useStyles(opened, matchesSM);
   return (
     <Grid
       item
       style={{
         flexDirection: "row",
-        height: opened ? "auto" : matchesSM ? "45px" : "60px",
-        width: !opened && matchesSM ? "55px" : opened ? "200px" : "80px",
+        height: opened ? "auto" : "60px",
+        width:
+          !opened && matchesSM
+            ? "100%"
+            : opened
+            ? matchesSM
+              ? "100%"
+              : "250px"
+            : "80px",
         paddingBottom: "1em",
+        margin: matchesSM ? "0 auto" : "auto",
         borderBottomLeftRadius: 15,
+        borderBottomRightRadius: matchesSM && opened ? 15 : 0,
         position: "absolute",
         zIndex: matchesMD ? 500 : 5,
-        right: 0,
+        right: matchesSM ? "-3px" : "-2px",
+        left: matchesSM ? "-1px" : "auto",
+        top: 60,
         borderRight: `2px double ${theme.palette.common.darkerWhite}`,
         backgroundColor: theme.palette.common.darkerWhite,
         boxShadow: matchesSM
           ? ""
           : `-2px 0px 0px -2px ${theme.palette.common.grey}`,
         transition: "0.5s",
+        marginTop: matchesSM ? "10px" : 0,
       }}
     >
       <Grid
         item
         container
         style={{
-          borderBottomLeftRadius: !opened ? 5 : 0,
+          borderBottomLeftRadius: 5,
+          borderBottomRightRadius: 5,
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: matchesSM ? "flex-end" : "space-between",
           background: theme.palette.common.darkerGrey,
           minWidth: "170px",
         }}
       >
-        {opened && (
-          <Grid
-            item
-            style={{
-              padding: "10px",
-            }}
-          >
-            <Typography variant="h6" color="secondary">
-              Filters
-            </Typography>
-          </Grid>
-        )}
-        <Grid item>
-          <IconButton onClick={() => setOpened(!opened)}>
-            <SortOutlinedIcon fontSize="large" color="secondary" />
-          </IconButton>
-        </Grid>
+        <IconButton onClick={() => setOpened(!opened)} focusRipple>
+          <SortOutlinedIcon fontSize="large" color="secondary" />
+        </IconButton>
       </Grid>
       {opened && (
         <>
@@ -93,7 +95,9 @@ export function SelectCategories({
             item
             container
             style={{
-              paddingLeft: !opened && matchesSM ? 0 : "1em",
+              width: matchesSM ? "70%" : "90%",
+              margin: matchesSM ? "0 auto" : "auto",
+              paddingTop: matchesSM ? "1.5em" : "0.5em",
             }}
           >
             <Grid item>
@@ -104,23 +108,12 @@ export function SelectCategories({
               container
               style={{
                 height: "100%",
+
                 flexDirection: "column",
               }}
             >
               {categories.map((cat, i) => (
-                <FormGroup
-                  key={cat.id}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    width: "90%",
-                    padding: "2px 0",
-                    transition: "1s",
-                    minWidth: "170px",
-                  }}
-                >
+                <FormGroup key={cat.id} className={classes.formGroup}>
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -190,7 +183,8 @@ export function SelectCategories({
             container
             direction="column"
             style={{
-              paddingLeft: !opened && matchesSM ? 0 : "1em",
+              width: matchesSM ? "70%" : "90%",
+              margin: matchesSM ? "0 auto" : "auto",
             }}
           >
             <Grid
@@ -198,30 +192,34 @@ export function SelectCategories({
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
               }}
             >
               <Typography variant="caption" align="left">
                 Sort
               </Typography>
-              <IconButton
-                onClick={() =>
-                  setOrder((prevOrder) => {
-                    let order = "asc";
-                    if (prevOrder === "asc") {
-                      order = "desc";
-                    }
-                    localStorage.setItem("order", order);
-                    return order;
-                  })
-                }
+              <Tooltip
+                title={order === "asc" ? "Sort descending" : "Sort ascending"}
               >
-                {order === "asc" ? (
-                  <img src={AscendingImage} alt="ascending" />
-                ) : (
-                  <img src={DescendingImage} alt="descending" />
-                )}
-              </IconButton>
+                <IconButton
+                  onClick={() =>
+                    setOrder((prevOrder) => {
+                      let order = "asc";
+                      if (prevOrder === "asc") {
+                        order = "desc";
+                      }
+                      localStorage.setItem("order", order);
+                      return order;
+                    })
+                  }
+                >
+                  {order === "asc" ? (
+                    <img src={AscendingImage} alt="ascending" />
+                  ) : (
+                    <img src={DescendingImage} alt="descending" />
+                  )}
+                </IconButton>
+              </Tooltip>
             </Grid>
             <Grid
               item
@@ -231,16 +229,7 @@ export function SelectCategories({
                 flexDirection: "column",
               }}
             >
-              <FormGroup
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "2px 0",
-                  minWidth: "170px",
-                }}
-              >
+              <FormGroup className={classes.formGroup}>
                 <Box>
                   <FormControlLabel
                     control={
@@ -263,20 +252,11 @@ export function SelectCategories({
                     label="Likes"
                   />
                 </Box>
-                <Box style={{ paddingRight: "15px" }}>
+                <Box>
                   <ThumbUpIcon />
                 </Box>
               </FormGroup>
-              <FormGroup
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "2px 0",
-                  minWidth: "170px",
-                }}
-              >
+              <FormGroup className={classes.formGroup}>
                 <Box>
                   <FormControlLabel
                     control={
@@ -300,20 +280,11 @@ export function SelectCategories({
                     label="Reviews"
                   />
                 </Box>
-                <Box style={{ paddingRight: "15px" }}>
+                <Box>
                   <InsertCommentIcon />
                 </Box>
               </FormGroup>
-              <FormGroup
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "2px 0",
-                  minWidth: "170px",
-                }}
-              >
+              <FormGroup className={classes.formGroup}>
                 <Box>
                   <FormControlLabel
                     control={
@@ -336,7 +307,7 @@ export function SelectCategories({
                     label="Price"
                   />
                 </Box>
-                <Box style={{ paddingRight: "15px" }}>
+                <Box>
                   <InsertCommentIcon />
                 </Box>
               </FormGroup>
@@ -348,7 +319,8 @@ export function SelectCategories({
             container
             direction="column"
             style={{
-              paddingLeft: !opened && matchesSM ? 0 : "1em",
+              width: matchesSM ? "70%" : "90%",
+              margin: matchesSM ? "0 auto" : "auto",
             }}
           >
             <Grid item style={{ display: "flex" }}>
@@ -362,16 +334,7 @@ export function SelectCategories({
                 height: "100%",
               }}
             >
-              <FormGroup
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "2px 0",
-                  minWidth: "170px",
-                }}
-              >
+              <FormGroup className={classes.formGroup}>
                 <Box>
                   <FormControlLabel
                     control={
@@ -387,12 +350,22 @@ export function SelectCategories({
                     label="Show owned"
                   />
                 </Box>
-                <Box style={{ paddingRight: "15px" }}>
+                <Box>
                   <VerifiedUserIcon />
                 </Box>
               </FormGroup>
             </Grid>
           </Grid>
+          {opened && matchesSM && (
+            <Grid item container>
+              <Button
+                onClick={(e) => setOpened(false)}
+                className={classes.closeButton}
+              >
+                Close
+              </Button>
+            </Grid>
+          )}
         </>
       )}
     </Grid>

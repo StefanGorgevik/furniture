@@ -28,7 +28,6 @@ const uiReducer = (state = initState, action) => {
     case CLOSE_MODAL:
       return { ...state, modal: false, modalData: null, modalType: "" };
     case LOADING_START:
-      console.log("CALLED loading");
       return { ...state, loading: true };
     case LOADING_STOP:
       return { ...state, loading: false };

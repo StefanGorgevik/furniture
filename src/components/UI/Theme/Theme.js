@@ -117,6 +117,15 @@ export default createMuiTheme({
     MuiDialog: {
       scrollPaper: { overflowX: "hidden" },
       paper: { overflowX: "hidden" },
+      paperFullWidth: {
+        minWidth: "95%",
+      },
+      // paperWidthMd: {
+      //   minWidth: "95%",
+      // },
+      // paperWidthsm: {
+      //   minWidth: "95%",
+      // },
     },
     MuiDialogContent: {
       root: { overflowX: "hidden" },
@@ -128,6 +137,11 @@ export default createMuiTheme({
       tooltip: {
         fontSize: "1em",
         fontFamily: "Heebo",
+      },
+    },
+    MuiTab: {
+      labelIcon: {
+        minHeight: "60px",
       },
     },
   },

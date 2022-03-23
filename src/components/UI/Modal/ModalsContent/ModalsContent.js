@@ -17,7 +17,6 @@ import ReloginModal from "../ReloginModal/ReloginModal";
 const ModalsContent = ({ modals, closeModal }) => {
   const { modalType, modal, loading, showNotification } = modals;
   const [modalContent, setModalContent] = useState(null);
-  console.log("loading", loading);
   useEffect(() => {
     switch (modalType) {
       case "review":
