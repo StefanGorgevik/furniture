@@ -30,7 +30,10 @@ const SearchedAll = ({
         item
         container
         justify="center"
-        style={{ marginTop: "1em", marginBottom: matchesSM ? "1em" : 0 }}
+        style={{
+          marginTop: matchesSM ? "2em" : "1em",
+          marginBottom: matchesSM ? "1em" : 0,
+        }}
       >
         <SearchInput />
       </Grid>

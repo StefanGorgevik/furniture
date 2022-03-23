@@ -5,39 +5,6 @@
   flex-direction: column;
   justify-content: center;
 }
-.layout-children {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-.layout-cantScroll {
-  height: 100%;
-  overflow: hidden;
-}
-
-.layout-cantScroll::-webkit-scrollbar {
-  display: none;
-}
-
-.layout-children::-webkit-scrollbar {
-  opacity: 0.9;
-}
-
-.layout-children::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.layout-children::-webkit-scrollbar-thumb {
-  background: #535559;
-  border-radius: 10px;
-  cursor: grabbing;
-}
-
-.layout-children::-webkit-scrollbar-thumb:hover {
-  background: rgb(138, 134, 134);
-}
-
 .back-btn-div {
   width: 100%;
   background-color: inherit;

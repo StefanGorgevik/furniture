@@ -13,6 +13,7 @@ import { FurnitureItem } from "components/Furniture/FurnitureItem/FurnitureItem"
 import NoItemsFound from "components/Furniture/NoItemsFound/NoItemsFound";
 import MyFurnitureFilter from "components/MyFurnitureFilter/MyFurnitureFilter";
 import { Grid } from "@material-ui/core";
+import { useScreenSize } from "hooks/breakpoints";
 
 const MyFurniture = ({
   getMyFurnitureAction,
@@ -25,7 +26,7 @@ const MyFurniture = ({
   sortMyFurnitureAction,
 }) => {
   const history = useHistory();
-
+  const { matchesSM } = useScreenSize();
   const [filter, setFilter] = useState("date");
   const [order, setOrder] = useState("des");
 
@@ -72,7 +73,10 @@ const MyFurniture = ({
     );
   } else {
     return (
-      <Grid container style={{ marginBottom: "4em" }}>
+      <Grid
+        container
+        style={{ marginBottom: "4em", marginTop: matchesSM ? "1em" : "auto" }}
+      >
         {myFurnitureLoaded && myFurniture.length > 0 && (
           <MyFurnitureFilter
             setFilter={setFilterHandler}

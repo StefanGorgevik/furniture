@@ -1,13 +1,12 @@
+import { Grid, Typography } from "@material-ui/core";
 import React from "react";
-import styles from "./NotFound.module.css";
 
 const NotFound = () => {
   return (
-    <div className={styles["not-found"]}>
-      <h1>Page not found!</h1>
-    </div>
+    <Grid container justify="center" style={{ marginTop: 300 }}>
+      <Typography variant="h1">Page not found!</Typography>
+    </Grid>
   );
 };
-
 
 export default NotFound;

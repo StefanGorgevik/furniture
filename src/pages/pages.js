@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import ProtectedRoute from "hooks/ProtectedRoute";
 const NotFound = lazy(() => import("components/NotFound/NotFound"));
 const HomePage = lazy(() => import("pages/HomePage/HomePage"));
@@ -44,7 +44,7 @@ const Routes = () => {
       /> */}
       {/* <ProtectedRoute exact path="/cart" component={Cart} /> */}
       {/* <ProtectedRoute exact path="/stats" component={Stats} /> */}
-      <Route path="*" component={NotFound} />
+      <Route component={NotFound} />
     </Switch>
   );
 };

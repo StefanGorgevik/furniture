@@ -47,6 +47,7 @@ export function* saveNewFurniture({ data }) {
   try {
     const res = yield fetchRequest(path, "POST", {
       ...data,
+      name: data.name.toLowerCase(),
       createdBy: user,
       createdOn: new Date(),
       likes: [],
@@ -102,7 +103,7 @@ export function* openFurnitureItem({ data }) {
 }
 
 export function* searchFurniture({ search }) {
-  const path = `furniture.json?orderBy="name"&equalTo=${JSON.stringify(
+  const path = `furniture.json?orderBy="name"&startAt=${JSON.stringify(
     search
   )}`;
   try {

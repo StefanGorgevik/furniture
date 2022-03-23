@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1em",
     width: "60em",
     margin: "0 auto",
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "1em",
+    },
   },
   formControl: {
     display: "flex",

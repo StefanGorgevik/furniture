@@ -60,7 +60,7 @@ const ModalsContent = ({ modals, closeModal }) => {
             hideBackdrop
             open={loading}
             style={{
-              top: 300,
+              top: 500,
               position: "absolute",
               oveflow: "hidden",
               backgroundColor: "rgba(0, 0, 0, 0)",
