@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Modal from "@material-ui/core/Modal";
-import NotificationModal from "../NotificationModal/NotificationModal";
 import ModalItem from "../Modal";
 import ReviewModal from "../ReviewModal/ReviewModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
@@ -15,7 +14,7 @@ import { closeModal } from "store/ui/uiActions";
 import ReloginModal from "../ReloginModal/ReloginModal";
 
 const ModalsContent = ({ modals, closeModal }) => {
-  const { modalType, modal, loading, showNotification } = modals;
+  const { modalType, modal, loading } = modals;
   const [modalContent, setModalContent] = useState(null);
   useEffect(() => {
     switch (modalType) {
@@ -69,11 +68,6 @@ const ModalsContent = ({ modals, closeModal }) => {
             <CircularProgress color="primary" />
           </Modal>,
           document.getElementById("spinner-root")
-        )}
-      {showNotification &&
-        ReactDOM.createPortal(
-          <NotificationModal />,
-          document.getElementById("error-root")
         )}
     </>
   );
