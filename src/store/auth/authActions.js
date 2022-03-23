@@ -8,6 +8,7 @@ import {
   SAVE_EDITED_INFO,
   SAVE_NEW_PASSWORD,
   LOGOUT_USER,
+  REFRESH_TOKEN_STARTED,
 } from "./authTypes";
 
 export const loginStarted = (data) => ({ type: LOGIN_STARTED, data });
@@ -40,4 +41,8 @@ export const saveEditedInfoAction = (data) => ({
 export const saveNewPasswordAction = (data) => ({
   type: SAVE_NEW_PASSWORD,
   data,
+});
+
+export const refreshTokenAction = () => ({
+  type: REFRESH_TOKEN_STARTED,
 });

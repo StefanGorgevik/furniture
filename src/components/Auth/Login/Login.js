@@ -5,7 +5,13 @@ import { loginStarted } from "store/auth/authActions";
 
 import { validateLoginForm } from "utils/validators";
 import { Input } from "components/UI/Inputs/Inputs";
-import { Grid, Button } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import useStyles from "./styles";
 import { useScreenSize } from "hooks/breakpoints";
 import { Error } from "components/UI/formError";
@@ -14,6 +20,7 @@ const Login = ({ loginUser }) => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [staySignedIn, setStaySignedIn] = useState(false);
   const [error, setError] = useState("");
   const { matchesSM } = useScreenSize();
 
@@ -24,6 +31,7 @@ const Login = ({ loginUser }) => {
       setError(valData);
       if (valData !== "") return;
       setError("");
+      localStorage.setItem("stay_signed_in", staySignedIn);
       loginUser({ email, password });
     }
   };
@@ -65,6 +73,20 @@ const Login = ({ loginUser }) => {
           error={error.includes("password")}
           setError={setError}
         />
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={staySignedIn}
+                onChange={(e) => {
+                  setStaySignedIn(e.target.checked);
+                }}
+                color="primary"
+              />
+            }
+            label="Stay signed in"
+          />
+        </FormGroup>
         <Error error={error} />
         <Grid item container direction="column">
           <Grid item>

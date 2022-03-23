@@ -27,6 +27,9 @@ const Layout = ({ children, modal, closeNotificationModal }) => {
         ContentProps={{
           style: {
             background: theme.palette.common.darkerGrey,
+            fontFamily: "Heebo",
+            fontSize: "1rem",
+            letterSpacing: "1px",
           },
         }}
       />

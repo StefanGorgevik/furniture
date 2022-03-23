@@ -22,9 +22,10 @@ export function* fetchRequest(path, requestMethod, postData, isSearch) {
 }
 
 export function* authRequest(data, path) {
-  const firebaseURL = `https://identitytoolkit.googleapis.com/v1/accounts:`;
+  const firebaseURL = "https://identitytoolkit.googleapis.com/v1/";
   const API_KEY = "AIzaSyBxpBch7kcgXQB9hMJrFipVDV9RUBxiijg";
-  const url = `${firebaseURL}${path}?key=${API_KEY}`;
+  let url = `${firebaseURL}${path}?key=${API_KEY}`;
+
   try {
     yield put(setLoadingStart());
 
@@ -44,10 +45,38 @@ export function* authRequest(data, path) {
       body: JSON.stringify(body),
     });
     const res = yield response.json();
-
     yield put(setLoadingStop());
 
-    const expiryTime = parseInt(res.expiresIn) * 1000;
+    const expiryTime = 10 * 1000;
+    const expirationDate = new Date().getTime() + expiryTime;
+    localStorage.setItem("expiresDate", JSON.stringify(expirationDate));
+
+    return res;
+  } catch (e) {
+    yield put(setLoadingStop());
+    throw new Error(e.message);
+  }
+}
+
+export function* refreshTokenRequest(data) {
+  const firebaseURL = "https://identitytoolkit.googleapis.com/v1/";
+  const API_KEY = "AIzaSyBxpBch7kcgXQB9hMJrFipVDV9RUBxiijg";
+  let url = `${firebaseURL}token?key=${API_KEY}`;
+
+  try {
+    yield put(setLoadingStart());
+
+    const response = yield fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const res = yield response.json();
+    yield put(setLoadingStop());
+
+    const expiryTime = 10 * 1000;
     const expirationDate = new Date().getTime() + expiryTime;
     localStorage.setItem("expiresDate", JSON.stringify(expirationDate));
 

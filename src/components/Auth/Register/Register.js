@@ -5,7 +5,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { registerStarted } from "store/auth/authActions";
 import { validateRegisterForm } from "utils/validators";
-import { Grid, Button } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import { useScreenSize } from "hooks/breakpoints";
 import { Error } from "components/UI/formError";
 
@@ -13,6 +19,7 @@ const Register = ({ registerUser }) => {
   const classes = useStyles();
   const { matchesSM } = useScreenSize();
   const [email, setEmail] = useState("");
+  const [staySignedIn, setStaySignedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -34,6 +41,7 @@ const Register = ({ registerUser }) => {
       else {
         setError("");
       }
+      localStorage.setItem("stay_signed_in", staySignedIn);
       registerUser({
         email,
         username,
@@ -98,6 +106,20 @@ const Register = ({ registerUser }) => {
           error={error.includes("don't match")}
           setError={setError}
         />
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={staySignedIn}
+                onChange={(e) => {
+                  setStaySignedIn(e.target.checked);
+                }}
+                color="primary"
+              />
+            }
+            label="Stay signed in"
+          />
+        </FormGroup>
         <Error error={error} />
         <Grid item container direction="column">
           <Grid item>

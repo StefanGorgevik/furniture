@@ -38,9 +38,9 @@ export const validateLoginForm = (userInput) => {
   const { email, password } = userInput;
   if (email.length === 0 || email === "" || !email.trim().includes("@")) {
     return "Please enter your email!";
-  } else if (password.length === 0 || password === "" || password.length < 4) {
+  } else if (password.length === 0) {
     return "Please enter your password!";
-  } else if (password.length < 6) {
+  } else if (password.length > 1 && password.length < 6) {
     return "Password should be at least 6 characters!";
   } else {
     return "";

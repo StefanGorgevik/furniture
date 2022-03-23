@@ -9,11 +9,12 @@ import {
 import {
   setIsUserLoggedInAction,
   loginStarted,
-  saveUserInfoAction,
+  // saveUserInfoAction,
+  logoutUser as logoutUserAction,
 } from "./authActions";
 import { saveUserData, logoutUser } from "utils/localStorage";
-import { fetchRequest } from "utils/fetch";
-import { authRequest } from "utils/fetch";
+// import { fetchRequest } from "utils/fetch";
+import { authRequest, refreshTokenRequest } from "utils/fetch";
 
 export function* isLoggedInSaga() {
   try {
@@ -38,7 +39,7 @@ export function* logoutUserSaga() {
 }
 
 export function* loginUserSaga({ data }) {
-  const path = "signInWithPassword";
+  const path = "accounts:signInWithPassword";
 
   try {
     const res = yield authRequest(data, path);
@@ -56,7 +57,7 @@ export function* loginUserSaga({ data }) {
       }
       yield put(setActionStatus("error", message));
     } else {
-      saveUserData(res.idToken, res.email, res.displayName);
+      saveUserData(res.idToken, res.email, res.displayName, res.refreshToken);
       yield put(closeModal());
       yield put(setIsUserLoggedInAction(true));
       yield put(push("/furniture/all"));
@@ -69,7 +70,8 @@ export function* loginUserSaga({ data }) {
 }
 
 export function* registerUserSaga({ data }) {
-  const path = `signUp`;
+  const path = `accounts:signUp`;
+
   try {
     const res = yield authRequest(data, path);
     const { email, password } = data;
@@ -95,70 +97,103 @@ export function* registerUserSaga({ data }) {
   }
 }
 
-export function* changePasswordSaga({ data }) {
-  const path = "update";
+export function* refreshTokenSaga() {
+  const refresh_token = localStorage.getItem("refresh_token");
 
   try {
-    const res = yield authRequest(data, path);
-    if (res.error) {
-      let message = "Something went wrong!";
-      const errorId = res.error.message;
-      // if (errorId === "EMAIL_NOT_FOUND") {
-      //   message = "This email could not be found!";
-      // } else if (errorId === "INVALID_PASSWORD") {
-      //   message = "This password is not valid!";
-      // } else if (errorId === "INVALID_EMAIL") {
-      //   message = "This email is not valid!";
-      // } else if (errorId === "TOO_MANY_ATTEMPTS_TRY_LATER") {
-      //   message = "Too many login attempts! Try again later!";
-      // }
-      // yield put(setActionStatus("error", message));
-    } else {
-      saveUserData(res.idToken, res.email, res.displayName);
-      yield put(closeModal());
-      yield put(setIsUserLoggedInAction(true));
-      yield put(push("/furniture/all"));
-      yield put(setActionStatus("success", "You have successfully logged in!"));
-    }
-  } catch (e) {
-    console.log(e);
-    yield put(setActionStatus("error", e.message));
-  }
-}
-
-export function* getUserInfo({ email }) {
-  const path = `profile-info/${email}`;
-
-  try {
-    const res = yield fetchRequest(path, "GET");
+    const res = yield refreshTokenRequest({
+      grant_type: "refresh_token",
+      refresh_token,
+    });
     if (res) {
-      yield put(saveUserInfoAction(res));
+      if (res.error) {
+        yield put(
+          setActionStatus(
+            "error",
+            "Unexpected error occured! You have been logged out!"
+          )
+        );
+        yield put(logoutUserAction());
+        return;
+      } else {
+        localStorage.setItem("refresh_token", res.refresh_token);
+        localStorage.setItem("user_token", res.id_token);
+      }
     }
   } catch (e) {
-    yield put(setActionStatus("error", e.message));
+    yield put(
+      setActionStatus(
+        "error",
+        "Unexpected error occurred! You have been logged out!"
+      )
+    );
   }
 }
 
-export function* saveEditedUserInfo({ data }) {
-  const path = `profile-info/edit/${data.email}`;
+// export function* changePasswordSaga({ data }) {
+//   const path = "update";
 
-  try {
-    const res = yield fetchRequest(path, "PUT", data);
-    yield put(setActionStatus("error", res.message));
-  } catch (e) {
-    yield put(setActionStatus("error", e.message));
-  }
-}
+//   try {
+//     const res = yield authRequest(data, path);
+//     if (res.error) {
+//       let message = "Something went wrong!";
+//       const errorId = res.error.message;
+//       // if (errorId === "EMAIL_NOT_FOUND") {
+//       //   message = "This email could not be found!";
+//       // } else if (errorId === "INVALID_PASSWORD") {
+//       //   message = "This password is not valid!";
+//       // } else if (errorId === "INVALID_EMAIL") {
+//       //   message = "This email is not valid!";
+//       // } else if (errorId === "TOO_MANY_ATTEMPTS_TRY_LATER") {
+//       //   message = "Too many login attempts! Try again later!";
+//       // }
+//       // yield put(setActionStatus("error", message));
+//     } else {
+//       saveUserData(res.idToken, res.email, res.displayName);
+//       yield put(closeModal());
+//       yield put(setIsUserLoggedInAction(true));
+//       yield put(push("/furniture/all"));
+//       yield put(setActionStatus("success", "You have successfully logged in!"));
+//     }
+//   } catch (e) {
+//     console.log(e);
+//     yield put(setActionStatus("error", e.message));
+//   }
+// }
 
-export function* saveNewPassword({ data }) {
-  let { userData, email } = data;
-  const path = `profile-info/change-password/${email}`;
+// export function* getUserInfo({ email }) {
+//   const path = `profile-info/${email}`;
 
-  try {
-    const res = yield fetchRequest(path, "PUT", userData);
-    if (res.success) yield put(push("/profile"));
-    yield put(setActionStatus("error", res.message));
-  } catch (e) {
-    yield put(setActionStatus("error", e.message));
-  }
-}
+//   try {
+//     const res = yield fetchRequest(path, "GET");
+//     if (res) {
+//       yield put(saveUserInfoAction(res));
+//     }
+//   } catch (e) {
+//     yield put(setActionStatus("error", e.message));
+//   }
+// }
+
+// export function* saveEditedUserInfo({ data }) {
+//   const path = `profile-info/edit/${data.email}`;
+
+//   try {
+//     const res = yield fetchRequest(path, "PUT", data);
+//     yield put(setActionStatus("error", res.message));
+//   } catch (e) {
+//     yield put(setActionStatus("error", e.message));
+//   }
+// }
+
+// export function* saveNewPassword({ data }) {
+//   let { userData, email } = data;
+//   const path = `profile-info/change-password/${email}`;
+
+//   try {
+//     const res = yield fetchRequest(path, "PUT", userData);
+//     if (res.success) yield put(push("/profile"));
+//     yield put(setActionStatus("error", res.message));
+//   } catch (e) {
+//     yield put(setActionStatus("error", e.message));
+//   }
+// }

@@ -4,9 +4,10 @@ import {
   REGISTER_STARTED,
   IS_USER_LOGGED,
   LOGOUT_USER,
-  GET_USER_INFO,
-  SAVE_EDITED_INFO,
-  SAVE_NEW_PASSWORD,
+  // GET_USER_INFO,
+  // SAVE_EDITED_INFO,
+  // SAVE_NEW_PASSWORD,
+  REFRESH_TOKEN_STARTED,
 } from "./auth/authTypes";
 import {
   GET_ALL_FURNITURE,
@@ -25,9 +26,10 @@ import {
   registerUserSaga,
   isLoggedInSaga,
   logoutUserSaga,
-  getUserInfo,
-  saveEditedUserInfo,
-  saveNewPassword,
+  // getUserInfo,
+  // saveEditedUserInfo,
+  // saveNewPassword,
+  refreshTokenSaga,
 } from "./auth/authSagas";
 import {
   getAllFurniture,
@@ -57,6 +59,7 @@ import {
 export default function* mainSaga() {
   yield takeLatest(LOGIN_STARTED, loginUserSaga);
   yield takeLatest(REGISTER_STARTED, registerUserSaga);
+  yield takeLatest(REFRESH_TOKEN_STARTED, refreshTokenSaga);
   yield takeLatest(GET_ALL_FURNITURE, getAllFurniture);
   yield takeLatest(SAVE_NEW_FURNITURE, saveNewFurniture);
   yield takeLatest(IS_USER_LOGGED, isLoggedInSaga);
@@ -68,9 +71,9 @@ export default function* mainSaga() {
   yield takeLatest(LIKE_FURNITURE, likeFurniture);
   yield takeLatest(GET_MY_FURNITURE, getMyFurniture);
   yield takeLatest(DELETE_FURNITURE_ACCEPT, deleteFurniture);
-  yield takeLatest(GET_USER_INFO, getUserInfo);
-  yield takeLatest(SAVE_EDITED_INFO, saveEditedUserInfo);
-  yield takeLatest(SAVE_NEW_PASSWORD, saveNewPassword);
+  // yield takeLatest(GET_USER_INFO, getUserInfo);
+  // yield takeLatest(SAVE_EDITED_INFO, saveEditedUserInfo);
+  // yield takeLatest(SAVE_NEW_PASSWORD, saveNewPassword);
   yield takeLatest(SAVE_EDITED_FURNITURE, editFurniture);
   yield takeLatest(ADD_TO_CART, addToCart);
   yield takeLatest(GET_CART_DATA, getCartData);

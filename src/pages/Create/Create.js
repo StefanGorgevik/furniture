@@ -96,7 +96,6 @@ const Create = ({
   ]);
 
   const saveValue = (e, id) => {
-    console.log("id", id);
     setUserInput((prevState) => {
       return { ...prevState, [id]: e.target.value };
     });

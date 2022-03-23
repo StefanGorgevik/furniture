@@ -11,9 +11,7 @@ import {
   Box,
   Typography,
 } from "@material-ui/core";
-import { logoutUser } from "store/auth/authActions";
 import { openModal } from "store/ui/uiActions";
-import Logo from "assets/images/Logo.png";
 import useStyles from "./styles.js";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -205,7 +203,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      logoutUser,
       openModal,
     },
     dispatch

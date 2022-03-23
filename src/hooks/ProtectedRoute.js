@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { openModal } from "store/ui/uiActions";
+import { refreshTokenAction } from "store/auth/authActions";
 
 const ProtectedRoute = ({
   component: Component,
@@ -10,6 +11,7 @@ const ProtectedRoute = ({
   path,
   exact,
   openModal,
+  refreshTokenAction,
 }) => {
   const isLoggedIn = localStorage.getItem("is_logged_in") === "1";
   useEffect(() => {
@@ -24,13 +26,21 @@ const ProtectedRoute = ({
         if (newDate > new Date() || !userToken) {
           return;
         } else {
-          openModal("relogin");
+          const stay = localStorage.getItem("stay_signed_in");
+          if (JSON.parse(stay)) {
+            const refresh_token = localStorage.getItem("refresh_token");
+            if (refresh_token) {
+              refreshTokenAction();
+            }
+          } else {
+            openModal("relogin");
+          }
         }
       }
     };
 
     tryLogin();
-  }, [openModal]);
+  }, [openModal, refreshTokenAction]);
   return (
     <>
       {isLoggedIn ? (
@@ -49,6 +59,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       openModal,
+      refreshTokenAction,
     },
     dispatch
   );
