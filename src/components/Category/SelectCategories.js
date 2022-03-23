@@ -45,7 +45,7 @@ export function SelectCategories({
         width: !opened && matchesSM ? "55px" : opened ? "200px" : "80px",
         paddingBottom: "1em",
         borderBottomLeftRadius: 15,
-        position: "fixed",
+        position: "absolute",
         zIndex: matchesMD ? 500 : 5,
         right: 0,
         borderRight: `2px double ${theme.palette.common.darkerWhite}`,

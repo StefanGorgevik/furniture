@@ -47,7 +47,12 @@ const ModalsContent = ({ modals, closeModal }) => {
     <>
       {modal &&
         ReactDOM.createPortal(
-          <ModalItem onClose={closeModal}>{modalContent}</ModalItem>,
+          <ModalItem
+            onClose={() => (modalType === "relogin" ? null : closeModal())}
+            modalType={modalType}
+          >
+            {modalContent}
+          </ModalItem>,
           document.getElementById("backdrop-root")
         )}
       {loading &&

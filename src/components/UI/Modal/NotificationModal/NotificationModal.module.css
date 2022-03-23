@@ -56,6 +56,7 @@
 
 @media (max-width: 564px) {
   .notification-modal {
-    left: 50%;
+    left: 10%;
+    margin: 0 auto;
   }
 }

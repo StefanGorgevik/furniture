@@ -6,7 +6,7 @@ import ModalButtons from "../ModalButtons/ModalButtons";
 import { logoutUser, loginStarted } from "store/auth/authActions";
 import WarningModalsContent from "components/UI/Modal/WarningModalsContent/WarningModalsContent";
 import { Input } from "components/UI/Inputs/Inputs";
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { Error } from "components/UI/formError";
 const ReloginModal = ({ closeModal, logoutUser, loginUser }) => {
   const username = localStorage.getItem("username");
@@ -30,6 +30,9 @@ const ReloginModal = ({ closeModal, logoutUser, loginUser }) => {
   return (
     <>
       <WarningModalsContent text={`${username} your session has expired `} />
+      <Typography variant="subtitle2">
+        Please enter your password to continue browsing!
+      </Typography>
       <Box style={{ width: "90%", margin: "0 auto" }}>
         <Input
           label="Password"

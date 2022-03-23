@@ -24,7 +24,7 @@ const CloseModal = ({ onClose }) => {
   );
 };
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ children, onClose, modalType }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -37,8 +37,8 @@ const Modal = ({ children, onClose }) => {
   }, []);
 
   return (
-    <Dialog open={show} maxWidth="xl" onClose={onClose}>
-      <CloseModal onClose={onClose} />
+    <Dialog open={show} onClose={onClose}>
+      {modalType !== "relogin" && <CloseModal onClose={onClose} />}
       {children}
     </Dialog>
   );

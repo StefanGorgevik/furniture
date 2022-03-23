@@ -9,6 +9,7 @@ const WarningModalsContent = ({ text }) => {
       direction="column"
       justify="center"
       alignItems="center"
+      style={{ paddingTop: "1em" }}
     >
       <Grid item>
         <WarningIcon fontSize="large" color="primary" />
