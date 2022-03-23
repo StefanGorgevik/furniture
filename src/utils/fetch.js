@@ -47,7 +47,7 @@ export function* authRequest(data, path) {
     const res = yield response.json();
     yield put(setLoadingStop());
 
-    const expiryTime = 10 * 1000;
+    const expiryTime = parseInt(res.expiresIn) * 1000;
     const expirationDate = new Date().getTime() + expiryTime;
     localStorage.setItem("expiresDate", JSON.stringify(expirationDate));
 
@@ -76,7 +76,7 @@ export function* refreshTokenRequest(data) {
     const res = yield response.json();
     yield put(setLoadingStop());
 
-    const expiryTime = 10 * 1000;
+    const expiryTime = parseInt(res.expiresIn) * 1000;
     const expirationDate = new Date().getTime() + expiryTime;
     localStorage.setItem("expiresDate", JSON.stringify(expirationDate));
 
