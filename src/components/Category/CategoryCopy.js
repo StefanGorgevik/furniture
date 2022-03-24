@@ -33,13 +33,18 @@ const Category = ({ itemKey, openFurnitureHandler, allFurniture }) => {
   };
 
   return (
-    <Grid item container justify="flex-start" style={{ marginBottom: "1em" }}>
+    <Grid
+      item
+      container
+      justifyContent="flex-start"
+      style={{ marginBottom: "1em" }}
+    >
       <Grid
         item
         container
         direction="row"
         alignItems="center"
-        justify="space-between"
+        justifyContent="space-between"
         className={classes.tools}
       >
         <Grid item>
@@ -47,7 +52,7 @@ const Category = ({ itemKey, openFurnitureHandler, allFurniture }) => {
             {itemKey.toUpperCase()} ({allFurniture[itemKey].length})
           </Typography>
         </Grid>
-        <Grid item container style={{ width: "80%" }} justify="flex-end">
+        <Grid item container style={{ width: "80%" }} justifyContent="flex-end">
           {opened && (
             <Grid item className={classes.arrowsContainer}>
               <Grid item>
@@ -87,7 +92,7 @@ const Category = ({ itemKey, openFurnitureHandler, allFurniture }) => {
           item
           container
           className={classes.itemsContainer}
-          justify="flex-start"
+          justifyContent="flex-start"
         >
           {allFurniture[itemKey].slice(slide, slide + 5).map((item) => {
             return (

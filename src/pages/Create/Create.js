@@ -15,7 +15,7 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import useStyles from "./styles";
 import { useScreenSize } from "hooks/breakpoints";
 import { Error } from "components/UI/formError";
-
+import { useNavigate } from "react-router";
 const categories = [
   "Chair",
   "Table",
@@ -42,7 +42,7 @@ const Create = ({
   const { matchesMD } = useScreenSize();
   const furnitureID = params?.id;
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     name: "",
     category: "",
@@ -74,7 +74,11 @@ const Create = ({
       setUserInput(furnitureToEdit);
     }
     if (!editingFurniture && pathname.startsWith("/furniture/edit/")) {
-      openFurnitureAction({ id: furnitureID, shouldRedirect: false });
+      openFurnitureAction({
+        id: furnitureID,
+        shouldRedirect: false,
+        navigate,
+      });
     }
     if (pathname.startsWith("/furniture/create")) {
       setUserInput({
@@ -93,6 +97,7 @@ const Create = ({
     pathname,
     furnitureID,
     openFurnitureAction,
+    navigate,
   ]);
 
   const saveValue = (e, id) => {
@@ -115,7 +120,11 @@ const Create = ({
       setError(valData);
       if (valData !== "") return;
       if (pathname.startsWith("/furniture/edit")) {
-        saveEditedFurnitureAction({ data: userInput, id: furnitureID });
+        saveEditedFurnitureAction({
+          data: userInput,
+          id: furnitureID,
+          navigate,
+        });
       } else {
         saveNewFurnitureAction(userInput);
       }
@@ -128,7 +137,7 @@ const Create = ({
       className={classes.create}
       direction="column"
       alignItems="center"
-      justify="center"
+      justifyContent="center"
     >
       <Grid item>
         <Typography variant="h3" style={{ textTransform: "uppercase" }}>
@@ -139,7 +148,7 @@ const Create = ({
         item
         container
         direction="row"
-        justify="space-evenly"
+        justifyContent="space-evenly"
         style={{
           padding: "1%",
           margin: "0 auto",
@@ -244,7 +253,7 @@ const Create = ({
         </Grid>
       </Grid>
       <Error error={error} />
-      <Grid item container justify="center">
+      <Grid item container justifyContent="center">
         <Button
           onClick={(e) => submitFurnitureHandler(e, false)}
           className={classes.createButton}

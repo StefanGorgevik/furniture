@@ -32,7 +32,7 @@ export const AppRoutes = () => {
         }
       />
       <Route
-        path="/furniture/allSearched"
+        path="/furniture/search"
         element={
           <ProtectedRoute>
             <SearchedAll />

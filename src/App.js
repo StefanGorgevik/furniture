@@ -7,22 +7,29 @@ import ModalsContent from "components/UI/Modal/ModalsContent/ModalsContent";
 import Layout from "components/Layout/Layout";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "components/UI/Theme/Theme";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Loading } from "components/UI/loading";
+import { history } from "./store/reducer";
+import configureStore from "./store";
+import { Provider } from "react-redux";
+
+const store = configureStore(history);
 
 const App = () => {
   return (
-    <Suspense fallback={<CircularProgress />}>
-      <Authenticator>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter history={history}>
+        <Authenticator>
+          <ThemeProvider theme={theme}>
             <Layout>
               <ModalsContent />
-              <AppRoutes />
+              <Suspense fallback={<Loading />}>
+                <AppRoutes />
+              </Suspense>
             </Layout>
-          </BrowserRouter>
-        </ThemeProvider>
-      </Authenticator>
-    </Suspense>
+          </ThemeProvider>
+        </Authenticator>
+      </BrowserRouter>
+    </Provider>
   );
 };
 

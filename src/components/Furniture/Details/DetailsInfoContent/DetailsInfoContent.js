@@ -7,12 +7,24 @@ import { useScreenSize } from "hooks/breakpoints";
 const useStyles = makeStyles((theme) => ({
   detailsContainer: {
     height: "100%",
+    width: "50%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
   },
   gridItem: {
-    paddingLeft: "2%",
-    paddingRight: "2%",
     margin: "1%",
     borderBottom: "1px solid black",
+  },
+  descriptionWrapper: {
+    padding: "0.5em",
+    margin: "0 auto",
+    marginTop: "1em",
+    marginBottom: "1em",
+    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "80%",
+    },
   },
 }));
 
@@ -24,7 +36,7 @@ const DetailsInfoContent = ({
   onEdit,
 }) => {
   const classes = useStyles();
-  const { matchesSM } = useScreenSize();
+  const { matchesSM, matchesMD } = useScreenSize();
   const items = [
     { label: "category", text: currentFurniture.category },
     { label: "year", text: currentFurniture.year },
@@ -42,7 +54,8 @@ const DetailsInfoContent = ({
         item
         container
         style={{
-          padding: "0.5em",
+          margin: "0 auto",
+          width: matchesMD ? "90%" : "100%",
           flexDirection: matchesSM ? "column" : "row",
         }}
       >
@@ -82,17 +95,8 @@ const DetailsInfoContent = ({
           onAddToCart={onAddToCart}
         />
       </Grid>
-      <Grid
-        item
-        style={{
-          padding: "0.5em",
-          margin: "0 auto",
-          marginTop: "1em",
-          marginBottom: "1em",
-          width: matchesSM ? "80%" : "100%",
-        }}
-      >
-        <Typography align={matchesSM ? "center" : "left"} variant="subtitle2">
+      <Grid item className={classes.descriptionWrapper}>
+        <Typography align={matchesMD ? "center" : "left"} variant="subtitle2">
           {currentFurniture.description}
         </Typography>
       </Grid>
@@ -102,9 +106,9 @@ const DetailsInfoContent = ({
         container
         direction="column"
         alignItems="center"
-        justify="center"
+        justifyContent="center"
         style={{
-          width: matchesSM ? "90%" : "100%",
+          width: matchesMD ? "90%" : "100%",
           marginTop: "1em",
           margin: "0 auto",
         }}
@@ -118,7 +122,7 @@ const DetailsInfoContent = ({
               className={classes.gridItem}
               key={`${item.label}${i}`}
               alignItems="flex-start"
-              justify="space-between"
+              justifyContent="space-between"
             >
               <Grid item>
                 <Typography variant="h6">{item.label}</Typography>

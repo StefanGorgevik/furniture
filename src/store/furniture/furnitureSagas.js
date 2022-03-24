@@ -69,7 +69,7 @@ export function* saveNewFurniture({ data }) {
 export function* openFurnitureItem({ data }) {
   const { id, shouldRedirect } = data;
   const path = `furniture/${id}.json`;
-
+  console.log("push", data);
   try {
     const res = yield fetchRequest(path, "GET", null);
     if (res && res.error) {
@@ -82,7 +82,7 @@ export function* openFurnitureItem({ data }) {
       }
       yield put(saveCurrentFurnitureAction({ ...res, id }));
       if (shouldRedirect) {
-        yield put(push(`/furniture/details/${id}`));
+        data.navigate(`/furniture/details/${id}`);
       } else {
         const furniture = {
           name: res.name,
@@ -131,7 +131,7 @@ export function* searchFurniture({ search }) {
   }
 }
 
-export function* submitReview({ data, id }) {
+export function* submitReview({ data, id, navigate }) {
   const path = `furniture/${id}.json`;
   const user = localStorage.getItem("username");
   try {
@@ -162,7 +162,7 @@ export function* submitReview({ data, id }) {
     if (res) {
       yield put(getAllReviewsAction(id));
 
-      yield put(openFurnitureAction({ id, shouldRedirect: false }));
+      yield put(openFurnitureAction({ id, shouldRedirect: false, navigate }));
     } else {
       messageType = "error";
     }
@@ -195,7 +195,7 @@ export function* getAllReviews({ id }) {
 }
 
 export function* likeFurniture({ data }) {
-  const { id, type } = data;
+  const { id, type, navigate } = data;
   const path = `furniture/${id}.json`;
   const user = localStorage.getItem("username");
   try {
@@ -228,7 +228,9 @@ export function* likeFurniture({ data }) {
         return;
       }
       if (likeResponse) {
-        yield put(openFurnitureAction({ id: id, shouldRedirect: false }));
+        yield put(
+          openFurnitureAction({ id: id, shouldRedirect: false, navigate })
+        );
         yield put(setActionStatus("success", message));
       }
     }
@@ -286,7 +288,13 @@ export function* editFurniture({ data }) {
       return;
     }
     if (res) {
-      yield put(openFurnitureAction({ id: data.id, shouldRedirect: true }));
+      yield put(
+        openFurnitureAction({
+          id: data.id,
+          shouldRedirect: true,
+          navigate: data.navigate,
+        })
+      );
       yield put(push(`/furniture/details/${data.id}`));
       yield put(setActionStatus("success", "Furniture edited successfully!"));
     } else {

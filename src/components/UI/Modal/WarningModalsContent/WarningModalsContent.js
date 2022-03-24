@@ -7,7 +7,7 @@ const WarningModalsContent = ({ text }) => {
       item
       container
       direction="column"
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       style={{ paddingTop: "1em" }}
     >

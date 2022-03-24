@@ -21,7 +21,7 @@ const CheckoutModal = ({
   }
 
   return (
-    // <Grid item container justify="space-between" style={{ padding: "1%" }}>
+    // <Grid item container justifyContent="space-between" style={{ padding: "1%" }}>
     //   <CheckoutInfo cartItemsInfo={cartItemsInfo} totalPrice={totalPrice} />
     //   <CheckoutForm
     //     onClose={closeModal}

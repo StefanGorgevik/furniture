@@ -16,6 +16,7 @@ import {
   sortByPriceHandler,
 } from "utils/sort";
 import { useScreenSize } from "hooks/breakpoints";
+import { useNavigate } from "react-router";
 export const CATEGORIES = [
   { id: 0, category: "All", value: true },
   { id: 1, category: "Chairs", value: false },
@@ -45,6 +46,7 @@ const All = ({
   const [order, setOrder] = useState("desc");
   const wrapperRef = useRef(null);
   const { matchesSM } = useScreenSize();
+  const navigate = useNavigate();
   const changeDrawerOptions = (drawerOpened) => {
     setDrawerOpened(drawerOpened);
     localStorage.setItem("drawer_opened", drawerOpened);
@@ -54,6 +56,7 @@ const All = ({
     openFurnitureAction({
       id,
       shouldRedirect: true,
+      navigate: navigate,
     });
   };
 
@@ -162,7 +165,7 @@ const All = ({
     <Grid
       container
       direction="row"
-      justify="center"
+      justifyContent="center"
       style={{
         marginBottom: matchesSM ? "2em" : 0,
       }}
@@ -197,7 +200,7 @@ const All = ({
           style={{ width: "100%", paddingTop: matchesSM ? "5em" : 0 }}
           item
           container
-          justify="center"
+          justifyContent="center"
         >
           {allProducts.map((item) => {
             return (

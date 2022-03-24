@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import React, { useEffect, useCallback, useState } from "react";
-=======
 import React, { useCallback, useEffect, useState } from "react";
->>>>>>> Stashed changes
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {

@@ -2,9 +2,12 @@ import React from "react";
 import { Grid, makeStyles, Typography } from "@material-ui/core";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   detailsImageContainer: {
     width: "40em",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
     padding: "1%",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -30,7 +33,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
   },
-});
+}));
 
 const DetailsImage = ({ imageURL, likesCount, handleLikesOpen }) => {
   const classes = useStyles();
@@ -40,7 +43,7 @@ const DetailsImage = ({ imageURL, likesCount, handleLikesOpen }) => {
       container
       className={classes.detailsImageContainer}
       alignItems="center"
-      justify="center"
+      justifyContent="center"
     >
       <Grid item>
         <img src={imageURL} alt="furniture" className={classes.image} />

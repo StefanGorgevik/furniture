@@ -12,6 +12,7 @@ import {
 import { closeModal } from "store/ui/uiActions";
 import { Grid, useTheme, Typography, IconButton } from "@material-ui/core";
 import { useScreenSize } from "hooks/breakpoints";
+import { useNavigate } from "react-router";
 const ReviewModal = ({
   closeModal,
   furnitureID,
@@ -23,6 +24,7 @@ const ReviewModal = ({
   const [review, setReview] = useState("");
   const [error, setError] = useState(false);
   const { matchesSM } = useScreenSize();
+  const navigate = useNavigate();
   const setStarsHandler = (star) => {
     if (star === 1 && stars === 1) return setStars(null);
     setStars(star);
@@ -40,20 +42,20 @@ const ReviewModal = ({
       comment: review,
     };
     setError(false);
-    submitReviewAction(newReview, furnitureID);
+    submitReviewAction(newReview, furnitureID, navigate);
     closeModal();
     getAllReviewsAction(furnitureID);
   };
 
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent="center">
       <Typography variant="h3" color="primary" gutterBottom>
         Leave a review
       </Typography>
       <Grid
         item
         container
-        justify="center"
+        justifyContent="center"
         style={{ marginBottom: matchesSM ? "10px" : "30px", marginTop: "20px" }}
       >
         {[0, 1, 2, 3, 4].map((star, i) => {

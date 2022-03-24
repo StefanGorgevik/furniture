@@ -90,7 +90,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
                     item
                     container
                     direction="row"
-                    justify="space-between"
+                    justifyContent="space-between"
                     style={{ paddingTop: "1em", paddingBottom: "0.5em" }}
                   >
                     <Grid
@@ -98,7 +98,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
                       lg
                       container
                       direction="row"
-                      justify="center"
+                      justifyContent="center"
                       alignItems="center"
                     >
                       <PersonIcon style={{ marginRight: "0.2em" }} />
@@ -113,7 +113,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
                       container
                       direction="row"
                       alignItems="center"
-                      justify="center"
+                      justifyContent="center"
                     >
                       <QueryBuilderIcon style={{ marginRight: "0.3em" }} />
                       <Typography variant="subtitle2">
@@ -127,7 +127,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
                       container
                       direction="row"
                       alignItems="center"
-                      justify="center"
+                      justifyContent="center"
                     >
                       {[...Array(review.rating).keys()].map((rat) => {
                         return <StarIcon key={rat} />;
@@ -140,7 +140,7 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
                     className={classes.comment}
                     direction="row"
                     alignItems="center"
-                    justify="center"
+                    justifyContent="center"
                   >
                     <Typography variant="subtitle2" align="center">
                       {review.comment}

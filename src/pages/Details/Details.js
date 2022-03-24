@@ -26,13 +26,17 @@ const Details = ({
   const [furnitureLiked, setFurnitureLiked] = useState(false);
   const params = useParams();
   const furnitureID = params.id;
-  const { matchesSM } = useScreenSize();
+  const { matchesSM, matchesMD } = useScreenSize();
   const [likesOpened, setLikesOpened] = React.useState(false);
   useEffect(() => {
     if (furnitureID && !currentFurnitureLoaded) {
-      openFurnitureAction({ id: furnitureID, shouldRedirect: true });
+      openFurnitureAction({
+        id: furnitureID,
+        shouldRedirect: true,
+        navigate,
+      });
     }
-  }, [furnitureID, openFurnitureAction, currentFurnitureLoaded]);
+  }, [furnitureID, openFurnitureAction, currentFurnitureLoaded, navigate]);
 
   useEffect(() => {
     if (!currentFurniture.likes) return;
@@ -69,8 +73,8 @@ const Details = ({
         <Grid
           item
           container
-          direction="row"
-          justify="space-evenly"
+          direction={matchesMD ? "column" : "row"}
+          justifyContent="space-evenly"
           alignItems="center"
           style={{
             marginTop: "2em",

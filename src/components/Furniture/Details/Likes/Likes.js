@@ -48,11 +48,10 @@ const Likes = ({ likes, handleClose, open }) => {
           container
           direction="column"
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           style={{ minWidth: "50%" }}
         >
-          {likes &&
-            likes.length > 0 &&
+          {likes && likes.length > 0 ? (
             likes.map((like, i) => (
               <Grid
                 item
@@ -69,7 +68,12 @@ const Likes = ({ likes, handleClose, open }) => {
                   {like.user}
                 </Typography>
               </Grid>
-            ))}
+            ))
+          ) : (
+            <Grid item>
+              <Typography variant="caption">No likes so far.</Typography>
+            </Grid>
+          )}
         </Grid>
       </DialogContent>
     </Dialog>

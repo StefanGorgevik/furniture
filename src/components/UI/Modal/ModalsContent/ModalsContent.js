@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Modal from "@material-ui/core/Modal";
 import ModalItem from "../Modal";
 import ReviewModal from "../ReviewModal/ReviewModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
@@ -14,7 +12,7 @@ import { closeModal } from "store/ui/uiActions";
 import ReloginModal from "../ReloginModal/ReloginModal";
 
 const ModalsContent = ({ modals, closeModal }) => {
-  const { modalType, modal, loading } = modals;
+  const { modalType, modal } = modals;
   const [modalContent, setModalContent] = useState(null);
   useEffect(() => {
     switch (modalType) {
@@ -52,22 +50,6 @@ const ModalsContent = ({ modals, closeModal }) => {
             {modalContent}
           </ModalItem>,
           document.getElementById("backdrop-root")
-        )}
-      {loading &&
-        ReactDOM.createPortal(
-          <Modal
-            hideBackdrop
-            open={loading}
-            style={{
-              top: 500,
-              position: "absolute",
-              oveflow: "hidden",
-              backgroundColor: "rgba(0, 0, 0, 0)",
-            }}
-          >
-            <CircularProgress color="primary" />
-          </Modal>,
-          document.getElementById("spinner-root")
         )}
     </>
   );

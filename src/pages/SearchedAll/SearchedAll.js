@@ -9,6 +9,7 @@ import {
 import { FurnitureItem } from "components/Furniture/FurnitureItem/FurnitureItem";
 import SearchInput from "components/UI/Inputs/SearchInput";
 import { useScreenSize } from "hooks/breakpoints";
+import { useNavigate } from "react-router";
 
 const SearchedAll = ({
   searchedFurniture,
@@ -17,19 +18,21 @@ const SearchedAll = ({
   searchFurnitureNotFound,
 }) => {
   const { matchesSM } = useScreenSize();
+  const navigate = useNavigate();
   const openFurnitureHandler = (id) => {
     openFurnitureAction({
       id,
       shouldRedirect: true,
+      navigate,
     });
   };
 
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent="center">
       <Grid
         item
         container
-        justify="center"
+        justifyContent="center"
         style={{
           marginTop: matchesSM ? "2em" : "1em",
           marginBottom: matchesSM ? "1em" : 0,
@@ -41,7 +44,7 @@ const SearchedAll = ({
         <Grid
           item
           container
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           style={{
             display: "flex",
@@ -64,7 +67,7 @@ const SearchedAll = ({
           item
           container
           direction="row"
-          justify="center"
+          justifyContent="center"
           style={{
             padding: "1%",
             margin: "0 auto",

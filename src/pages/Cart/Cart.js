@@ -52,7 +52,7 @@ const Cart = ({
           item
           container
           direction="row"
-          justify="flex-end"
+          justifyContent="flex-end"
           alignItems="center"
           className={classes.totalPrice}
         >
@@ -67,7 +67,7 @@ const Cart = ({
             </Typography>
           </Grid>
         </Grid>
-        <Grid item container justify="flex-end">
+        <Grid item container justifyContent="flex-end">
           <Button onClick={orderHandler} className={classes.orderButton}>
             Order
           </Button>

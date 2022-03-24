@@ -48,10 +48,11 @@ export const searchForFurnitureAction = (search) => ({
   search,
 });
 
-export const submitReviewAction = (data, id) => ({
+export const submitReviewAction = (data, id, navigate) => ({
   type: SUBMIT_REVIEW,
   data,
   id,
+  navigate,
 });
 
 export const getAllReviewsAction = (id) => ({

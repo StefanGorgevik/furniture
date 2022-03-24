@@ -28,7 +28,7 @@ const Header = ({ isLoggedIn, openModal }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-  const pathname = useLocation().pathname;
+  const { pathname } = useLocation();
   const [tab, setHeaderTab] = useState(0);
   const { matchesMD } = useScreenSize();
   useEffect(() => {

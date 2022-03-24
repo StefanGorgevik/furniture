@@ -3,7 +3,7 @@ import React from "react";
 
 const NotFound = () => {
   return (
-    <Grid container justify="center" style={{ marginTop: 300 }}>
+    <Grid container justifyContent="center" style={{ marginTop: 300 }}>
       <Typography variant="h1">Page not found!</Typography>
     </Grid>
   );

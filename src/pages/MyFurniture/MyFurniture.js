@@ -84,7 +84,7 @@ const MyFurniture = ({
             order={order}
           />
         )}
-        <Grid item container justify="center">
+        <Grid item container justifyContent="center">
           {myFurniture.map((furniture) => {
             return (
               <FurnitureItem
@@ -100,6 +100,7 @@ const MyFurniture = ({
                   openFurnitureAction({
                     id: furniture.id,
                     shouldRedirect: true,
+                    navigate,
                   })
                 }
                 onEdit={() => editFurnitureHandler(furniture)}

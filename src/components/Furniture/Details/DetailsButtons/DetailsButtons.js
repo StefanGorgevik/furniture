@@ -10,6 +10,7 @@ import { Button, Grid, Tooltip } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { useScreenSize } from "hooks/breakpoints";
+import { useNavigate } from "react-router";
 
 const ButtonContainer = ({ children, onClick, tooltip }) => {
   const classes = useStyles();
@@ -41,6 +42,7 @@ const DetailsButtons = ({
 }) => {
   const isMyFurniture = createdBy === localStorage.getItem("user_email");
   const { matchesSM } = useScreenSize();
+  const navigate = useNavigate();
   const leaveReviewHandler = () => {
     openModal("review");
   };
@@ -48,7 +50,7 @@ const DetailsButtons = ({
   const likeHandler = (type) => {
     setLiked(true);
     if (type === "remove-like") setLiked(false);
-    likeFurnitureAction({ id, type });
+    likeFurnitureAction({ id, type, navigate });
   };
 
   const deleteFurnitureHandler = (id) => {
@@ -60,7 +62,7 @@ const DetailsButtons = ({
       item
       container
       direction="row"
-      justify={matchesSM ? "center" : "flex-end"}
+      justifyContent={matchesSM ? "center" : "flex-end"}
       alignItems="flex-end"
       style={{
         marginTop: matchesSM ? "1em" : 0,
