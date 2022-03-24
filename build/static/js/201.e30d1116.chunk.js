@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfurnlab=self.webpackChunkfurnlab||[]).push([[201],{1201:function(n,e,t){t.r(e);var r=t(1288),u=t(8302),a=(t(2791),t(184));e.default=function(){return(0,a.jsx)(r.Z,{container:!0,justifyContent:"center",style:{marginTop:300},children:(0,a.jsx)(u.Z,{variant:"h1",children:"Page not found!"})})}}}]);
+//# sourceMappingURL=201.e30d1116.chunk.js.map
