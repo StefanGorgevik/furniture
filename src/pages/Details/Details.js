@@ -64,6 +64,9 @@ const Details = ({
   const addToCartHandler = (furniture) => {
     addToCartAction(furniture);
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   if (!currentFurnitureLoaded) {
     return null;
