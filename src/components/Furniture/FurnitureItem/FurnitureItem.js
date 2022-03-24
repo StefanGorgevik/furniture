@@ -75,6 +75,7 @@ export const FurnitureItem = ({
         style={{
           display: "flex",
           width: matchesSM ? "325px" : "350px",
+          maxWidth: matchesSM ? "325px" : "350px",
           alignItems: "center",
           justifyContent: "space-between",
         }}

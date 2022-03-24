@@ -6,8 +6,6 @@ import { useScreenSize } from "hooks/breakpoints";
 
 const useStyles = makeStyles((theme) => ({
   detailsContainer: {
-    width: "42em",
-    paddong: "%",
     height: "100%",
   },
   gridItem: {
