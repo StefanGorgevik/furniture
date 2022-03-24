@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { Grid, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NoItemsFound = ({ text, subText, buttonText, location }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   const onClickHandler = () => {
-    history.push(location);
+    navigate(location);
   };
   return (
     <Grid

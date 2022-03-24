@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useCallback, useState } from "react";
+=======
+import React, { useCallback, useEffect, useState } from "react";
+>>>>>>> Stashed changes
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -58,7 +62,8 @@ const SearchInput = ({ searchForFurnitureAction, getAllFurnitureAction }) => {
   const denySearchHandler = useCallback(() => {
     setSearched(false);
     getAllFurnitureAction();
-  }, [setSearched, getAllFurnitureAction]);
+  }, [getAllFurnitureAction]);
+
   const saveSearchHandler = (e) => {
     setSearched(true);
     setSearch(e.target.value);

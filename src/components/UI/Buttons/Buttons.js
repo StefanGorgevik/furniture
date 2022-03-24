@@ -2,12 +2,12 @@ import React from "react";
 import styles from "./Buttons.module.css";
 import { Tooltip } from "@material-ui/core";
 import classNames from "classnames";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 export const BackButton = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
-    <button onClick={() => history.goBack()} className={styles["back-button"]}>
+    <button onClick={() => navigate(-1)} className={styles["back-button"]}>
       <ArrowBackIcon />
     </button>
   );

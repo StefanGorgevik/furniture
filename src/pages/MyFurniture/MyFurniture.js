@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   getMyFurnitureAction,
   openFurnitureAction,
@@ -25,11 +25,10 @@ const MyFurniture = ({
   editFurnitureAction,
   sortMyFurnitureAction,
 }) => {
-  const history = useHistory();
-  const { matchesSM } = useScreenSize();
+  const navigate = useNavigate();
   const [filter, setFilter] = useState("date");
   const [order, setOrder] = useState("des");
-
+  const { matchesSM } = useScreenSize();
   useEffect(() => {
     getMyFurnitureAction();
   }, [getMyFurnitureAction]);
@@ -59,7 +58,7 @@ const MyFurniture = ({
       material: furniture.material,
     };
     editFurnitureAction({ furniture: furnitureToEdit, editing: true });
-    history.push(`/furniture/edit/${furniture.id}`);
+    navigate(`/furniture/edit/${furniture.id}`);
   };
 
   if (myFurnitureLoaded && myFurniture.length === 0 && !loading) {

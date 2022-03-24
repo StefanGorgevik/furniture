@@ -1,9 +1,11 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core";
+
 const mainGrey = "#535559";
 const darkerWhite = "#EEEEEE";
 const darkerGrey = "#222831";
-const backgroundColor = "rgba(151, 138, 138, 0.287)";
-export default createMuiTheme({
+const backgroundColor = "rgba(151, 138, 138, 0.287);";
+
+export default createTheme({
   palette: {
     common: {
       grey: mainGrey,

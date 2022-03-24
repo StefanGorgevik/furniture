@@ -1,12 +1,11 @@
 import React from "react";
 import styles from "./CartTable.module.css";
 import CartItem from "../CartItem/CartItem";
-import { useHistory } from "react-router";
 import { Card } from "@material-ui/core";
+import { useNavigate } from "react-router";
 
 const CartTable = ({ cartItems, onRemove }) => {
-  const history = useHistory();
-
+  const navigate = useNavigate();
   return (
     <Card raised style={{ width: "100%" }}>
       <table className={styles["cart-table"]}>
@@ -31,7 +30,7 @@ const CartTable = ({ cartItems, onRemove }) => {
               dateAdded={item.dateAdded}
               price={item.price}
               onRemove={() => onRemove(item.cartItemID)}
-              onOpen={() => history.push(`/furniture/details/${item.id}`)}
+              onOpen={() => navigate(`/furniture/details/${item.id}`)}
             />
           ))}
         </tbody>

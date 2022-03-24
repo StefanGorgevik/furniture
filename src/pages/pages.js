@@ -1,5 +1,6 @@
-import { lazy } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import ProtectedRoute from "hooks/ProtectedRoute";
 const NotFound = lazy(() => import("components/NotFound/NotFound"));
 const HomePage = lazy(() => import("pages/HomePage/HomePage"));
@@ -18,20 +19,59 @@ const MyFurniture = lazy(() => import("pages/MyFurniture/MyFurniture"));
 // const Cart = lazy(() => import("pages/Cart/Cart"));
 const SearchedAll = lazy(() => import("pages/SearchedAll/SearchedAll"));
 
-const Routes = () => {
+export const AppRoutes = () => {
   return (
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <ProtectedRoute exact path="/furniture/all" component={All} />
-      <ProtectedRoute exact path="/furniture/search" component={SearchedAll} />
-      <ProtectedRoute exact path="/furniture/create" component={Create} />
-      <ProtectedRoute exact path="/furniture/edit/:id" component={Create} />
-      <ProtectedRoute
-        exact
-        path="/furniture/my-furniture"
-        component={MyFurniture}
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/furniture/all"
+        element={
+          <ProtectedRoute>
+            <All />
+          </ProtectedRoute>
+        }
       />
-      <ProtectedRoute exact path="/furniture/details/:id" component={Details} />
+      <Route
+        path="/furniture/allSearched"
+        element={
+          <ProtectedRoute>
+            <SearchedAll />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/furniture/create"
+        element={
+          <ProtectedRoute>
+            <Create />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/furniture/edit/:id"
+        element={
+          <ProtectedRoute>
+            <Create />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/furniture/my-furniture"
+        element={
+          <ProtectedRoute>
+            <MyFurniture />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/furniture/details/:id"
+        element={
+          <ProtectedRoute>
+            <Details />
+          </ProtectedRoute>
+        }
+      />
+
       {/* <ProtectedRoute
         exact
         path="/change-username"
@@ -41,12 +81,10 @@ const Routes = () => {
         exact
         path="/change-password"
         component={ChangePassword}
-      /> */}
-      {/* <ProtectedRoute exact path="/cart" component={Cart} /> */}
-      {/* <ProtectedRoute exact path="/stats" component={Stats} /> */}
-      <Route component={NotFound} />
-    </Switch>
+      />
+      <ProtectedRoute exact path="/cart" component={Cart} />
+      <ProtectedRoute exact path="/stats" component={Stats} /> */}
+      <Route path="*" component={NotFound} />
+    </Routes>
   );
 };
-
-export default Routes;

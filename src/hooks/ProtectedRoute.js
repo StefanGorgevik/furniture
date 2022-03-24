@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { Route, Redirect } from "react-router";
+import { Route } from "react-router";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { openModal } from "store/ui/uiActions";
-import { refreshTokenAction } from "store/auth/authActions";
+import { useLocation } from "react-router";
+import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({
   component: Component,
@@ -14,30 +12,7 @@ const ProtectedRoute = ({
   refreshTokenAction,
 }) => {
   const isLoggedIn = localStorage.getItem("is_logged_in") === "1";
-  useEffect(() => {
-    const tryLogin = async () => {
-      const userToken = localStorage.getItem("user_token");
-      if (!userToken) {
-        return;
-      }
-      const date = localStorage.getItem("expiresDate");
-      if (date) {
-        const newDate = new Date(JSON.parse(date));
-        if (newDate > new Date() || !userToken) {
-          return;
-        } else {
-          const stay = localStorage.getItem("stay_signed_in");
-          if (JSON.parse(stay)) {
-            const refresh_token = localStorage.getItem("refresh_token");
-            if (refresh_token) {
-              refreshTokenAction();
-            }
-          } else {
-            openModal("relogin");
-          }
-        }
-      }
-    };
+  const location = useLocation();
 
     tryLogin();
   }, [openModal, refreshTokenAction]);
@@ -46,7 +21,7 @@ const ProtectedRoute = ({
       {isLoggedIn ? (
         <Route exact={exact} path={path} key={path} component={Component} />
       ) : (
-        <Redirect to="/" />
+        <Navigate to="/" state={{ from: location }} replace />
       )}
     </>
   );

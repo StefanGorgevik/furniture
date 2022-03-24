@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import useStyles from "./styles";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -22,7 +22,7 @@ const Details = ({
   editFurnitureAction,
   addToCartAction,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [furnitureLiked, setFurnitureLiked] = useState(false);
   const params = useParams();
   const furnitureID = params.id;
@@ -54,7 +54,7 @@ const Details = ({
       material: currentFurniture.material,
     };
     editFurnitureAction({ furniture, editing: true });
-    history.push(`/furniture/edit/${furnitureID}`);
+    navigate(`/furniture/edit/${furnitureID}`);
   };
 
   const addToCartHandler = (furniture) => {
