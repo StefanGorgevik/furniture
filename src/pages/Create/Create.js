@@ -11,11 +11,20 @@ import { Input } from "components/UI/Inputs/Inputs";
 import Dropdown from "components/UI/Select/Select";
 import { useParams, useLocation } from "react-router-dom";
 import { validateCreateForm } from "utils/validators";
-import { Grid, Button, Typography } from "@material-ui/core";
-import useStyles from "./styles";
+import { Grid, Typography } from "@material-ui/core";
 import { useScreenSize } from "hooks/breakpoints";
 import { Error } from "components/UI/formError";
 import { useNavigate } from "react-router";
+import { SubmitButton } from "components/UI/Buttons/Buttons";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  create: {
+    padding: "1em",
+    paddingTop: "1em",
+    marginTop: "1em",
+  },
+}));
 const categories = [
   "Chair",
   "Table",
@@ -254,12 +263,10 @@ const Create = ({
       </Grid>
       <Error error={error} />
       <Grid item container justifyContent="center">
-        <Button
-          onClick={(e) => submitFurnitureHandler(e, false)}
-          className={classes.createButton}
-        >
+        <SubmitButton onClick={(e) => submitFurnitureHandler(e, false)}>
+          {" "}
           Save
-        </Button>
+        </SubmitButton>
       </Grid>
     </Grid>
   );

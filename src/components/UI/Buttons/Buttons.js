@@ -1,9 +1,26 @@
 import React from "react";
 import styles from "./Buttons.module.css";
-import { Tooltip } from "@material-ui/core";
-import classNames from "classnames";
+import { Button } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  signInButton: {
+    ...theme.typography.acceptButton,
+    width: "20em",
+    margin: "0 10px",
+    marginBottom: "1em",
+  },
+  cancelButton: {
+    width: "20em",
+    color: "black",
+    "&:hover": {
+      background: "transparent",
+    },
+  },
+}));
+
 export const BackButton = () => {
   const navigate = useNavigate();
   return (
@@ -13,30 +30,25 @@ export const BackButton = () => {
   );
 };
 
-export const HomePageButton = ({ onClick, text, active }) => {
-  const classes = classNames(styles["home-page-btn"], styles[active]);
+export const SubmitButton = ({ children, onClick, ...props }) => {
+  const classes = useStyles();
   return (
-    <button className={classes} onClick={onClick}>
-      {text}
-    </button>
+    <Button onClick={onClick} className={classes.signInButton} {...props}>
+      {children}
+    </Button>
   );
 };
 
-const Button = ({ text, styling, click, icon }) => {
-  let buttonType = "button";
-  if (styling === "sign-in" || styling === "register") buttonType = "submit";
+export const SecondaryButton = ({ children, onClick, ...props }) => {
+  const classes = useStyles();
   return (
-    <Tooltip title={styling === "logout-btn" ? "Logout" : ""}>
-      <button
-        type={buttonType}
-        onClick={click}
-        className={`${styles.btn} ${styles[styling]}`}
-      >
-        {text}
-        {icon && icon}
-      </button>
-    </Tooltip>
+    <Button
+      onClick={onClick}
+      color="secondary"
+      className={classes.cancelButton}
+      {...props}
+    >
+      {children}
+    </Button>
   );
 };
-
-export default Button;

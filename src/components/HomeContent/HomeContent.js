@@ -7,8 +7,8 @@ import ChairTable from "assets/images/chairTable.png";
 import NightStand from "assets/images/nightStand.png";
 import Wardrobe from "assets/images/wardrobe.png";
 import { connect } from "react-redux";
-import Login from "components/Auth/Login/Login";
-import Register from "components/Auth/Register/Register";
+import Login from "components/Auth/Login";
+import Register from "components/Auth/Register";
 
 const HomeContent = () => {
   const classes = useStyles();

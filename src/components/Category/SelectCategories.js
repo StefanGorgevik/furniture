@@ -8,7 +8,6 @@ import {
   IconButton,
   useTheme,
   Box,
-  Button,
   Tooltip,
 } from "@material-ui/core";
 import SortOutlinedIcon from "@material-ui/icons/SortOutlined";
@@ -19,6 +18,7 @@ import InsertCommentIcon from "@material-ui/icons/InsertComment";
 import AscendingImage from "assets/images/asc.png";
 import DescendingImage from "assets/images/desc.png";
 import useStyles from "./styles";
+import { SubmitButton } from "components/UI/Buttons/Buttons";
 
 export function SelectCategories({
   categories,
@@ -358,13 +358,15 @@ export function SelectCategories({
             </Grid>
           </Grid>
           {opened && matchesSM && (
-            <Grid item container>
-              <Button
-                onClick={(e) => setOpened(false)}
-                className={classes.closeButton}
-              >
+            <Grid
+              item
+              container
+              justify="center"
+              className={classes.closeButtonWrapper}
+            >
+              <SubmitButton onClick={(e) => setOpened(false)}>
                 Close
-              </Button>
+              </SubmitButton>
             </Grid>
           )}
         </>

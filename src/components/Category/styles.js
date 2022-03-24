@@ -24,11 +24,7 @@ const useStyles = makeStyles((theme) => ({
     borderRight: `1px solid ${theme.palette.common.darkerGrey}`,
     borderLeft: `1px solid ${theme.palette.common.darkerGrey}`,
   },
-  closeButton: {
-    ...theme.typography.acceptButton,
-    width: "20em",
-    margin: "0 auto",
-    marginBottom: "1em",
+  closeButtonWrapper: {
     [theme.breakpoints.down("sm")]: {
       marginTop: "1em",
     },

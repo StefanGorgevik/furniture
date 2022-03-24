@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllReviewsAction } from "store/furniture/furnitureActions";
 import StarIcon from "@material-ui/icons/Star";
-import { Grid, Typography, Card, Button } from "@material-ui/core";
+import { Grid, Typography, Card } from "@material-ui/core";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PersonIcon from "@material-ui/icons/Person";
 import { makeStyles } from "@material-ui/styles";
 import { openModal } from "store/ui/uiActions";
+import { SubmitButton } from "components/UI/Buttons/Buttons";
 
 const useStyles = makeStyles((theme) => ({
   reviews: {
@@ -32,12 +33,6 @@ const useStyles = makeStyles((theme) => ({
   comment: {
     width: "85%",
     margin: "1em auto",
-  },
-  button: {
-    ...theme.typography.acceptButton,
-    width: "20em",
-    margin: "0 10px",
-    marginTop: "1em",
   },
 }));
 const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
@@ -68,9 +63,12 @@ const Reviews = ({ id, getAllReviewsAction, reviews, openModal }) => {
             <Typography variant="h6" align="center">
               No reviews were found for this item!
             </Typography>
-            <Button onClick={leaveReviewHandler} className={classes.button}>
+            <SubmitButton
+              style={{ marginTop: "1em" }}
+              onClick={leaveReviewHandler}
+            >
               Add a review
-            </Button>
+            </SubmitButton>
           </Grid>
         )}
         <Grid item container className={classes.allReviews}>

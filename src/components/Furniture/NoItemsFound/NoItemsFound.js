@@ -1,20 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { Grid, Typography, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-
-const useStyles = makeStyles((theme) => ({
-  createButton: {
-    ...theme.typography.acceptButton,
-    width: "20em",
-    margin: "0 10px",
-    marginTop: "2em",
-  },
-}));
+import { Grid, Typography } from "@material-ui/core";
+import { useScreenSize } from "hooks/breakpoints";
+import { SubmitButton } from "components/UI/Buttons/Buttons";
 
 const NoItemsFound = ({ text, subText, buttonText, location }) => {
   const navigate = useNavigate();
-  const classes = useStyles();
+  const { matchesSM } = useScreenSize();
   const onClickHandler = () => {
     navigate(location);
   };
@@ -23,18 +15,23 @@ const NoItemsFound = ({ text, subText, buttonText, location }) => {
       container
       direction="column"
       justifyContent="center"
-      style={{ paddingTop: "5em" }}
+      style={{ marginTop: "10em" }}
     >
       <Grid item>
-        <Typography variant="h4">{text}</Typography>
+        <Typography variant="h4" gutterBottom>
+          {text}
+        </Typography>
+      </Grid>
+      <Grid
+        item
+        style={{ margin: "0 auto", maxWidth: matchesSM ? "90%" : "auto" }}
+      >
+        <Typography variant="subtitle1">{subText}</Typography>
       </Grid>
       <Grid item>
-        <Typography variant="h5">{subText}</Typography>
-      </Grid>
-      <Grid item>
-        <Button onClick={onClickHandler} className={classes.createButton}>
+        <SubmitButton style={{ marginTop: "1em" }} onClick={onClickHandler}>
           {buttonText}
-        </Button>
+        </SubmitButton>
       </Grid>
     </Grid>
   );

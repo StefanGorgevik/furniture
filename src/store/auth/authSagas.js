@@ -15,6 +15,7 @@ import {
 import { saveUserData, logoutUser } from "utils/localStorage";
 // import { fetchRequest } from "utils/fetch";
 import { authRequest, refreshTokenRequest } from "utils/fetch";
+import { sendPwResetRequest } from "utils/fetch";
 
 export function* isLoggedInSaga() {
   try {
@@ -118,6 +119,42 @@ export function* refreshTokenSaga() {
       } else {
         localStorage.setItem("refresh_token", res.refresh_token);
         localStorage.setItem("user_token", res.id_token);
+      }
+    }
+  } catch (e) {
+    yield put(
+      setActionStatus(
+        "error",
+        "Unexpected error occurred! You have been logged out!"
+      )
+    );
+  }
+}
+
+export function* sendResetPwSaga() {
+  const email = localStorage.getItem("user_email");
+  try {
+    const res = yield sendPwResetRequest({
+      requestType: "PASSWORD_RESET",
+      email,
+    });
+    if (res) {
+      if (res.error) {
+        let message = "Unexpected error occurred!";
+        if (res.error.message === "EMAIL_NOT_FOUND") {
+          message = "Email not found!";
+        }
+        yield put(setActionStatus("error", message));
+        return;
+      } else {
+        yield put(
+          setActionStatus(
+            "success",
+            "Reset link successfully sent to your email!"
+          )
+        );
+        yield put(closeModal());
+        yield put(logoutUserAction());
       }
     }
   } catch (e) {

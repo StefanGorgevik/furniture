@@ -31,4 +31,5 @@ export const logoutUser = () => {
   localStorage.removeItem("order");
   localStorage.removeItem("stay_signed_in");
   localStorage.removeItem("expiresDate");
+  localStorage.removeItem("refresh_token");
 };

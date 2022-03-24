@@ -8,6 +8,7 @@ import {
   // SAVE_EDITED_INFO,
   // SAVE_NEW_PASSWORD,
   REFRESH_TOKEN_STARTED,
+  SET_PW_RESET,
 } from "./auth/authTypes";
 import {
   GET_ALL_FURNITURE,
@@ -30,6 +31,7 @@ import {
   // saveEditedUserInfo,
   // saveNewPassword,
   refreshTokenSaga,
+  sendResetPwSaga,
 } from "./auth/authSagas";
 import {
   getAllFurniture,
@@ -60,6 +62,7 @@ export default function* mainSaga() {
   yield takeLatest(LOGIN_STARTED, loginUserSaga);
   yield takeLatest(REGISTER_STARTED, registerUserSaga);
   yield takeLatest(REFRESH_TOKEN_STARTED, refreshTokenSaga);
+  yield takeLatest(SET_PW_RESET, sendResetPwSaga);
   yield takeLatest(GET_ALL_FURNITURE, getAllFurniture);
   yield takeLatest(SAVE_NEW_FURNITURE, saveNewFurniture);
   yield takeLatest(IS_USER_LOGGED, isLoggedInSaga);

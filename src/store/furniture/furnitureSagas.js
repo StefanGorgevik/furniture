@@ -27,7 +27,13 @@ export function* getAllFurniture({ page }) {
   try {
     const res = yield fetchRequest("furniture.json", "GET", null);
     if (res && res.error) {
+      let err = res.error;
+      if (err === "Auth token is expired.") {
+        err = err + " Refreshing page!";
+        window.location.reload();
+      }
       yield put(setActionStatus("error", res.error));
+      yield put(saveAllFurnitureAction([]));
       return;
     }
     let finalArray = [];
@@ -69,7 +75,6 @@ export function* saveNewFurniture({ data }) {
 export function* openFurnitureItem({ data }) {
   const { id, shouldRedirect } = data;
   const path = `furniture/${id}.json`;
-  console.log("push", data);
   try {
     const res = yield fetchRequest(path, "GET", null);
     if (res && res.error) {

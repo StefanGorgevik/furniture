@@ -1,44 +1,29 @@
 import React from "react";
-import { Grid, Button, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  acceptActionButton: {
-    ...theme.typography.acceptButton,
-    width: "100%",
-    margin: "0 10px",
-  },
-  cancelButton: {
-    color: "black",
-    width: "100%",
-    "&:hover": {
-      background: "transparent",
-    },
-  },
-}));
+import { Grid } from "@material-ui/core";
+import { SubmitButton } from "components/UI/Buttons/Buttons";
+import { SecondaryButton } from "components/UI/Buttons/Buttons";
+import { useScreenSize } from "hooks/breakpoints";
 
 const ModalButtons = ({ onSubmit, onClose, submitButtonText, cancelText }) => {
-  const classes = useStyles();
+  const { matchesSM } = useScreenSize();
   return (
     <Grid
       item
       container
-      direction="row"
-      justifyContent="space-evenly"
-      style={{ marginTop: "1em", marginBottom: "1em" }}
+      direction={matchesSM ? "column" : "row"}
+      justifyContent={matchesSM ? "center" : "space-around"}
+      style={{
+        marginTop: "1em",
+        marginBottom: "1em",
+      }}
     >
       <Grid item>
-        <Button
-          onClick={onClose}
-          className={classes.cancelButton}
-          color="secondary"
-        >
+        <SecondaryButton onClick={onClose}>
           {cancelText ? cancelText : "Cancel"}
-        </Button>
+        </SecondaryButton>
       </Grid>
       <Grid item>
-        <Button onClick={onSubmit} className={classes.acceptActionButton}>
-          {submitButtonText}
-        </Button>
+        <SubmitButton onClick={onSubmit}>{submitButtonText}</SubmitButton>
       </Grid>
     </Grid>
   );

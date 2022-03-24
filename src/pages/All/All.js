@@ -17,6 +17,8 @@ import {
 } from "utils/sort";
 import { useScreenSize } from "hooks/breakpoints";
 import { useNavigate } from "react-router";
+import { setLoadingStart } from "store/ui/uiActions";
+import { setLoadingStop } from "store/ui/uiActions";
 export const CATEGORIES = [
   { id: 0, category: "All", value: true },
   { id: 1, category: "Chairs", value: false },
@@ -111,6 +113,7 @@ const All = ({
   }, []);
 
   const allProducts = useMemo(() => {
+    setLoadingStart();
     let array = [];
     if (Object.keys(allFurniture).length === 0) return array;
     categories.forEach((cat) => {
@@ -146,6 +149,7 @@ const All = ({
     if (array.length === 0) {
       changeDrawerOptions(true);
     }
+    setLoadingStop();
     return array ? array : [];
   }, [
     categories,

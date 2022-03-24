@@ -37,7 +37,6 @@ const ProtectedRoute = ({ children, openModal, refreshTokenAction }) => {
 
     tryLogin();
   }, [openModal, refreshTokenAction]);
-
   if (!isLoggedIn) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }

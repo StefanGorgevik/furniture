@@ -34,7 +34,7 @@ export function* authRequest(data, path) {
       password: data.password,
       returnSecureToken: true,
     };
-    if (path === "signUp") {
+    if (path === "accounts:signUp") {
       body["displayName"] = data.username;
     }
     const response = yield fetch(url, {
@@ -76,10 +76,36 @@ export function* refreshTokenRequest(data) {
     const res = yield response.json();
     yield put(setLoadingStop());
 
+    // const expiryTime = 10 * 1000;
     const expiryTime = parseInt(res.expiresIn) * 1000;
     const expirationDate = new Date().getTime() + expiryTime;
     localStorage.setItem("expiresDate", JSON.stringify(expirationDate));
 
+    return res;
+  } catch (e) {
+    yield put(setLoadingStop());
+    throw new Error(e.message);
+  }
+}
+
+export function* sendPwResetRequest(data) {
+  const firebaseURL =
+    "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=";
+  const API_KEY = "AIzaSyBxpBch7kcgXQB9hMJrFipVDV9RUBxiijg";
+  let url = `${firebaseURL}${API_KEY}`;
+
+  try {
+    yield put(setLoadingStart());
+
+    const response = yield fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const res = yield response.json();
+    yield put(setLoadingStop());
     return res;
   } catch (e) {
     yield put(setLoadingStop());

@@ -9,6 +9,7 @@ import {
   SAVE_NEW_PASSWORD,
   LOGOUT_USER,
   REFRESH_TOKEN_STARTED,
+  SET_PW_RESET,
 } from "./authTypes";
 
 export const loginStarted = (data) => ({ type: LOGIN_STARTED, data });
@@ -45,4 +46,8 @@ export const saveNewPasswordAction = (data) => ({
 
 export const refreshTokenAction = () => ({
   type: REFRESH_TOKEN_STARTED,
+});
+
+export const sendPWResetAction = () => ({
+  type: SET_PW_RESET,
 });
