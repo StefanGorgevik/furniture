@@ -9,6 +9,7 @@ import Wardrobe from "assets/images/wardrobe.png";
 import { connect } from "react-redux";
 import Login from "components/Auth/Login";
 import Register from "components/Auth/Register";
+import ForgotPassword from "components/Auth/ForgotPassword";
 
 const HomeContent = () => {
   const classes = useStyles();
@@ -171,12 +172,17 @@ const HomeContent = () => {
 
       {selectedAuth === "signIn" && (
         <div ref={ref}>
-          <Login />
+          <Login setSelectedAuth={setSelectedAuth} />
         </div>
       )}
       {selectedAuth === "signUp" && (
         <div ref={ref}>
-          <Register />
+          <Register setSelectedAuth={setSelectedAuth} />
+        </div>
+      )}
+      {selectedAuth === "forgotPassword" && (
+        <div ref={ref}>
+          <ForgotPassword />
         </div>
       )}
     </Grid>

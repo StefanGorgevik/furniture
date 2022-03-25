@@ -131,18 +131,22 @@ export function* refreshTokenSaga() {
   }
 }
 
-export function* sendResetPwSaga() {
+export function* sendResetPwSaga({ data }) {
   const email = localStorage.getItem("user_email");
+  console.log("CHK DATA SAGA", data);
+
   try {
     const res = yield sendPwResetRequest({
       requestType: "PASSWORD_RESET",
-      email,
+      email: data.email ? data.email : email,
     });
     if (res) {
       if (res.error) {
         let message = "Unexpected error occurred!";
         if (res.error.message === "EMAIL_NOT_FOUND") {
           message = "Email not found!";
+        } else if (res.error.message === "INVALID_EMAIL") {
+          message = "This email is incorrect. Try again.";
         }
         yield put(setActionStatus("error", message));
         return;

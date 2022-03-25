@@ -8,8 +8,9 @@ import { Grid, FormGroup, FormControlLabel, Checkbox } from "@material-ui/core";
 import { useScreenSize } from "hooks/breakpoints";
 import { Error } from "components/UI/formError";
 import { SubmitButton } from "components/UI/Buttons/Buttons";
+import { SecondaryButton } from "components/UI/Buttons/Buttons";
 
-const Register = ({ registerUser }) => {
+const Register = ({ registerUser, setSelectedAuth }) => {
   const { matchesSM } = useScreenSize();
   const [email, setEmail] = useState("");
   const [staySignedIn, setStaySignedIn] = useState(false);
@@ -118,6 +119,13 @@ const Register = ({ registerUser }) => {
             <SubmitButton onClick={(e) => registerHandler(e, false)}>
               Sign Up
             </SubmitButton>
+          </Grid>
+        </Grid>
+        <Grid item container direction="column">
+          <Grid item>
+            <SecondaryButton onClick={() => setSelectedAuth("forgotPassword")}>
+              Forgot password?
+            </SecondaryButton>
           </Grid>
         </Grid>
       </form>

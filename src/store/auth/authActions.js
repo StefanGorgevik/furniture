@@ -48,6 +48,7 @@ export const refreshTokenAction = () => ({
   type: REFRESH_TOKEN_STARTED,
 });
 
-export const sendPWResetAction = () => ({
+export const sendPWResetAction = (data) => ({
   type: SET_PW_RESET,
+  data,
 });

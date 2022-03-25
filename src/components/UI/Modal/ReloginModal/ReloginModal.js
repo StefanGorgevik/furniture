@@ -112,20 +112,14 @@ const ReloginModal = ({
           </Typography>
         </Box>
       )}
-      {isForgotPassword ? (
-        <Box>
-          <SubmitButton onClick={() => sendPWResetAction()}>
-            Send reset link to email
-          </SubmitButton>
-        </Box>
-      ) : (
-        <ModalButtons
-          onSubmit={loginHandler}
-          onClose={logout}
-          submitButtonText="Login"
-          cancelText="Logout"
-        />
-      )}
+      <ModalButtons
+        onSubmit={isForgotPassword ? sendPWResetAction : loginHandler}
+        onClose={logout}
+        submitButtonText={
+          isForgotPassword ? "Send reset link to email" : "Login"
+        }
+        cancelText="Logout"
+      />
     </>
   );
 };
