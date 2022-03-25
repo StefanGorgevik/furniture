@@ -1,6 +1,6 @@
 import { push } from "connected-react-router";
 import { put } from "redux-saga/effects";
-import { setActionStatus, closeModal, openModal } from "store/ui/uiActions";
+import { setActionStatus, closeModal } from "store/ui/uiActions";
 import {
   saveAllFurnitureAction,
   saveCurrentFurnitureAction,
@@ -23,22 +23,15 @@ const transformArray = (array) => {
   });
   return transformed;
 };
-export function* getAllFurniture({ page }) {
+export function* getAllFurniture() {
   try {
     const res = yield fetchRequest("furniture.json", "GET", null);
     if (res) {
-      if (res.error === "Auth token is expired") {
-        yield put(openModal("relogin"));
-        yield put(setActionStatus("error", res.error));
-        return;
-      }
-    }
-    let finalArray = [];
-    if (res) {
+      let finalArray = [];
       let array = transformArray(res);
       finalArray = sortByCategory(array);
+      yield put(saveAllFurnitureAction(finalArray));
     }
-    yield put(saveAllFurnitureAction(finalArray));
   } catch (e) {
     yield put(setActionStatus("error", "Unexpected error occurred!"));
   }

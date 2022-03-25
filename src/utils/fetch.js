@@ -1,5 +1,7 @@
 import { setLoadingStart, setLoadingStop } from "store/ui/uiActions";
 import { put } from "@redux-saga/core/effects";
+import { refreshTokenAction } from "store/auth/authActions";
+import { openModal } from "store/ui/uiActions";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -15,6 +17,18 @@ export function* fetchRequest(path, requestMethod, postData, isSearch) {
       body: postData ? JSON.stringify(postData) : null,
     });
     const res = yield response.json();
+    if (res && res.error && res.error === "Auth token is expired") {
+      const stay = localStorage.getItem("stay_signed_in");
+      if (JSON.parse(stay)) {
+        const refresh_token = localStorage.getItem("refresh_token");
+        if (refresh_token) {
+          yield put(refreshTokenAction());
+          yield put(fetchRequest(path, requestMethod, postData, isSearch));
+        }
+      } else {
+        yield put(openModal("relogin"));
+      }
+    }
     yield put(setLoadingStop());
     return res;
   } catch (e) {
