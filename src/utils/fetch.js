@@ -23,7 +23,9 @@ export function* fetchRequest(path, requestMethod, postData, isSearch) {
         const refresh_token = localStorage.getItem("refresh_token");
         if (refresh_token) {
           yield put(refreshTokenAction());
-          yield fetchRequest(path, requestMethod, postData, isSearch);
+          setTimeout(() => {
+            window.location.reload();
+          }, 200);
         }
       } else {
         yield put(openModal("relogin"));
