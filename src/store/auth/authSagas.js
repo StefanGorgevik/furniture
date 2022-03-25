@@ -65,7 +65,6 @@ export function* loginUserSaga({ data }) {
       yield put(setActionStatus("success", "You have successfully logged in!"));
     }
   } catch (e) {
-    console.log(e);
     yield put(setActionStatus("error", e.message));
   }
 }
@@ -93,7 +92,6 @@ export function* registerUserSaga({ data }) {
       yield put(loginStarted({ email, password }));
     }
   } catch (e) {
-    console.log(e);
     yield put(setActionStatus("error", e.message));
   }
 }
@@ -133,7 +131,6 @@ export function* refreshTokenSaga() {
 
 export function* sendResetPwSaga({ data }) {
   const email = localStorage.getItem("user_email");
-  console.log("CHK DATA SAGA", data);
 
   try {
     const res = yield sendPwResetRequest({
@@ -197,7 +194,6 @@ export function* sendResetPwSaga({ data }) {
 //       yield put(setActionStatus("success", "You have successfully logged in!"));
 //     }
 //   } catch (e) {
-//     console.log(e);
 //     yield put(setActionStatus("error", e.message));
 //   }
 // }

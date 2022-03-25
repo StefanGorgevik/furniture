@@ -17,7 +17,6 @@ const ForgotPassword = ({ sendPWResetAction }) => {
   const resetPwHandler = (e, onKey) => {
     if (e.key === "Enter" || !onKey) {
       e.preventDefault();
-      console.log("RESETING", email);
       if (email.length === 0 || email === "" || !email.trim().includes("@")) {
         setError("Please enter a correct email!");
         return;

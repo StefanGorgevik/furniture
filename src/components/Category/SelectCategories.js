@@ -361,7 +361,7 @@ export function SelectCategories({
             <Grid
               item
               container
-              justify="center"
+              justifyContent="center"
               className={classes.closeButtonWrapper}
             >
               <SubmitButton onClick={(e) => setOpened(false)}>

@@ -26,7 +26,6 @@ export function* getCartData() {
       })
     );
   } catch (e) {
-    console.log("error", e);
     yield put(setActionStatus("error", "Unexpected error occurred!"));
   }
 }
@@ -43,7 +42,6 @@ export function* addToCart({ data }) {
     }
     yield put(setActionStatus(messageType, res.message));
   } catch (e) {
-    console.log("error", e);
     yield put(setActionStatus("error", "Unexpected error occurred!"));
   }
 }
@@ -61,7 +59,6 @@ export function* removeFromCart({ id }) {
     }
     yield put(closeModal());
   } catch (e) {
-    console.log("error", e);
     yield put(setActionStatus("error", "Unexpected error occurred!"));
   }
 }
@@ -77,7 +74,6 @@ export function* emptyCart() {
     }
     yield put(closeModal());
   } catch (e) {
-    console.log("error", e);
     yield put(setActionStatus("error", "Unexpected error occurred!"));
   }
 }

@@ -18,7 +18,6 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import { Error } from "components/UI/formError";
-import { SubmitButton } from "components/UI/Buttons/Buttons";
 const ReloginModal = ({
   closeModal,
   logoutUser,
