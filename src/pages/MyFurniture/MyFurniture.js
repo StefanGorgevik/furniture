@@ -57,7 +57,11 @@ const MyFurniture = ({
       image: furniture.image,
       material: furniture.material,
     };
-    editFurnitureAction({ furniture: furnitureToEdit, editing: true });
+    editFurnitureAction({
+      furniture: furnitureToEdit,
+      editing: true,
+      navigate,
+    });
     navigate(`/furniture/edit/${furniture.id}`);
   };
 

@@ -5,13 +5,14 @@ import { closeModal } from "store/ui/uiActions";
 import ModalButtons from "../ModalButtons/ModalButtons";
 import { deleteFurnitureAction } from "store/furniture/furnitureActions";
 import WarningModalsContent from "components/UI/Modal/WarningModalsContent/WarningModalsContent";
+import { useNavigate } from "react-router";
 
 const DeleteModal = ({ modalData, closeModal, deleteFurnitureAction }) => {
   const id = modalData ? modalData.id : "";
   const shouldRedirect = modalData ? modalData.shouldRedirect : false;
-
+  const navigate = useNavigate();
   const deleteFurnitureHandler = () => {
-    deleteFurnitureAction({ id, shouldRedirect });
+    deleteFurnitureAction({ id, shouldRedirect, navigate });
   };
   return (
     <>

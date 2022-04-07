@@ -19,6 +19,7 @@ const ProtectedRoute = ({ children, openModal, refreshTokenAction }) => {
       const date = localStorage.getItem("expiresDate");
       if (date) {
         const newDate = new Date(JSON.parse(date));
+        console.log("DATES", newDate, new Date());
         if (newDate > new Date() || !userToken) {
           return;
         } else {

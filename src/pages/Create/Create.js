@@ -74,9 +74,10 @@ const Create = ({
           material: "",
         },
         editing: false,
+        navigate,
       });
     };
-  }, [editFurnitureAction]);
+  }, [editFurnitureAction, navigate]);
 
   useEffect(() => {
     if (editingFurniture && pathname.startsWith("/furniture/edit/")) {
@@ -135,7 +136,7 @@ const Create = ({
           navigate,
         });
       } else {
-        saveNewFurnitureAction(userInput);
+        saveNewFurnitureAction({ userInput, navigate });
       }
     }
   };

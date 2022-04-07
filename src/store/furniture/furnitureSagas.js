@@ -1,4 +1,3 @@
-import { push } from "connected-react-router";
 import { put } from "redux-saga/effects";
 import { setActionStatus, closeModal } from "store/ui/uiActions";
 import {
@@ -40,22 +39,25 @@ export function* getAllFurniture() {
 export function* saveNewFurniture({ data }) {
   const path = `furniture.json`;
   const user = localStorage.getItem("user_email");
+  console.log(data);
+  const { userInput, navigate } = data;
   try {
     const res = yield fetchRequest(path, "POST", {
-      ...data,
-      name: data.name.toLowerCase(),
+      ...userInput,
+      name: userInput.name.toLowerCase(),
       createdBy: user,
       createdOn: new Date(),
       likes: [],
       reviews: [],
     });
+    console.log(res);
     if (res && res.error) {
       yield put(setActionStatus("error", res.error));
       return;
     }
     if (res) {
       yield put(setActionStatus("success", "Furniture saved!"));
-      // yield put(push("/furniture/all"));
+      navigate("/furniture/all");
     }
   } catch (e) {
     yield put(setActionStatus("error", "Unexpected error occurred!"));
@@ -89,7 +91,13 @@ export function* openFurnitureItem({ data }) {
           material: res.material,
           id,
         };
-        yield put(editFurnitureAction({ furniture, editing: true }));
+        yield put(
+          editFurnitureAction({
+            furniture,
+            editing: true,
+            navigate: data.navigate,
+          })
+        );
       }
     }
   } catch (e) {
@@ -255,7 +263,7 @@ export function* getMyFurniture() {
 }
 
 export function* deleteFurniture({ data }) {
-  const { id, shouldRedirect } = data;
+  const { id, shouldRedirect, navigate } = data;
   const path = `furniture/${id}.json`;
   try {
     const res = yield fetchRequest(path, "DELETE");
@@ -267,7 +275,7 @@ export function* deleteFurniture({ data }) {
     yield put(setActionStatus("success", "Furniture deleted successfully!"));
     yield put(getMyFurnitureAction());
     if (shouldRedirect) {
-      yield put(push(`/furniture/my-furniture`));
+      navigate(`/furniture/my-furniture`);
     }
   } catch (e) {
     yield put(setActionStatus("error", e.message));
@@ -290,7 +298,7 @@ export function* editFurniture({ data }) {
           navigate: data.navigate,
         })
       );
-      yield put(push(`/furniture/details/${data.id}`));
+      data.navigate(`/furniture/details/${data.id}`);
       yield put(setActionStatus("success", "Furniture edited successfully!"));
     } else {
       yield put(setActionStatus("error", "Unexpected error occurred!"));

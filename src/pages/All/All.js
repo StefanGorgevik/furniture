@@ -7,7 +7,6 @@ import {
 } from "store/furniture/furnitureActions";
 import NoItemsFound from "components/Furniture/NoItemsFound/NoItemsFound";
 import { Grid } from "@material-ui/core";
-import { editFurnitureAction } from "store/furniture/furnitureActions";
 import { SelectCategories } from "components/Category/SelectCategories";
 import { FurnitureItem } from "components/Furniture/FurnitureItem/FurnitureItem";
 import {
@@ -238,7 +237,6 @@ const mapDispatchToProps = (dispatch) =>
     {
       getAllFurnitureAction,
       openFurnitureAction,
-      editFurnitureAction,
     },
     dispatch
   );
